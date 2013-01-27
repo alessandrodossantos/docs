@@ -1,18 +1,18 @@
-# Introduction
+# Introdução
 
-- [Laravel Philosophy](#laravel-philosophy)
-- [Learning Laravel](#learning-laravel)
+- [Filosofia do Laravel](#laravel-philosophy)
+- [Aprendendo Laravel](#learning-laravel)
 
 <a name="laravel-philosophy"></a>
-## Laravel Philosophy
+## Filosofia do Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development should be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by implementing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+Laravel é um framework de aplicações web com expressiva, sintaxe elegante. Acreditamos que o desenvolvimento dever ser uma divertida, experiência crivativa para ser verdadeiramente gratificante. Laravel tenta tirar a dor de desenvolvimento através da implementação de tarefas comuns usadas na maioria dos projetos web, como autenticação, roteamento, sessões e cache.
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code.
+Laravel visa tornar o processo de desenvolvimento agradável para o programador, sem sacrificar a funcionalidade do aplicativo. Desenvolvedores felizes fazem melhores códigos.
 
 <a name="learning-laravel"></a>
-## Learning Laravel
+## Aprendendo Laravel
 
-One of the best ways to learn Laravel is to read through the entirety of its documentation. This guide details all aspects of the framework and how to apply them to your application.
+Uma das melhores maneiras de aprender Laravel é ler toda sua documentação. Este guia detalha todos os aspectos do framework e como aplicá-los para a sua aplicação.
 
-In addition to this guide, you may wish to check out some of the Laravel books that are available on the [books page](http://laravel.com/books). These books serve as a good supplemental resource for learning the framework.
+Além deste guia, você pode querer verificar alguns dos livros sobre Laravel que estão disponíveis na [página de livros] (http://laravel.com/books). Esses livros servem como um bom recurso suplementar para o aprendizado do framework.
