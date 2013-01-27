@@ -1,32 +1,32 @@
-# Contributing To Laravel
+# Contribuindo com o Laravel
 
-- [Introduction](#introduction)
+- [Introdução](#introduction)
 - [Pull Requests](#pull-requests)
-- [Coding Guidelines](#coding-guidelines)
+- [Normas de Codificação](#coding-guidelines)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-Laravel is free, open-source software, meaning anyone can contribute to its development and progress. Laravel source code is currently hosted on [Github](http://github.com), which provides an easy method for forking the project and merging your contributions.
+Laravel é livre, software de código aberto, sendo assim qualquer um pode contribuir para o seu desenvolvimento e progresso. O código fonte do Laravel está atualmente hospedado em [Github](http://github.com), que proporciona uma maneira fácil para forkar o projeto e mesclar suas contribuições.
 
 <a name="pull-requests"></a>
 ## Pull Requests
 
-The pull request process differs for new features and bugs. Before sending a pull request for a new feature, you should first create an issue with `[Proposal]` in the title. The proposal should describe the new feature, as well as implementation ideas. The proposal will then be reviewed and either approved or denied. Once a proposal is approved, a pull request may be created implementing the new feature. Pull requests which do not follow this guideline will be closed immediately.
+O processo de pull request difere para novos recursos e para bugs. Antes de enviar um pull request para uma nova para um novo recurso, você deverá primeiro criar um issue com `[Proposal]` no título. A proposta deverá descrever o novo recurso, bem como idéias para a implementação. A proposta será então revisto e, aprovado ou negado. Uma vez que a proposta seja aprovada, um pull request pode ser criado para a implementação do novo recurso. Pull requests que não seguem essa diretriz, será fechado imediatamente.
 
-Pull requests for bugs may be sent without creating any proposal issue. If you believe that you know of a solution for a bug that has been filed on Github, please leave a comment detailing your proposed fix.
+Pull requests para bugs pode ser enviado sem a criação de qualquer proposta. Se você acredita que conhece uma solução para o bug apresentado no Github, por favor, deixe um comentário detalhando sua proposta de correção.
 
-### Feature Requests
+### Solicitações de Recursos
 
-If you have an idea for a new feature you would like to see added to Laravel, you may create an issue on Github with `[Request]` in the title. The feature request will then be reviewed by a core contributor.
+Se você tem uma ideia para um novo rescurso e gostaria de vê-lo adicionando ao Laravel, você pode criar um issue com `[Request]` no título. O recurso solicitado será revisto por um colaborador do núcleo do Laravel.
 
 <a name="coding-guidelines"></a>
-## Coding Guidelines
+## Normas de Codificação
 
-Laravel follows the [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) coding standards. In addition to these standards, below is a list of other coding standards that should be followed:
+Laravel segue os padrões de código da [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) e [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md). Como complemento a esses padrões, segue uma lista de outros padrões de código que devem ser seguidos:
 
-- Namespace declarations should be on the same line as `<?php`.
-- Class opening `{` should be on the same line as the class name.
-- Function and control structure opening `{` should be on a separate line.
-- Always use `and` and `or`. Never use `&&` or `||`.
-- Interface names are suffixed with `Interface` (`FooInterface`)
+- Declarações de Namespace deve estar na mesma linha que `<?php`.
+- Abertura de classes `{` devem estar na mesma linha do nome da classe.
+- Abertura de funções e estruturas de controle `{` devem estar em uma linha separada.
+- Sempre use `and` e `or`. Nunca `&&` ou `||`.
+- Nomes de interfaces devem iniciar com `Interface` (`FooInterface`)
