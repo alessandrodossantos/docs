@@ -12,13 +12,13 @@ Laravel é livre, software de código aberto, sendo assim qualquer um pode contr
 <a name="pull-requests"></a>
 ## Pull Requests
 
-O processo de pull request é diferente para novos recursos e para bugs. Antes de enviar um pull request para uma nova para um novo recurso, você deverá primeiro criar um issue com `[Proposal]` no título. A proposta deverá descrever o novo recurso, bem como idéias para a implementação. A proposta será então revisto e, aprovado ou negado. Uma vez que a proposta seja aprovada, um pull request pode ser criado para a implementação do novo recurso. Pull requests que não seguem essa diretriz, será fechado imediatamente.
+O processo de pull request é diferente para novos recursos e para bugs. Antes de enviar um pull request para uma novo recurso, você deverá primeiro criar um issue com `[Proposal]` no título. A proposta deverá descrever o novo recurso, bem como idéias para a implementação. A proposta será então revisto e, aprovado ou negado. Uma vez que a proposta seja aprovada, um pull request pode ser criado para a implementação do novo recurso. Pull requests que não seguem essa diretriz, será fechado imediatamente.
 
 Pull requests para bugs pode ser enviado sem a criação de qualquer proposta. Se você acredita que conhece uma solução para o bug apresentado no Github, por favor, deixe um comentário detalhando sua proposta de correção.
 
 ### Solicitações de Recursos
 
-Se você tem uma ideia para um novo rescurso e gostaria de vê-lo adicionando ao Laravel, você pode criar um issue com `[Request]` no título. O recurso solicitado será revisto por um colaborador do núcleo do Laravel.
+Se você tem uma ideia para um novo recurso e gostaria de vê-lo adicionando ao Laravel, você pode criar um issue com `[Request]` no título. O recurso solicitado será revisto por um colaborador do núcleo do Laravel.
 
 <a name="coding-guidelines"></a>
 ## Normas de Codificação
