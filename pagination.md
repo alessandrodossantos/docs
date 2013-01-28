@@ -1,31 +1,31 @@
-# Pagination
+# Paginação
 
-- [Configuration](#configuration)
-- [Usage](#usage)
+- [Configuração](#configuration)
+- [Uso](#usage)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-In other frameworks, pagination can be very painful. Laravel makes it a breeze. There is a single configuration option in the `app/config/view.php` file. The `pagination` option specifies which view should be used to create pagination links. By default, Laravel includes two views.
+Em outros frameworks, a paginação pode ser dolorosa. Laravel faz isso suave. Há uma única opção no arquivo de configuração `app/config/view.php`. A opção `pagination` especifica qual view deve ser usada para criar links de paginação. Por padrão, Laravel inclui duas views.
 
-The `pagination::slider` view will show an intelligent "range" of links based on the current page, while the `pagination::simple` view will simply show "previous" and "next" buttons. **Both views are compatible with Twitter Bootstrap out of the box.**
+A view `pagination::slider` que irá mostrar uma inteligente "série" de links baseado-se na página atual, enquanto a viw `pagination::simple` simplesmente mostra  os botoões "previous(anterior)" e "next(próxima)". **Ambas as views são compatíveis com o Twitter Bootstrap.**
 
 <a name="usage"></a>
-## Usage
+## Uso
 
-There are several ways to paginate items. The simplest is by using the `paginate` method on the query builder or an Eloquent model.
+Existem várias maneiras para paginar itens. A forma mais simples é usando o método `paginate` do construtor de query ou do modelo Eloquent.
 
-**Paginating Database Results**
+**Paginando Resultados do Banco de Dados**
 
 	$users = DB::table('users')->paginate(15);
 
-You may also paginate [Eloquent](/docs/eloquent) models:
+Você pode também paginar o modelo [Eloquent](/docs/eloquent):
 
-**Paginating An Eloquent Model**
+**Paginando um Molelo Eloquent**
 
 	$users = User::where('votes', '>', 100)->paginate(15);
 
-The argument passed to the `paginate` method is the number of items you wish to display per page. Once you have retrieved the results, you may display them on your view, and create the pagination links using the `links` method:
+O argumento passado para o método é o número de items que você deseja mostrar por páginas. Uma vez que tenha recebido os resultados, você pode mostrar eles em sua view, e criar links de paginação usando o método `links`:
 
 	<div class="container">
 		<?php foreach ($users as $user): ?>
@@ -35,10 +35,10 @@ The argument passed to the `paginate` method is the number of items you wish to 
 
 	<?php echo $users->links(); ?>
 
-This is all it takes to create a pagination system! Note that we did not have to inform the framework of the current page. Laravel will determine this for you automatically.
+Isso é tudo o que é preciso para criar um sistema de paginação! Observe que não é preciso informar ao framework a página atual. Laravel irá determinar isso para você automaticamente.
 
-Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so using the `Paginator::make` method:
+Às vezes, você pode querer criar uma instância de paginação manualmente, passando uma série de itens. Você pode usar o método `Paginator::make`:
 
-**Creating A Paginator Manually**
+**Criando Paginação Manualmente**
 
 	$paginator = Paginator::make($items, $totalItems, $perPage);

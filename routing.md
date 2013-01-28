@@ -136,7 +136,7 @@ No exemplo acima, o filtro `admin` será aplicado a todas as rotas iniciadas com
 
 **Classes de Filtro**
 
-Para filtros avançados, você talvez queira usar uma classe em vez de uma Closure. Uma vez que classes de filtro são resolvidas fora da aplicação do [conteúdo IoC](/docs/ioc), você será capaz de utilizar a injeção de dependência nesses filtros para maior testabilidade.
+Para filtros avançados, você talvez queira usar uma classe em vez de uma Closure. Uma vez que classes de filtro são resolvidas fora da aplicação do [IoC container](/docs/ioc), você será capaz de utilizar a injeção de dependência nesses filtros para maior testabilidade.
 
 **Definindo Classes de Filtro**
 

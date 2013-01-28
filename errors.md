@@ -1,32 +1,32 @@
-# Errors & Logging
+# Erros & Logging
 
-- [Error Detail](#error-detail)
-- [HTTP Exceptions](#http-exceptions)
-- [Handling Errors](#handling-errors)
-- [Handling 404 Errors](#handling-404-errors)
+- [Erros Detalhados](#error-detail)
+- [Exceções HTTP](#http-exceptions)
+- [Manipulando Erros](#handling-errors)
+- [Manipulando Erros 404](#handling-404-errors)
 - [Logging](#logging)
 
-## Error Detail
+## Erros Detalhados
 
-By default, error detail is enabled for your application. This means that when an error occurs you will be showed an error page with a detailed stack trace and error message. You may turn off error details by setting the `debug` option in your `app/config/app.php` file to `false`. **It is strongly recommended that you turn off error detail in a production environment.**
+Por padrão, erros detalhados estam habilitados em sua aplicação. Isso significa que quando ocorrer um erro, você ira ver uma página de erro com uma detalhada pilha de rastreamento e messagem de erro. Você pode desabilitar os erros detalhados, definindo a opção `debug` como `false` no arquivo`app/config/app.php` da sua aplicação. **É altamente recomendado que você desabilite erros detalhados em seu ambiente de produção.**
 
-## Handling Errors
+## Manipulando Erros
 
-By default, the `app/start/global.php` file contains an error handler for all exceptions:
+Por padrão, o arquivo `app/start/global.php` contem um manipulador de erro para todas as exceções:
 
 	App::error(function(Exception $exception)
 	{
 		Log::error($exception);
 	});
 
-This is the most basic error handler. However, you may specify more handlers if needed. Handlers are called based on the type-hint of the Exception they handle. For example, you may create a handler that only handles `RuntimeException` instances:
+Este é o manipulador de erro mais básico. Sendo assim, você pode especificar mais manipuladores se necessário. Manipuladores são chamados com base em seus type-hint de manipulação de Exceções. Por exemplo, você pode criar um manipulador que somente manipula instância de `RuntimeException`:
 
 	App::error(function(RuntimeException $exception)
 	{
 		// Handle the exception...
 	});
 
-If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called:
+Se um manipulador de exceção retorna uma reposta, esta resposta irá ser enviada para o navegador e nenhum outro manipulador de erro sera chamado:
 
 	App::error(function(InvalidUserException $exception)
 	{
@@ -36,24 +36,24 @@ If an exception handler returns a response, that response will be sent to the br
 	});
 
 <a name="http-exceptions"></a>
-## HTTP Exceptions
+## Exceções HTTP
 
-Exceptions in respect to HTTP, refer to errors that may occur during a client request. This may be a page not found error (404), an authorized error (401) or even a generated 500 error. In order to return such a response, use the following:
+Exceções em relação a HTTP, referem-se a erros que podem ocorrer durante uma requisição do cliente. Isso significa que uma página de erro não encontrada (404), um erro de autorização (401) ou mesmo um erro 500 seram gerados. Para retornar essa resposta, use o seguinte:
 
 	App::abort(404, 'Page not found');
 
-The first argument, is the HTTP status code, with the following being a custom message you'd like to show with the error.
+O primeiro argumento é o código do estado do HTTP, o segundo é uma mensagem personalizada que você queira mostrar junto com o erro.
 
-In order to raise a 401 Unauthorized exception, just do the following:
+Para uma exceção 401 não-autorizada, faça o seguinte:
 
 	App::abort(401, 'You are not authorized.');
 
-These exceptions can be executed at any time during the request's lifecycle.
+Essas exceções podem ser executadas a qualquer momento durante o ciclo de vida da requisição.
 
 <a name="handling-404-errors"></a>
-## Handling 404 Errors
+## Manipulando Erros 404
 
-You may register an error handler that handles all "404 Not Found" errors in your application, allowing you to return custom 404 error pages:
+Você pode registrar um manipulador de erro que lide com todos os erros "404 Not Found" em sua aplicação, permitindo que você retorne uma página personalizada 404:
 
 	App::missing(function($exception)
 	{
@@ -63,7 +63,7 @@ You may register an error handler that handles all "404 Not Found" errors in you
 <a name="logging"></a>
 ## Logging
 
-The Laravel logging facilities provide a simple layer on top of the powerful [Monolog](http://github.com/seldaek/monolog). By default, Laravel is configured to create daily log files for your application, and these files are stored in `app/storage/logs`. You may write information to these logs like so:
+Instalações do Laravel logging fornece uma simples camada em cima do poderoso [Monolog](http://github.com/seldaek/monolog). Por padrão, Laravel é configurado para criar logs diários para sua aplicação, e esses arquivos são armazenados em `app/storage/logs`. Você escrever informações nesses logs da seguinte maneira:
 
 	Log::info('This is some useful information.');
 
@@ -71,8 +71,8 @@ The Laravel logging facilities provide a simple layer on top of the powerful [Mo
 
 	Log::error('Something is really going wrong.');
 
-The logger provides the seven logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **debug**, **info**, **notice**, **warning**, **error**, **critical**, and **alert**.
+O logger fornece os sete níveis de logging descritos em [RFC 5424](http://tools.ietf.org/html/rfc5424): **debug**, **info**, **notice**, **warning**, **error**, **critical**, e **alert**.
 
-Monolog has a variety of additional handlers you may use for logging. If needed, you may access the underlying Monolog instance being used by Laravel:
+Monolog possui uma variedade de manipuladores adicionais que você pode usar para logging. Se necessário, você pode acessar a instância subjacente do Monolog inicialmente usuado pelo Laravel:
 
 	$monolog = Log::getMonolog();

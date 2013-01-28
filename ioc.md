@@ -1,20 +1,20 @@
 # IoC Container
 
-- [Introduction](#introduction)
-- [Basic Usage](#basic-usage)
-- [Automatic Resolution](#automatic-resolution)
-- [Practical Usage](#practical-usage)
-- [Service Providers](#service-providers)
+- [Introdução](#introduction)
+- [Uso Básico](#basic-usage)
+- [Resolução Automatica](#automatic-resolution)
+- [Uso Prático](#practical-usage)
+- [Provedores de Serviço](#service-providers)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-The Laravel inversion of control container is a powerful tool for managing class dependencies. Dependency injection is a method of removing hard-coded class dependencies. Instead, the dependencies are injected at run-time, allowing for greater flexibility as dependency implementations may be swapped easily.
+O IoC(Inversão de Controle) container do Laravel é uma poderosa ferramenta para gerenciar dependências de classes. Injeção de dependências é um método de remoção de alta dependências de classes. Instead, the dependencies are injected at run-time, allowing for greater flexibility as dependency implementations may be swapped easily.
 
 Understanding the Laravel IoC container is essential to building a powerful, large application, as well as for contributing to the Laravel core itself.
 
 <a name="basic-usage"></a>
-## Basic Usage
+## Uso Básico
 
 There are two ways the IoC container can resolve dependencies: via Closure callbacks or automatic resolution. First, we'll explore Closure callbacks. First, a "type" may be bound into the container:
 
@@ -49,7 +49,7 @@ You may also bind an existing object instance into the container using the `inst
 	App::instance('foo', $foo);
 
 <a name="automatic-resolution"></a>
-## Automatic Resolution
+## Resolução Automática
 
 The IoC container is powerful enough to resolve classes without any configuration at all in many scenarios. For example:
 
@@ -90,7 +90,7 @@ Now consider the following controller:
 Since we have bound the `UserRepositoryInterface` to a concrete type, the `DbUserRepository` will automatically be injected into this controller when it is created.
 
 <a name="practical-usage"></a>
-## Practical Usage
+## Uso Prático
 
 Laravel provides several opportunities to use the IoC container to increase the flexibility and testability of your application. One primary example is when resolving controllers. All controllers are resolved through the IoC container, meaning you can type-hint dependencies in a controller constructor, and they will automatically be injected.
 
@@ -125,7 +125,7 @@ In this example, the `OrderRepository` class will automatically be injected into
 	Event::listen('foo', 'FooHandler');
 
 <a name="service-providers"></a>
-## Service Providers
+## Provedores de Serviços
 
 Service providers are a great way to group related IoC registrations in a single location. In fact, most of the core Laravel components include service providers. All of the registered service providers for your application are listed in the `providers` array of the `app/config/app.php` configuration file.
 

@@ -1,15 +1,15 @@
-# Events
+# Eventos
 
-- [Basic Usage](#basic-usage)
-- [Using Classes As Listeners](#using-classes-as-listeners)
-- [Event Subscribers](#event-subscribers)
+- [Uso Básico](#basic-usage)
+- [Usando Classes como Listeners(Ouvintes)](#using-classes-as-listeners)
+- [Subscribers(Assinantes) de Eventos](#event-subscribers)
 
 <a name="basic-usage"></a>
-## Basic Usage
+## Uso Básico
 
-The Laravel `Event` class provides a simple observer implementation, allowing you to subscribe and listen for events in your application. The Laravel event facilities extend the `Symfony\Component\EventDispatcher\EventDispatcher` class.
+A Classe `Event` do Laravel fornece uma simples implementação de observador, permitindo você subscribe(assinar) e listen(ouvir) eventos na sua aplicação. A instalação de eventos do Laravel extende a classe `Symfony\Component\EventDispatcher\EventDispatcher`.
 
-**Subscribing To An Event**
+**Assinando Um Evento**
 
 	Event::listen('user.login', function($event)
 	{
@@ -18,23 +18,23 @@ The Laravel `Event` class provides a simple observer implementation, allowing yo
 		$event->user->save();
 	});
 
-**Firing An Event**
+**Disparando Um Evento**
 
 	$event = Event::fire('user.login', array('user' => $user));
 
-Note that the `Event::fire` method returns an `Event` object, allowing you to inspect the event payload after the listeners have been called.
+Note que o método `Event::fire` retorna um objeto `Event`, permitindo você verificar a carga do evento depois dos listeners(ouvintes) terem sido chamados.
 
-You may also specify a priority when subscribing to events. Listeners with higher priority will be run first, while listeners that have the same priority will be run in order of subscription.
+Você podem também especificar a prioridade quando subscribing(assinar) eventos. Listeners(ouvintes) que tem alta prioridade seram executados primeiro, enquanto listeneres(ouvintes) que possuem a mesma prioridade seram executados pela ordem de subscription(assinatura).
 
-**Subscribing To Events With Priority**
+**Assinando Eventos Com Prioridade**
 
 	Event::listen('user.login', 'LoginHandler', 10);
 
 	Event::listen('user.login', 'OtherHandler', 5);
 
-Sometimes, you may wish to stop the propagation of an event to other listeners. You may do so using the `$event->stop()` method.
+Algumas vezes, você pode desejar interromper a propagação de um evento ou outro. Você pode fazer apensar usando o método `$event->stop()`.
 
-**Stopping The Propagation Of An Event**
+**Interrompendo A Propagação De Um Evento**
 
 	Event::listen('user.login', function($event)
 	{
@@ -44,17 +44,17 @@ Sometimes, you may wish to stop the propagation of an event to other listeners. 
 	});
 
 <a name="using-classes-as-listeners"></a>
-## Using Classes As Listeners
+## Usando Classes como Listeners(Ouvintes)
 
-In some case, you may wish to use a class to handle an event rather than a Closure. Class event listeners will be resolved out of the [Laravel IoC container](/docs/ioc), providing you the full power of dependency injection on your listeners.
+Em alguns casos, você queira usar uma classe como manipuladora de um evento do que uma Closure. Classes de listeners(ouvintes) de evento fora do [Laravel IoC container](/docs/ioc), fornecendo um completo poder de injeção de dependências para os seus listeners(ouvintes).
 
-**Registering A Class Listener**
+**Registrando Uma Classe Listener(Ouvinte)**
 
 	Event::listen('user.login', 'LoginHandler');
 
-By default, the `handle` method on the `LoginHandler` class will be called:
+Por padrão, o método `handle` na classe `LoginHandler` será chamada:
 
-**Defining An Event Listener Class**
+**Definindo Uma Classe De Event Listener(Ouvinte)**
 
 	class LoginHandler {
 
@@ -65,18 +65,18 @@ By default, the `handle` method on the `LoginHandler` class will be called:
 
 	}
 
-If you do not wish to use the default `handle` method, you may specify the method that should be subscribed:
+Se você não quiser o método `handle` como padrão, especifique o método que deverá ser subscribed(assinado):
 
-**Specifying Which Method To Subscribe**
+**Especificando Que Método Será Subscribe(assinado)**
 
 	Event::listen('user.login', 'LoginHandler@onLogin');
 
 <a name="event-subscribers"></a>
-## Event Subscribers
+## Subscribers(Assinantes) de Eventos
 
-Event subscribers are classes that may subscribe to multiple events from within the class itself. Subscribers should extend the `EventSubscriber` class and define a `subscribes` method.
+Subscribers(Assinantes) de eventos são classes que podem subscribe(assinar) mútiplos eventos de dentro da própria classe. Subscribers(assinantes) devem extender a classe `EventSubscriber` e definir um método `subscribes`.
 
-**Defining An Event Subscriber**
+**Definindo Um Subscriber(assinante) de Evento**
 
 	class UserEventHandler extends EventSubscriber {
 
@@ -115,15 +115,15 @@ Event subscribers are classes that may subscribe to multiple events from within 
 
 	}
 
-Once the subscriber has been defined, it may be registered with the `Event` class.
+Uma vez que a subscriber(assinatura) foi definida, ela pode ser registrada com a classe `Event`.
 
-**Registering An Event Subscriber**
+**Registrando Um Subscriber(assinante) de Evento**
 
 	$subscriber = new UserEventHandler();
 	Event::subscribe($subscriber);
 
-**Removing An Event Subscriber**
+**Removendo Um Subscriber(assinante) de Evento**
 
 	Event::unsubscribe($subscriber);
 	
-The instance that was passed to the `subscribe()` method may also be passed to the `unsubscribe()` method to remove it.
+A instância que que foi passada para o método `subscribe()` também pode ser passada para o método `unsubscribe()` removê-la.
