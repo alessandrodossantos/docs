@@ -1,38 +1,38 @@
 # Cache
 
-- [Configuration](#configuration)
-- [Cache Usage](#cache-usage)
-- [Database Cache](#database-cache)
+- [Configuração](#configuration)
+- [Uso do Cache](#cache-usage)
+- [Cache de Banco de Dados](#database-cache)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-Laravel provides a unified API for various caching systems. The cache configuration is located at `app/config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Laravel supports popular caching backends like [Memcached](http://memcached.org) and [Redis](http://redis.io) out of the box.
+Laravel fornece uma API unificada para vários tipos de sistema de cache. A configuração do cache encontra-se em `app/config/cache.php`. Neste arquivo você pode especificar que driver de cache você prefere usar por padrão em toda sua aplicação. Laravel suporta caching backends populares como [Memcached](http://memcached.org) e [Redis](http://redis.io) fora da caixa.
 
-The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, Laravel is configured to use the `file` cache driver, which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached or APC.
+O arquivo de configuração também contem varias outras opções, que são documentadas no próprio arquivo, então certifique-se de ler sobre essas opções. Por padrão, Laravel é configurado para usar o cache driver `file`, que armazena, serializado, o objetos de cache no sistema de arquivos. Para grandes aplicações, recomenda-se que você use um cache em memória como o Memcached ou APC.
 
 <a name="cache-usage"></a>
-## Cache Usage
+## Uso do Cache
 
-**Storing An Item In The Cache**
+**Armazenando Um Item No Cache**
 
 	Cache::put('key', 'value', $minutes);
 
-**Retrieving An Item From The Cache**
+**Recuperando Um Item Do Cache**
 
 	$value = Cache::get('key');
 
-**Retrieving An Item Or Returning A Default Value**
+**Recuperando Um Item Ou Retornando Um Valor Padrão**
 
 	$value = Cache::get('key', 'default');
 
 	$value = Cache::get('key', function() { return 'default'; });
 
-**Storing An Item In The Cache Permanently**
+**Armazenando Um Item No Cache Permanentemente**
 
 	Cache::forever('key', 'value');
 
-Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. You may do this using the `Cache::remember` method:
+Algumas vezes você pode querer recuperar um item do cache, mas Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. You may do this using the `Cache::remember` method:
 
 	$value = Cache::remember('users', $minutes, function()
 	{
