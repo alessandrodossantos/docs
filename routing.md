@@ -1,41 +1,41 @@
-# Routing
+# Roteamento
 
-- [Basic Routing](#basic-routing)
-- [Route Parameters](#route-parameters)
-- [Route Filters](#route-filters)
-- [Named Routes](#named-routes)
-- [Route Groups](#route-groups)
-- [Sub-Domain Routing](#sub-domain-routing)
-- [Throwing 404 Errors](#throwing-404-errors)
-- [Resource Controllers](#resource-controllers)
+- [Roteamento Básico](#basic-routing)
+- [Parâmetros de Rota](#route-parameters)
+- [Filtros de Rota](#route-filters)
+- [Rotas Nomeadas](#named-routes)
+- [Grupos de Rota](#route-groups)
+- [Roteamento de Sub-Domínio](#sub-domain-routing)
+- [Lançando Erros 404](#throwing-404-errors)
+- [Controladores de Recurso](#resource-controllers)
 
 <a name="basic-routing"></a>
-## Basic Routing
+## Roteamento Básico
 
-Most of the routes for your application will be defined in the `app/routes.php` file. The simplest Laravel routes consist of a URI and a Closure callback.
+A maioria das rotas do seu aplicativo será definida no arquivo `app/routes.php`. A simplicidade das rotas no Laravel consiste de uma URI e um Closure callback.
 
-**Basic GET Route**
+**Rota Básica GET**
 
 	Route::get('/', function()
 	{
 		return 'Hello World';
 	});
 
-**Basic POST Route**
+**Rota Básica POST**
 
 	Route::post('foo/bar', function()
 	{
 		return 'Hello World';
 	});
 
-**Registering A Route Responding To Any HTTP Verb**
+**Registrando uma Rota Respondendo Qualquer HTTP Verbo**
 
 	Route::any('foo', function()
 	{
 		return 'Hello World';
 	});
 
-**Forcing A Route To Be Served Over HTTPS**
+**Forçando uma Rota Usar HTTPS**
 
 	Route::get('foo', array('https', function()
 	{
@@ -43,28 +43,28 @@ Most of the routes for your application will be defined in the `app/routes.php` 
 	}));
 
 <a name="route-parameters"></a>
-## Route Parameters
+## Parâmetros de Rota
 
 	Route::get('user/{id}', function($id)
 	{
 		return 'User '.$id;
 	});
 
-**Optional Route Parameters**
+**Parâmetros de Rota Opcional**
 
 	Route::get('user/{name?}', function($name)
 	{
 		return $name;
 	});
 
-**Optional Route Parameters With Defaults**
+**Parâmetros de Rota Opcional Com Valor Padrão**
 
 	Route::get('user/{name?}', function($name = 'John')
 	{
 		return $name;
 	});
 
-**Regular Expression Route Constraints**
+**Restrição de Rota Com Expressão Regular**
 
 	Route::get('user/{name}', function($name)
 	{
@@ -79,11 +79,11 @@ Most of the routes for your application will be defined in the `app/routes.php` 
 	->where('id', '[0-9]+');
 
 <a name="route-filters"></a>
-## Route Filters
+## Filtros de Rota
 
-Route filters provide a convenient way of limiting access to a given route, which is useful for creating areas of your site which require authentication. There are several filters included in the Laravel framework, including an `auth` filter, a `guest` filter, and a `csrf`filter. These are located in the `app/filters.php` file.
+Filtros de rota fornecem uma maneira conveniente de limitar o acesso a uma determinada rota, o que é útil para a criação de áreas de seu site que exigem autenticação. Existem vários filtros incluídos no framework Laravel, includo o filtro `auth`, filtro `guest`, e o filtro `csrf`. Eles estão alocados no arquivo `app/filters.php`.
 
-**Defining A Route Filter**
+**Definindo Filtros de Rota**
 
 	Route::filter('old', function()
 	{
@@ -93,23 +93,23 @@ Route filters provide a convenient way of limiting access to a given route, whic
 		}
 	});
 
-If a response is returned from a filter, that response will be considered the response to the request and the route will not be executed.
+Se uma resposta é retornada de um filtro, a mesma será considerada a resposta da requisição e a rota não será executada.
 
-**Attaching A Filter To A Route**
+**Anexando um Filtro a uma Rota**
 
 	Route::get('user', array('before' => 'old', function()
 	{
 		return 'You are over 200 years old!';
 	}));
 
-**Attaching Multiple Filters To A Route**
+**Anexando Multiplos Filtros a uma Rota**
 
 	Route::get('user', array('before' => 'auth|old', function()
 	{
 		return 'You are authenticated and over 200 years old!';
 	}));
 
-**Specifying Filter Parameters**
+**Especificando Parâmetros do Filtro**
 
 	Route::filter('age', function($value)
 	{
@@ -121,9 +121,9 @@ If a response is returned from a filter, that response will be considered the re
 		return 'Hello World';
 	}));
 
-**Pattern Based Filters**
+**Filtros Baseados em Padrão**
 
-You may also specify that a filter applies to an entire set of routes based on their URI.
+Você pode também especificar que um filtro se aplique a todo um conjunto de rota baseado na sua URI.
 
 	Route::filter('admin', function()
 	{
@@ -132,47 +132,47 @@ You may also specify that a filter applies to an entire set of routes based on t
 
 	Route::when('admin/*', 'admin');
 
-In the example above, the `admin` filter would be applied to all routes beginning with `admin/`. The asterisk is used as a wildcard, and will match any combination of characters.
+No exemplo acima, o filtro `admin` será aplicado a todas as rotas iniciadas com `admin/`. O asterisco é usado como um curinga, e irá casar qualquer combinação de caractéres.
 
-**Filter Classes**
+**Classes de Filtro**
 
-For advanced filtering, you may wish to use a class instead of a Closure. Since filter classes are resolved out of the application [IoC container](/docs/ioc), you will be able to utilize dependency injection in these filters for greater testability.
+Para filtros avançados, você talvez queira usar uma classe em vez de uma Closure. Uma vez que classes de filtro são resolvidas fora da aplicação do [conteúdo IoC](/docs/ioc), você será capaz de utilizar a injeção de dependência nesses filtros para maior testabilidade.
 
-**Defining A Filter Class**
+**Definindo Classes de Filtro**
 
 	class FooFilter {
 
 		public function filter()
 		{
-			// Filter logic...
+			// Lógica do Filtro...
 		}
 
 	}
 
-**Registering A Class Based Filter**
+**Registrando uma Classe de Filtro**
 
 	Route::filter('foo', 'FooFilter');
 
 <a name="named-routes"></a>
-## Named Routes
+## Rotas Nomeadas
 
-Named routes make referring to routes when generating redirects or URLs more convenient. You may specify a name for a route like so:
+Rotas nomeadas torna a referência para rotas, ao gerar redirecionamentos ou URLs, mais conveniente. Você pode especificar um nome para rota assim como:
 
 	Route::get('user/profile', array('as' => 'profile', function()
 	{
 		//
 	}));
 
-Now, you may use the route's name when generating URLs or redirects:
+Agora, você pode usar seus nomes de rotas quando gerar URLs ou redirecionamentos:
 
 	$url = URL::route('profile');
 
 	$redirect = Redirect::route('profile');
 
 <a name="route-groups"></a>
-## Route Groups
+## Grupos de Rota
 
-Sometimes you may need to apply filters to a group of routes. Instead of specifying the filter on each route, you may use a route group:
+Algumas vezes você pode precisar aplicar filtros para um grupo de rotas. Em vez de especificar um filtro para cada rota, você pode usar uma grupo de rota:
 
 	Route::group(array('before' => 'auth'), function()
 	{
@@ -188,11 +188,11 @@ Sometimes you may need to apply filters to a group of routes. Instead of specify
 	});
 
 <a name="sub-domain-routing"></a>
-## Sub-Domain Routing
+## Roteamento de Sub-Domínio
 
-Laravel routes are also able to handle wildcard sub-domains, and pass you wildcard parameters from the domain:
+Rotas em Laravel são capazes de lidar com sub-domínios, e passar seu curinga como parâmetro para o o domínio:
 
-**Registering Sub-Domain Routes**
+**Registrando Routeamento de Sub-Domínio**
 
 	Route::group(array('domain' => '{account}.myapp.com'), function()
 	{
@@ -205,19 +205,19 @@ Laravel routes are also able to handle wildcard sub-domains, and pass you wildca
 	});
 
 <a name="throwing-404-errors"></a>
-## Throwing 404 Errors
+## Lançando Erros 404
 
-There are two ways to manually trigger a 404 error from a route. First, you may use the `App::abort` method:
+Existem duas maneiras de manualmente lançar um erro 404 de uma rota. A primeira, deve usar o métodos `App::abort`:
 
 	App::abort(404);
 
-Second, you may throw an instance of `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`.
+A segunda, você pode lançar uma instância de `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`.
 
-More information on handling 404 exceptions and using custom responses for these errors may be found in the [errors](/docs/errors#handling-404-errors) section of the documentation.
+Para mais informações sobre manipulações de exceções 404 e o uso de respostas customizadas para esses erros, você pode encontrar na seção de [erros](/docs/errors#handling-404-errors) da documentação.
 
 <a name="resource-controllers"></a>
-## Resource Controllers
+## Controladores de Recursos
 
-Resource controllers make it easier to build RESTful controllers around resources. 
+Controladores de Recursos torna fácil construir controles RESTful atraves dos recursos. 
 
-See [Controllers](/docs/controllers#resource-controllers) documentation for more information.
+Veja a documentação sobre [Controllers](/docs/controllers#resource-controllers) para obter mais informações.

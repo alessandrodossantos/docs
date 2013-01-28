@@ -1,163 +1,163 @@
-# Requests & Input
+# Requisições & Entradas
 
-- [Basic Input](#basic-input)
+- [Entradas Básicas](#basic-input)
 - [Cookies](#cookies)
-- [Old Input](#old-input)
-- [Files](#files)
-- [Request Information](#request-information)
+- [Entradas Antigas](#old-input)
+- [Arquivos](#files)
+- [Informações da Requisição](#request-information)
 
 <a name="basic-input"></a>
-## Basic Input
+## Entradas Básicas
 
-You may access all user input with a few simple methods. You do not need to worry about the HTTP verb used for the request, as input is accessed in the same way for all verbs.
+Você pode acessar todas as entradas do usuário com algums métodos simples. Você não precisa se preocupar com os verbos da requisição HTTP, assim como entrada, eles são acessados todos da mesma forma.
 
-**Retrieving An Input Value**
+**Recuperando Um Valor de Entrada**
 
 	$name = Input::get('name');
 
-**Retrieving A Default Value If The Input Value Is Absent**
+**Recuperando Um Valor Padrão Se O Valor de Entrada Está Ausente**
 
 	$name = Input::get('name', 'Sally');
 
-**Determining If An Input Value Is Present**
+**Determinando SE Um Valor de Entrada Está Presente**
 
 	if (Input::has('name'))
 	{
 		//
 	}
 
-**Getting All Input For The Request**
+**Obtendo Todas As Entradas Da Requisição**
 
 	$input = Input::all();
 
-**Getting Only Some Of The Request Input**
+**Obtendo Somente Algumas Entradas Da Requisição**
 
 	$input = Input::only('username', 'password');
 
 	$input = Input::except('credit_card');
 
-Some JavaScript libraries such as Backbone may send input to the application as JSON.
+Algumas bibliotecas JavaScript como Backbone pode enviar entradas para a aplicação como JSON.
 
-**Retrieving JSON Input**
+**Recuperando Entrada JSON**
 
 	$input = Input::json();
 
 <a name="cookies"></a>
 ## Cookies
 
-All cookies created by the Laravel framework are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client.
+Todos os cookies criados pelo framework Laravel são encriptados e assinado com um código de autenticação, significando que será considerado inválido se forem alterados pelo cliente.
 
-**Retrieving A Cookie Value**
+**Recuperando Um Valor De Cookie**
 
 	$value = Cookie::get('name');
 
-**Attaching A New Cookie To A Response**
+**Anexando Um Novo Cookie Para A Resposta**
 
 	$response = Response::make('Hello World');
 
 	$response->withCookie(Cookie::make('name', 'value', $minutes));
 
-**Creating A Cookie That Lasts Forever**
+**Criando Um Cookie Que Dura Pra Sempre**
 
 	$cookie = Cookie::forever('name', 'value');
 
 <a name="old-input"></a>
-## Old Input
+## Entradas Antigas
 
-You may need to keep input from one request until the next request. For example, you may need to re-populate a form after checking it for validation errors.
+Você pode precisar manter entradas de uma requisição até a próxima requisição. Por exemplo, você pode precisar re-popular um formulário depois de checar por erros de validação.
 
-**Flashing Input To The Session**
+**Flashing Entradas Na Sessão**
 
 	Input::flash();
 
-**Flashing Only Some Input To The Session**
+**Flashing Somente Algumas Entradas Na Sessão**
 
 	Input::flashOnly('username', 'email');
 
 	Input::flashExcept('password');
 
-Since you often will want to flash input in association with a redirect to the previous page, you may easily chain input flashing onto a redirect.
+Uma vez que você frequentemente irá querer entradas flash associadas com o redirecionamento para a página anterior, você pode facilmente encadear entradas flashing para um redirecionamento.
 
 	return Redirect::to('form')->withInput();
 
 	return Redirect::to('form')->withInput(Input::except('password'));
 
-> **Note:** You may flash other data across requests using the [Session](/docs/session) class.
+> **Nota:** Você pode flash(manter rapidamente) outros dados através de requisições usando a classe [Session](/docs/session).
 
-**Retrieving Old Data**
+**Recuperando Dados antigos**
 
 	Input::old('username');
 
 <a name="files"></a>
-## Files
+## Arquivos
 
-**Retrieving An Uploaded File**
+**Recuperando Um Arquivo Enviado**
 
 	$file = Input::file('photo');
 
-**Determining If A File Was Uploaded**
+**Determinando Se O Arquivo Foi Enviado**
 
 	if (Input::hasFile('photo'))
 	{
 		//
 	}
 
-The object returned by the `file` method is an instance of the `Symfony\Component\HttpFoundation\File\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file.
+O objeto retorno será um método `file` que é um instância da classe `Symfony\Component\HttpFoundation\File\UploadedFile`, que extende a classe PHP `SplFileInfo` e fornece uma variedade de métodos para interagir com o arquivo.
 
-**Moving An Uploaded File**
+**Movendo Um Arquivo Enviado**
 
 	Input::file('photo')->move($destinationPath);
 
 	Input::file('photo')->move($destinationPath, $fileName);
 
-**Retrieving The Path To An Uploaded File**
+**Recuperando O Caminho De Um Arquivo Enviado**
 
 	$path = Input::file('photo')->getRealPath();
 
-**Retrieving The Size Of An Uploaded File**
+**Recuperando O Tamanho De Um Arquivo Enviado**
 
 	$size = Input::file('photo')->getSize();
 
-**Retrieving The MIME Type Of An Uploaded File**
+**Recuperando O Tipo MIME De Um Arquivo Enviado**
 
 	$mime = Input::file('photo')->getMimeType();
 
 <a name="request-information"></a>
-## Request Information
+## Informações da Requisição
 
-The `Request` class provides many methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. Here are some of the highlights.
+A classe `Request` fornece muitos métodos para examinar a requisição HTTP para sua aplicação and extende a classe `Symfony\Component\HttpFoundation\Request`. Aqui está alguns destaques.
 
-**Retrieving The Request URI**
+**Recuperando A URI Da Requisição**
 
 	$uri = Request::path();
 
-**Determining If The Request Path Matches A Pattern**
+**Determinando Se O Caminho Da Requisição Casa Com Um Padrão**
 
 	if (Request::is('admin/*'))
 	{
 		//
 	}
 
-**Get The Request URL**
+**Obtém A Url Da Requisição**
 
 	$url = Request::url();
 
-**Retrieving A Request Header**
+**Recuperando Um Cabeçalho da Requisicao**
 
 	$value = Request::header('Content-Type');
 
-**Retrieving Values From $_SERVER**
+**Recuperando Valores Do $_SERVER**
 
 	$value = Request::server('PATH_INFO');
 
-**Determine If The Request Is Using AJAX**
+**Determinando Se A Requisição Está Usando AJAX**
 
 	if (Request::ajax())
 	{
 		//
 	}
 
-**Determining If The Request Is Over HTTPS**
+**Determinando Se A Requisição Está Sobre HTTPS**
 
 	if (Request::secure())
 	{
