@@ -1,24 +1,24 @@
-# Views & Responses
+# Views & Repostas
 
-- [Basic Responses](#basic-responses)
-- [Redirects](#redirects)
+- [Respostas Básicas](#basic-responses)
+- [Redirecionamentos](#redirects)
 - [Views](#views)
-- [View Composers](#view-composers)
-- [Special Responses](#special-responses)
+- [Compositor de Views](#view-composers)
+- [Repostas Especiais](#special-responses)
 
 <a name="basic-responses"></a>
-## Basic Responses
+## Repostas Básicas
 
-**Returning Strings From Routes**
+**Retornando Texto Das Rotas**
 
 	Route::get('/', function()
 	{
 		return 'Hello World';
 	});
 
-**Creating Custom Responses**
+**Criando Respostas Customizadas**
 
-A `Response` instance inherits from the `Symfony\Component\HttpFoundation\Response` class, providing a variety of methods for building HTTP responses.
+Uma instância de `Response` herda da classe `Symfony\Component\HttpFoundation\Response`, fornecendo uma variedade de métodos para construir respostas HTTP.
 
 	$response = Response::make($contents, $statusCode);
 
@@ -26,51 +26,51 @@ A `Response` instance inherits from the `Symfony\Component\HttpFoundation\Respon
 
 	return $response;
 
-**Attaching Cookies To Responses**
+**Anexando Cookies Nas Respostas**
 
 	$cookie = Cookie::make('name', 'value');
 
 	return Response::make($content)->withCookie($cookie);
 
 <a name="redirects"></a>
-## Redirects
+## Redirecionamentos
 
-**Returning A Redirect**
+**Retornando Um Redicionamento**
 
 	return Redirect::to('user/login');
 
-**Returning A Redirect To A Named Route**
+**Retornando Um Redirecionamento Para Uma Rota Nomeada**
 
 	return Redirect::route('login');
 
-**Returning A Redirect To A Named Route With Parameters**
+**Retornando Um Redirecionamento Para Uma Rota Nomeada Com Parâmetros**
 
 	return Redirect::route('profile', array(1));
 
-**Returning A Redirect To A Named Route Using Named Parameters**
+**Retornando Um Redirecionamento Para Uma Rota Nomeada Com Parâmetros Nomeados**
 
 	return Redirect::route('profile', array('user' => 1));
 
-**Returning A Redirect To A Controller Action**
+**Retornando Um Redirecionamento Para Uma Ação Controladora**
 
 	return Redirect::action('HomeController@index');
 
-**Returning A Redirect To A Controller Action With Parameters**
+**Retornando Um Redirecionamento Para Uma Ação Controladora Com Parâmetros**
 
 	return Redirect::action('UserController@profile', array(1));
 
-**Returning A Redirect To A Controller Action Using Named Parameters**
+**Retornando Um Redirecionamento Para Uma Ação Controladora Com Parâmetros Nomeados**
 
 	return Redirect::action('UserController@profile', array('user' => 1));
 
 <a name="views"></a>
 ## Views
 
-Views typically contain the HTML of your application and provide a convenient way of separating your controller and domain logic from your presentation logic. Views are stored in the `app/views` directory.
+Views tipicamente contem o HTML da sua aplicação e fornece uma conveniente maneira de separar o controle e a logica de dominio da sua lógica de apresentação. Views são armazenados no diretório `app/views`.
 
-A simple view could look something like this:
+Uma simples view pode ser algo assim:
 
-	<!-- View stored in app/views/greeting.php -->
+	<!-- View armazenada em app/views/greeting.php -->
 
 	<html>
 		<body>
@@ -78,32 +78,32 @@ A simple view could look something like this:
 		</body>
 	</html>
 
-This view may be returned to the browser like so:
+Está pode ser retornada para o navegador assim:
 
 	Route::get('/', function()
 	{
 		return View::make('greeting', array('name' => 'Taylor'));
 	});
 
-The second argument passed to `View::make` is an array of data that should be made available to the view.
+O segundo argumento passado para o `View::make` é um vetor com dados que estarão disponíveis na sua view.
 
-**Passing Data To Views**
+**Passando Dados Para As Views**
 
 	$view = View::make('greeting', $data);
 
 	$view = View::make('greeting')->with('name', 'Steve');
 
-In the example above the variable `$name` would be accessible from the view, and would contain `Steve`.
+No exemplo acima a variavel `$name` estará acessível na view, e contém `Steve`.
 
-**Passing A Sub-View To A View**
+**Passando Uma Sub-View Para A View**
 
-Sometimes you may wish to pass a view into another view. For example, given a sub-view stored at `app/views/child/view.php`, we could pass it to another view like so:
+Algumas vezes você pode querer passar uma view para dentro de outra view. Por exemplo, dada uma sub-view armazenada em `app/views/child/view.php`, podemos passar isso para outra view assim:
 
 	$view = View::make('greeting')->nest('child', 'child.view');
 
 	$view = View::make('greeting')->nest('child', 'child.view', $data);
 
-The sub-view can then be rendered from the parent view:
+A sub-view pode então ser exibida na view pai view:
 
 	<html>
 		<body>
@@ -113,24 +113,24 @@ The sub-view can then be rendered from the parent view:
 	</html>
 
 <a name="view-composers"></a>
-## View Composers
+## Compositor de Views
 
-View composers are callbacks or class methods that are called when a view is created. If you have data that you want bound to a given view each time that view is created throughout your application, a view composer can organize that code into a single location. Therefore, view composers may function like "view models" or "presenters".
+Compositor de Views são callbacks ou métodos de classe que são chamados quando uma view é criada. Se você tem dados que são necessários vincular a uma view cada vez que ela é criada por toda sua aplicação, um compositor de view pode organizar o código num só local. Portanto, compositor de view podem funcionar como "modelo de view" ou "apresentadores".
 
-**Defining A View Composer**
+**Definindo Um Compositor de View**
 
 	View::composer('profile', function($event)
 	{
 		$event->view->with('count', User::count());
 	});
 
-Now each time the `profile` view is created, the `count` data will be bound to the view.
+Agora cada vez que a view `profile` é criada, o dado `count` será vinculado ao view.
 
-If you would rather use a class based composer, which will provide the benefits of being resolved through the application [IoC container](/docs/ioc), you may do so:
+Se você prefefir compositor baseado em classe, que fornecerá os benefícios de ser resolvido através da aplicação [conteúdo IoC](/docs/ioc), poderá fazê-lo:
 
 	View::composer('profile', 'ProfileComposer');
 
-A view composer class should be defined like so:
+Uma classe compositor de view deve ser definida assim como:
 
 	class ProfileComposer {
 
@@ -141,20 +141,20 @@ A view composer class should be defined like so:
 
 	}
 
-Note that there is no convention on where composer classes may be stored. You are free to store them anywhere as long as they can be autoloaded using the directives in your `composer.json` file.
+Observe que não há uma convenção de onde suas classes compositoras devem ser armazenadas. Você é livre para armazenar em qualquer lugar, desde que possam ser carregadas automaticamente usando as diretivas no seu arquivo `composer.json`.
 
 <a name="special-responses"></a>
-## Special Responses
+## Respostas Especiais
 
-**Creating A JSON Response**
+**Criando Uma Resposta JSON**
 
 	return Response::json(array('name' => 'Steve', 'state' => 'CA'));
 
-**Creating A JSONP Response**
+**Criando Uma Resposta JSONP**
 
 	return Response::json(array('name' => 'Steve', 'state' => 'CA'))->setCallback(Input::get('callback'));
 
-**Creating a File Download Response**
+**Criando Um Resposta Para Download De Arquivo**
 
 	return Response::download($pathToFile);
 
