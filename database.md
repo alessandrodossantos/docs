@@ -1,44 +1,44 @@
-# Basic Database Usage
+# Uso Básico do Banco de Dados
 
-- [Configuration](#configuration)
-- [Running Queries](#running-queries)
-- [Accessing Connections](#accessing-connections)
+- [Configuração](#configuration)
+- [Executando Consultas](#running-queries)
+- [Acessando Conexões](#accessing-connections)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-Laravel makes connecting with databases and running queries extremely simple. The database configuration file is `app/config/database.php`. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for all of the supported database systems are provided in this file.
+Laravel faz conexão com banco de dados e execução de consultas ser extramamente simples. O arquivo de configuração do banco dados é `app/config/database.php`. Neste arquivo você pode definir tudo de sua conexão, bem como especificar que conexão será usada por padrão. Exemplos para todos os sistemas de base de dados suportadas são fornecidos neste arquivo.
 
-Currently Laravel supports four database systems: MySQL, Postgres, SQLite, and SQL Server.
+Atualmente Laravel suporta quatro sistemas de banco de dados: MySQL, Postgres, SQLite, e SQL Server.
 
 <a name="running-queries"></a>
-## Running Queries
+## Executando Consultas
 
-Once you have configured your database connection, you may run queries using the `DB` class.
+Uma que sua conexão com o banco de ados está configurada, você pode executar consultas usando a classe `DB`.
 
-**Running A Select Query**
+**Executando Um Consulta Select**
 
 	$results = DB::select('select * from users where id = ?', array(1));
 
-The `select` method will always return an `array` of results.
+O método `select` irá sempre retornar uma `array(matriz)` de resultados.
 
-**Running An Insert Statement**
+**Executando Uma Instrução Insert**
 
 	DB::insert('insert into users (id, name) values (?, ?)', array(1, 'Dayle'));
 
-**Running An Update Statement**
+**Executando Uma Instrução Update**
 
 	DB::update('update users set votes = 100 where name = ?', array('John'));
 
-**Running A Delete Statement**
+**Executando Uma Instrução Delete**
 
 	DB::delete('delete from users');
 
-> **Note:** The `update` and `delete` statements return the number of rows affected by the operation.
+> **Nota:** Instruções `update` e `delete` retornam o número de linhas afetadas pela operação.
 
 <a name="accessing-connections"></a>
-## Accessing Connections
+## Acessando Conexões
 
-When using multiple connections, you may access them via the `DB::connection` method:
+Quando multiplas conexões são usadas, é possível acessar elas via método `DB::connection`:
 
 	$users = DB::connection('foo')->select(...);
