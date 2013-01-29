@@ -2,7 +2,7 @@
 
 - [Configuração](#configuration)
 - [Uso do Cache](#cache-usage)
-- [Cache de Banco de Dados](#database-cache)
+- [Cache no Banco de Dados](#database-cache)
 
 <a name="configuration"></a>
 ## Configuração
@@ -32,30 +32,30 @@ O arquivo de configuração também contem varias outras opções, que são docu
 
 	Cache::forever('key', 'value');
 
-Algumas vezes você pode querer recuperar um item do cache, mas Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. You may do this using the `Cache::remember` method:
+Algumas vezes você pode querer recuperar um item do cache, mas também armazenar um valor padrão, caso seja requisitado e não existir. Isso é possível usando o método `Cache::remember`:
 
 	$value = Cache::remember('users', $minutes, function()
 	{
 		return DB::table('users')->get();
 	});
 
-You may also combine the `remember` and `forever` methods:
+Você também pode combinar os métodos `remember` e `forever`:
 
 	$value = Cache::rememberForever('users', function()
 	{
 		return DB::table('users')->get();
 	});
 
-Note that all items stored in the cache are serialized, so you are free to store any type of data.
+Observe que todos os itens armazenados no cache são serializados, então você é livre para armazenar qualquer tipo de dado.
 
-**Removing An Item From The Cache**
+**Removendo Um Item Do Cache**
 
 	Cache::forget('key');
 
 <a name="database-cache"></a>
-## Database Cache
+## Cache no Banco de Dados
 
-When using the `database` cache driver, you will need to setup a table to contain the cache items. Below is an example `Schema` declaration for the table:
+Quando usar `database` como cache driver, você precisará configurar uma tabela para armazenar os itens do cache. Abaixo está um exemplod e declaração de `Schema` para a tabela:
 
 	Schema::create('cache', function($t)
 	{

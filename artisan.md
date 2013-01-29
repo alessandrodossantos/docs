@@ -1,36 +1,36 @@
 # Artisan CLI
 
-- [Introduction](#introduction)
-- [Usage](#usage)
+- [Introdução](#introduction)
+- [Uso](#usage)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-Artisan is the name of the command-line interface included with Laravel. It provides a number of helpful commands for your use while developing your application. It is driven by the powerful Symfony Console component.
+Artisan é o nome da inteface de linha de comando incluso no Laravel. Ele fornece alguns comandos úteis para você usar enquanto desenvolve sua aplicação. Ele é impulsionado pelo poderoso componente Symfony Console.
 
 <a name="usage"></a>
-## Usage
+## Uso
 
-To view a list of all available Artisan commands, you may use the `list` command:
+Para ver uma lista de todos os comandos do Artisan disponíveis, use o comando `list`:
 
-**Listing All Available Commands**
+**Listando Todos Comandos Disponíveis**
 
 	php artisan list
 
-Every command also includes a "help" screen which displays and describes the command's available arguments and options. To view a help screen, simply precede the name of the command with `help`:
+Cada comando inclui também um "help" que mostra e descreve argumentos disponíveis do comando e opções. Para ver um help, simplesmente preceda o comando com `help`:
 
-**Viewing The Help Screen For A Command**
+**Visualizar O Help De Um Comando**
 
 	php artisan help migrate
 
-You may specify the configuration environment that should be used while running a command using the `--env` switch:
+Você pode especificar o ambiente configurado que será usado para executar o comando, usando o switch `--env`:
 
-**Specifying The Configuration Environment**
+**Especificando O Ambiente Configurado**
 
 	php artisan migrate --env=local
 
-You may also view the current version of your Laravel installation using the `--version` option:
+Você também pode ver a versão atual da sua instalação do Laravel usando a opção `--version`:
 
-**Displaying Your Current Laravel Version**
+**Exibindo Sua Versão Atual Do Laravel**
 
 	php artisan --version

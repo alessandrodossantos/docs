@@ -1,131 +1,131 @@
 # Artisan Development
 
-- [Introduction](#introduction)
-- [Building A Command](#building-a-command)
-- [Registering Commands](#registering-commands)
-- [Calling Other Commands](#calling-other-commands)
+- [Introdução](#introduction)
+- [Criando Um Comando](#building-a-command)
+- [Registrando Comandos](#registering-commands)
+- [Chamando Outro Comando](#calling-other-commands)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-In addition to the commands provided with Artisan, you may also build your own custom commands for working with your application. You may store your custom commands in the `app/commands` directory; however, you are free to choose your own storage location as long as your commands can be autoloaded based on your `composer.json` settings.
+Além dos comandos que o Artisan disponhe, é possível criar os seus próprios comandos de trabalho para sua aplicação. Você pode armazenar seus comandos personalizados no diretório`app/commands`; contudo, você é livre para escolher onde armazenar, desde que seus comandos possam ser carregados automaticamente com base nas configurações do seu `composer.json`.
 
 <a name="building-a-command"></a>
-## Building A Command
+## Criando Um Comando
 
-### Generating The Class
+### Gerando a Classe
 
-To create a new command, you may use the `command:make` Artisan command, which will generate a command stub to help you get started:
+Para criar um novo comando, você pode usar o comando `command:make` do Artisan, que irá gerar um esboço para ajudar você a iniciar:
 
-**Generate A New Command Class**
+**Gerando Uma Nova Classe De Comando**
 
 	php artisan command:make FooCommand
 
-By default, generated commands will be stored in the `app/commands` directory; however, you may specify custom path or namespace:
+Por padrão, o comandos gerados será armazenado no diretório `app/commands`; mas você pode especificar um caminho ou namespace de sua preferência:
 
 	php artisan command:make FooCommand --path="app/classes" --namespace="Classes"
 
-### Writing The Command
+### Escrevando Comandos
 
-Once your command is generated, you should fill out the `name` and `description` properties of the class, which will be used when displaying your command on the `list` screen.
+Uma vez que seu comando foi gerado, você deverá preencher o `name` e a `description` nas propriedades da classe, que serão exibidas quando o comando `list` for executado.
 
-The `fire` method will be called when your command is executed. You may place any command logic in this method.
+O método `fire` será chamado quando seu comando for executado. Você pode qualquer lógica de comando nesse método.
 
-### Arguments & Options
+### Argumentos & Opções
 
-The `getArguments` and `getOptions` methods are where you may define any arguments or options your command receives. Both of these methods return an array of commands, which are described by a list of array options.
+Os métodos `getArguments` e `getOptions` são onde você pode definir quais argumentos e opções que seu comando ira receber. Ambos métodos retornam uma matriz de comandos, que são descritos por uma lista de opções.
 
-When defining `arguments`, the array definition values represent the following:
+Quando definimos `arguments(argumentos)`, os valores de definição da matriz representam o seguinte:
 
 	array($name, $mode, $description, $defaultValue)
 
-The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
+O argumento `mode` pode ser qualquer um a seguir: `InputArgument::REQUIRED` ou `InputArgument::OPTIONAL`.
 
-When defining `options`, the array definition values represent the following:
+Ao definir `options(opções)`, os valores de definição da matriz representa o seguinte:
 
 	array($name, $shortcut, $mode, $description, $defaultValue)
 
-For options, the argument `mode` may be: `InputOption::VALUE_REQUIRED`, `InputOption::VALUE_OPTIONAL`, `InputOption::VALUE_IS_ARRAY`, `InputOption::VALUE_NONE`.
+Para opções, o argumento `mode` pode ser: `InputOption::VALUE_REQUIRED`, `InputOption::VALUE_OPTIONAL`, `InputOption::VALUE_IS_ARRAY`, `InputOption::VALUE_NONE`.
 
-The `VALUE_IS_ARRAY` mode indicates that the switch may be used multiple times when calling the command:
+O modo `VALUE_IS_ARRAY` indica que você pode usar o switch(--) muitas vezes quando chamar o comando:
 
 	php artisan foo --option=bar --option=baz
 
-The `VALUE_NONE` option indicates that the option is simply used as a "switch":
+A opção `VALUE_NONE` indica que a opção pode usar simplemente o "switch":
 
 	php artisan foo --option
 
-### Retrieving Input
+### Recuperando Entrada
 
-While your command is executing, you will obviously need to access the values for the arguments and options accepted by your application. To do so, you may use the `argument` and `option` methods:
+Enquanto o seu comando é executado, você obviamente vai precisar acessar os valores dos argumentos e opções aceitos pela sua aplicação. Para fazer isso, você pode usar o método `argument` e `option`:
 
-**Retrieving The Value Of A Command Argument**
+**Recuperando O Valor Do Argumento De Comando**
 
 	$value = $this->argument('name');
 
-**Retrieving All Arguments**
+**Recuperando Todos Os Argumentos**
 
 	$arguments = $this->argument();
 
-**Retrieving The Value Of A Command Option**
+**Recuperando O Valor De Uma Opção de Comando**
 
 	$value = $this->option('name');
 
-**Retrieving All Options**
+**Recuperando Todas As Opções**
 
 	$options = $this->option();
 
-### Writing Output
+### Escrendo Saídas
 
-To send output to the console, you may use the `info`, `comment`, `question` and `error` methods. Each of these methods will use the appropriate ANSI colors for their purpose.
+Para enviar uma saída para o console, você pode usar os métodos `info`, `comment`, `question` e `error`. Cada um desses metódos fará o uso apropriado das cores ANSI em suas cores propostas.
 
-**Sending Information To The Console**
+**Enviando Informação Para Console**
 
 	$this->info('Display this on the screen');
 
-**Sending An Error Message To The Console**
+**Eviando Uma Mensagem De Erro Para O Console**
 
 	$this->error('Something went wrong!');
 
-### Asking Questions
+### Fazendo Perguntas
 
-You may also use the `ask` and `confirm` methods to prompt the user for input:
+Você pode usar os métodos `ask` e `confirm` para solicitar entradas ao usuário:
 
-**Asking The User For Input**
+**Solicitando Entradas Do Usuário**
 
 	$name = $this->ask('What is your name?');
 
-**Asking The User For Confirmation**
+**Solicitando Confirmação Do Usuário**
 
 	if ($this->confirm('Do you wish to continue? [yes|no]'))
 	{
 		//
 	}
 
-You may also specify a default value to the `confirm` method, which should be `true` or `false`:
+Você pode especificar um valor padrão para o método `confirm`, que deverá ser `true` ou `false`:
 
 	$this->confirm($question, true);
 
 <a name="registering-commands"></a>
-## Registering Commands
+## Registrando Comandos
 
-Once your command is finished, you need to register it with Artisan so it will be available for use. This is typically done in the `app/start/artisan.php` file. Within this file, you may use the `Artisan::add` method to register the command:
+Certo de que seu comando está pronto, você precisa registrá-lo no Artisan para que posa usá-lo. Isso é tipicamente feito no arquivo `app/start/artisan.php`. Nele, você pode usar o método `Artisan::add` para registrá-lo:
 
-**Registering An Artisan Command**
+**Registrando Um Comando No Artisan**
 
 	Artisan::add(new CustomCommand);
 
-If your command is registered in the application [IoC container](/docs/ioc), you may use the `Artisan::resolve` method to make it available to Artisan:
+Se seu comando está registrado na aplicação [IoC container](/docs/ioc), use o método `Artisan::resolve` torná-lo disponível no Artisan:
 
-**Registering A Command That Is In The IoC Container**
+**Registrando Um Comando Que Está No IoC Container**
 
 	Artisan::resolve('binding.name');
 
 <a name="calling-other-commands"></a>
-## Calling Other Commands
+## Chamando Outro Comando
 
-Sometimes you may wish to call other commands from your command. You may do so using the `call` method:
+Algumas vezes você desejará chamar outro comando a partir do seu comando. Faça usando o método `call`:
 
-**Calling Another Command**
+**Comando Outro Comando**
 
 	$this->call('command.name', array('argument' => 'foo', '--option' => 'bar'));

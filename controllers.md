@@ -1,18 +1,18 @@
-# Controllers
+# Controladores
 
-- [Basic Controllers](#basic-controllers)
-- [Controller Filters](#controller-filters)
-- [RESTful Controllers](#restful-controllers)
-- [Resource Controllers](#resource-controllers)
+- [Controladores Básicos](#basic-controllers)
+- [Filtros de Controladores](#controller-filters)
+- [Controladores RESTful](#restful-controllers)
+- [Controladores de Recursos](#resource-controllers)
 
 <a name="basic-controllers"></a>
-## Basic Controllers
+## Controladores Básicos
 
-Instead of defining all of your route-level logic in a single `routes.php` file, you may wish to organize this behavior using Controller classes. Controllers can group related route logic into a class, as well as take advantage of more advanced framework features such as automatic [dependency injection](/docs/ioc).
+Em vez de definir todos os seus níveis lógicos de rota num simples arquivo `routes.php`, você pode querer organizar o comportamento usando classes Controladoras. Controladores podem agrupar lógicas de rota relacionais em uma clase, bem como tirar vantagem de recursos mais avançados, tais como o framework automático para [injeção de dependências](/docs/ioc).
 
-Controllers are typically stored in the `app/controllers` directory, and this directory is registered in the `classmap` option of your `composer.json` file by default.
+Controladores são armazenados no diretório `app/controllers`, e esses diretório está registrando na opção `classmap(mapeamento de classes)` no seu arquivo `composer.json` por padrão.
 
-Here is an example of a basic controller class:
+Aqui está um exemplo básico de Classe Controladora:
 
 	class UserController extends BaseController {
 
@@ -28,30 +28,30 @@ Here is an example of a basic controller class:
 
 	}
 
-All controllers should extend the `BaseController` class. The `BaseController` is also stored in the `app/controllers` directory, and may be used as a place to put shared controller logic. The `BaseController` extends the framework's `Controller` class. Now, We can route to this controller action like so:
+Todos os controladores devem extender a classe `BaseController`. A `BaseController` também se encontra no diretório `app/controllers`, e pode ser usado como local para colocar a lógica compartilhada. A `BaseController` extende a classe `Controller` do framework. Agora, podemos rotear essa ação controladora assim como:
 
 	Route::get('user/{id}', 'UserController@showProfile');
 
-If you choose to nest or organize your controller using PHP namespaces, simply use the fully qualified class name when defining the route:
+Se preferir organizar seus controladores usando PHP namespaces, basta usar o nome da classe totalmente qualificado para definir a rota:
 
 	Route::get('foo', 'Namespace\FooController@method');
 
-You may also specify names on controller routes:
+Você também pode especificar nomes em rotas de controlador:
 
 	Route::get('foo', array('uses' => 'FooController@method',
 											'as' => 'name'));
 
-> **Note:** After creating a new class, make sure to run `composer dump-autoload` from the command line. This will allow the framework to automatically load your class.
+> **Nota:** Depois de criar uma nova classe, certifique-se de executar `composer dump-autoload` na linha de comando. Isso permitirá que o framework automaticamente carregue suas classes.
 
 <a name="controller-filters"></a>
-## Controller Filters
+## Filtros de Controladores
 
-[Filters](/docs/routing#route-filters) may be specified on controller routes similar to "regular" routes:
+[Filtros](/docs/routing#route-filters) pode ser especificado em rotas controladoras da mesma maneira que rotas "regular":
 
 	Route::get('profile', array('before' => 'auth',
 				'uses' => 'UserController@showProfile'));
 
-However, you may also specify filters from within your controller:
+No entanto, você também pode especificar filtros de dentro de seu controlador:
 
 	class UserController extends BaseController {
 
@@ -70,7 +70,7 @@ However, you may also specify filters from within your controller:
 
 	}
 
-You may also specify controller filters inline using a Closure:
+YVocê também pode especificar filtros de controladores inline usando uma Clousure:
 
 	class UserController extends BaseController {
 
@@ -88,15 +88,15 @@ You may also specify controller filters inline using a Closure:
 	}
 
 <a name="restful-controllers"></a>
-## RESTful Controllers
+## Controladores RESTful
 
-Laravel allows you to easily define a single route to handle every action in a controller using simple, REST naming conventions. First, define the route using the `Route::controller` method:
+Laravel permite a você facilmente definir uma única rota para lidar com cada ação de um controlador simples, usando convenções de REST. Primeiro, defina a rota usando o método `Route::controller`:
 
-**Defining A RESTful Controller**
+**Definindo Controlador RESTful**
 
 	Route::controller('users', 'UserController');
 
-The `controller` method accepts two arguments. The first is the base URI the controller handles, while the second is the class name of the controller. Next, just add methods to your controller, prefixed with the HTTP verb they respond to:
+O método `controller` aceita dois argumentos. O primeiro é a URI base do controlador, enquanto o segundo é o nome da classe do controlador. Depois, basta adicionar métodos para o seu controlador, prefixado com o verbo HTTP:
 
 	class UserController extends BaseController {
 
@@ -112,28 +112,28 @@ The `controller` method accepts two arguments. The first is the base URI the con
 
 	}
 
-The `index` methods will respond to the root URI handled by the controller, which, in this case, is `users`.
+O método `index` irá responder ao URI raiz tratada pelo controlador, na qual, neste caso, é `users`.
 
-If your controller action contains multiple words, you may access the action using "dash" syntax in the URI. For example, the following controller action on our `UserController` would respond to the `users/admin-profile` URI:
+Se sua ação controlador contém várias palavras, você pode acessar a ação usando sintaxe "dash(-)" na URI. Exemplo, a ação do controlador `UserController` responderia à URI `users/admin-profile`:
 
 	public function getAdminProfile() {}
 
 <a name="resource-controllers"></a>
-## Resource Controllers
+## Controladores de Recursos
 
-Resource controllers make it easier to build RESTful controllers around resources. For example, you may wish to create a controller that manages "photos" stored by your application. Using the `controller:make` command via the Artisan CLI and the `Route::resource` method, we can quickly create such a controller.
+Controladores de recursos tornam mais fácil construir controladores RESTful em torno de recursos. Por exemplo, você pode querer criar um controlador que gerencia "photos(fotos)" armazenados pelo seu aplicativo. Usando o controlador `controller:make` através do CLI Artisan e o método `Route::resource`, podemos criar rapidamente um controlador.
 
-To create the controller via the command line, execute the following command:
+Para criar o controlador via linha de comando, execute o seguinte comando:
 
 	php artisan controller:make PhotoController
 
-Now we can register a resourceful route to the controller:
+Agora podemos registar uma rota de recursos para o controlador:
 
 	Route::resource('photo', 'PhotoController');
 
-This single route declaration creates multiple routes to handle a variety of RESTful actions on the photo resource. Likewise, the generated controller will already have stubbed methods for each of these actions with notes informing you which URIs and verbs they handle.
+Esta única declaração de rota cria múltiplas rotas para lidar com uma variedade de ações RESTful em photo(foto). Da mesma forma, o controlador gerado já terá esboçado métodos para cada uma dessas ações com notas informando que URIs e verbos serão tratados por eles.
 
-**Actions Handled By Resource Controller**
+**Ações Trados Por Controlador de Recursos**
 
 Verb      | Path                  | Action
 ----------|-----------------------|--------------
@@ -145,13 +145,13 @@ GET       | /resource/{id}/edit   | edit
 PUT/PATCH | /resource/{id}        | update
 DELETE    | /resource/{id}        | destroy
 
-Sometimes you may only need to handle a subset of the resource actions:
+Às vezes, você só precisa lidar com um subconjunto das ações de recursos::
 
 	php artisan controller:make PhotoController --only=index,show
 
 	php artisan controller:make PhotoController --except=index
 
-And, you may also specify a subset of actions to handle on the route:
+E, você também pode especificar um subconjunto de ações para tratar na rota:
 
 	Route::resource('photo', 'PhotoController',
 					array('only' => array('index', 'show')));
