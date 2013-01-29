@@ -26,7 +26,7 @@
     - [Validações](/docs/validation)
 - Bancos de Dados
     - [Uso Básico](/docs/database)
-    - [Construtor de Query](/docs/queries)
+    - [Construtor de Consultas](/docs/queries)
     - [Eloquent ORM](/docs/eloquent)
     - [Construtor de Esquemas](/docs/schema)
     - [Migrações & Seeding](/docs/migrations)

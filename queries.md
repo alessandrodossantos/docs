@@ -1,26 +1,26 @@
-# Query Builder
+# Construtor de Consultas
 
-- [Introduction](#introduction)
+- [Introdução](#introduction)
 - [Selects](#selects)
 - [Joins](#joins)
-- [Advanced Wheres](#advanced-wheres)
-- [Aggregates](#aggregates)
-- [Raw Expressions](#raw-expressions)
+- [Condições(Wheres) Avançadas](#advanced-wheres)
+- [Agregação](#aggregates)
+- [Expressões Cruas(Raw)](#raw-expressions)
 - [Inserts](#inserts)
 - [Updates](#updates)
 - [Deletes](#deletes)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-The database query builder provides a convenient, fluent interface to creating and running database queries. It can be used to perform most database operations in your application, and works on all supported database systems.
+O construtor de consultas de banco de dados fornece um The database query builder provides a conviniente, inteface fluente para criar e executar consultas no banco de dados. Ele pode ser usado para executar a maioria das operações de banco de dados em seu aplicativo, e funciona em todos os sistemas de banco de dados suportados.
 
-> **Note:** The Laravel query builder uses PDO parameter binding throughout to protect your application against SQL injection attacks. There is no need to clean strings being passed as bindings.
+> **Nota:** O construtor de consultas Laravel usa ligação de parâmetros do PDO para proteger seu aplicativo contra ataques de injeção de SQL. Não há necessidade de limpar as strings passadas.
 
 <a name="selects"></a>
 ## Selects
 
-**Retrieving All Rows From A Table**
+**Recuperando Todas As Linhas Da Tabela**
 
 	$users = DB::table('users')->get();
 
@@ -29,17 +29,17 @@ The database query builder provides a convenient, fluent interface to creating a
 		var_dump($user->name);
 	}
 
-**Retrieving A Single Row From A Table**
+**Recuperando Uma Única Linha Da Tabela**
 
 	$user = DB::table('users')->where('name', 'John')->first();
 
 	var_dump($user->name);
 
-**Retrieving A Single Column From A Row**
+**Recuperando Uma Única Coluna Da Linha**
 
 	$name = DB::table('users')->where('name', 'John')->pluck('name');
 
-**Specifying A Select Clause**
+**Especificando Uma Cláusula Select**
 
 	$users = DB::table('users')->select('name', 'email')->get();
 
@@ -47,23 +47,23 @@ The database query builder provides a convenient, fluent interface to creating a
 
 	$users = DB::table('users')->select('name as user_name')->get();
 
-**Using Where Operators**
+**Usando O Operador Where**
 
 	$users = DB::table('users')->where('votes', '>', 100)->get();
 
-**Or Statements**
+**Instruções OR(Ou)**
 
 	$users = DB::table('users')
 	                    ->where('votes', '>', 100)
 	                    ->orWhere('name', 'John')
 	                    ->get();
 
-**Using Where Between**
+**Usando Where Between**
 
 	$users = DB::table('users')
 	                    ->whereBetween('votes', array(1, 100))->get();
 
-**Using Where In With An Array**
+**Usando Where In Com Um Array**
 
 	$users = DB::table('users')
 	                    ->whereIn('id', array(1, 2, 3))->get();
@@ -71,12 +71,12 @@ The database query builder provides a convenient, fluent interface to creating a
 	$users = DB::table('users')
 	                    ->whereNotIn('id', array(1, 2, 3))->get();
 
-**Using Where Null To Find Records With Unset Values**
+**Usando Where Nulo Para Buscar Registros Com Valores Não Definidos**
 
 	$users = DB::table('users')
 	                    ->whereNull('updated_at')->get();
 
-**Order By, Group By, And Having**
+**Order By, Group By, e Having**
 
 	$users = DB::table('users')
 	                    ->orderBy('name', 'desc')
@@ -91,16 +91,16 @@ The database query builder provides a convenient, fluent interface to creating a
 <a name="joins"></a>
 ## Joins
 
-The query builder may also be used to write join statements. Take a look at the following examples:
+O construtor de consulta também pode ser usado para escrever declarações join. Dê uma olhada nos exemplos:
 
-**Basic Join Statement**
+**Declaração De Join Básica**
 
 	DB::table('users')
 	            ->join('contacts', 'users.id', '=', 'contacts.user_id')
 	            ->join('orders', 'users.id', '=', 'orders.user_id')
 	            ->select('users.id', 'contacts.phone', 'orders.price');
 
-You may also specify more advanced join clauses:
+Você também pode especificar cláusulas de join mais avançados:
 
 	DB::table('users')
 	        ->join('contacts', function($join)
@@ -110,11 +110,11 @@ You may also specify more advanced join clauses:
 	        ->get();
 
 <a name="advanced-wheres"></a>
-## Advanced Wheres
+## Condições(Wheres) Avançadas
 
-Sometimes you may need to create more advanced where clauses such as "where exists" or nested parameter groupings. The Laravel query builder can handle these as well:
+Às vezes você necessita criar cláusulas where mais avançadas como "where exists" ou aninhados agrupamentos de parâmetros. O construtor de consultas do Laravel pode resolver isso muito bem:
 
-**Parameter Grouping**
+**Agrupamento de Parâmetros**
 
 	DB::table('users')
 	            ->where('name', '=', 'John')
@@ -125,11 +125,11 @@ Sometimes you may need to create more advanced where clauses such as "where exis
 	            })
 	            ->get();
 
-The query above will produce the following SQL:
+A consulta acima irá produzir o seguinte SQL:
 
 	select * from users where name = 'John' or (votes > 100 and title <> 'Admin')
 
-**Exists Statements**
+**Instrução Exists**
 
 	DB::table('users')
 	            ->whereExist(function($query)
@@ -140,7 +140,7 @@ The query above will produce the following SQL:
 	            })
 	            ->get();
 
-The query above will produce the following SQL:
+A consulta acima irá produzir o seguinte SQL:
 
 	select * from users
 	where exists (
@@ -148,11 +148,11 @@ The query above will produce the following SQL:
 	)
 
 <a name="aggregates"></a>
-## Aggregates
+## Agregadores
 
-The query builder also provides a variety of aggregate methods, such as `count`, `max`, `min`, `avg`, and `sum`.
+O construtor de consultas também fornece uma variedade de métodos de agregadores, tais como `count`, `max`, `min`, `avg`, e `sum`.
 
-**Using Aggregate Methods**
+**Usando Métodos Agregadores**
 
 	$users = DB::table('users')->count();
 
@@ -165,11 +165,11 @@ The query builder also provides a variety of aggregate methods, such as `count`,
 	$total = DB::table('users')->sum('votes');
 
 <a name="raw-expressions"></a>
-## Raw Expressions
+## Expressões Cruas(Raw)
 
-Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the `DB::raw` method:
+Às vezes, você pode precisar usar uma expressão crua em uma consulta. Estas expressões serão injetados na consulta como strings, por isso tome cuidado para não criar quaisquer brechas de injeção de SQL! Para criar uma expressão crua, use o método `DB::raw`:
 
-**Using A Raw Expression**
+**Usando Uma Expressão Crua**
 
 	$users = DB::table('users')
 	                     ->select(DB::raw('count(*) as user_count, status'))
@@ -177,7 +177,7 @@ Sometimes you may need to use a raw expression in a query. These expressions wil
 	                     ->groupBy('status')
 	                     ->get();
 
-**Incrementing or decrementing a value of a column**
+**Incrementando ou decrementando o valor de uma coluna**
 
 	DB::table('users')->increment('votes');
 
@@ -186,23 +186,23 @@ Sometimes you may need to use a raw expression in a query. These expressions wil
 <a name="inserts"></a>
 ## Inserts
 
-**Inserting Records Into A Table**
+**Inserindo Registros na Tabela**
 
 	DB::table('users')->insert(
 		array('email' => 'john@example.com', 'votes' => 0),
 	);
 
-If the table has an auto-incrementing id, use `insertGetId` to insert a record and retrieve the id:
+Se a tabela tem um id auto-incrementável, use `insertGetId` para inserir e já recuperar o id:
 
-**Inserting Records Into A Table With An Auto-Incrementing ID**
+**Inserindo Registro Na Tablea Com ID Auto-Incrementável**
 
 	$id = DB::table('users')->insertGetId(
 		array('email' => 'john@example.com', 'votes' => 0),
 	);
 
-> **Note:** When using PostgreSQL the insertGetId method expects the auto-incrementing column to be named "id".
+> **Nota:** Ao usar PostgreSQL o método insertGetId espera que a coluna de auto-incremento se chame "id".
 
-**Inserting Multiple Records Into A Table**
+**Inserindo Multiplos Registros Numa Tabela**
 
 	DB::table('users')->insert(
 		array('email' => 'taylor@example.com', 'votes' => 0),
@@ -212,7 +212,7 @@ If the table has an auto-incrementing id, use `insertGetId` to insert a record a
 <a name="updates"></a>
 ## Updates
 
-**Updating Records In A Table**
+**Atualizando Registros De Uma tabela**
 
 	DB::table('users')
 	            ->where('id', 1)
@@ -221,10 +221,10 @@ If the table has an auto-incrementing id, use `insertGetId` to insert a record a
 <a name="deletes"></a>
 ## Deletes
 
-**Deleting Records In A Table**
+**Apagando Registros de Uma Tabela**
 
 	DB::table('users')->where('votes', '<', 100)->delete();
 
-**Deleting All Records From A Table**
+**Apagando Todos Os Registros De Uma Tabela**
 
 	DB::table('users')->delete();

@@ -1,18 +1,18 @@
 # Redis
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [Usage](#usage)
+- [Introdução](#introduction)
+- [Configuração](#configuration)
+- [Uso](#usage)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-[Redis](http://redis.io) is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain [strings](http://redis.io/topics/data-types#strings), [hashes](http://redis.io/topics/data-types#hashes), [lists](http://redis.io/topics/data-types#lists), [sets](http://redis.io/topics/data-types#sets), and [sorted sets](http://redis.io/topics/data-types#sorted-sets).
+[Redis](http://redis.io) é um avançado software livre de amazenamento chave-valor. Ele é muitas vezes referido como um servidor de estrutura de dados uma vez que pode conter chaves do tipo [strings](http://redis.io/topics/data-types#strings), [hashes](http://redis.io/topics/data-types#hashes), [lists](http://redis.io/topics/data-types#lists), [sets](http://redis.io/topics/data-types#sets), e [sorted sets](http://redis.io/topics/data-types#sorted-sets).
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-The Redis configuration for your application is stored in the **app/config/database.php** file. Within this file, you will see a **redis** array containing the Redis servers used by your application:
+A configuração do Redis para sua aplicação é armazenado no arquivo **app/config/database.php**. Nesse arquivo, você verá um array **redis** contendo o servidor Redis usado na sua aplicação:
 
 	'redis' => array(
 
@@ -20,20 +20,20 @@ The Redis configuration for your application is stored in the **app/config/datab
 
 	),
 
-The default server configuration should suffice for development. However, you are free to modify this array based on your environment. Simply give each Redis server a name, and specify the host and port used by the server.
+A configuração padrão do servidor deve ser suficiente para o desenvolvimento. No entanto, você é livre para modificar esse array com base no seu ambiente. Basta dar a cada servidor Redis um nome, e especificar o host e a porta usada pelo servidor.
 
 <a name="usage"></a>
-## Usage
+## Uso
 
-You may get a Redis instance by calling the `Redis::connection` method:
+Você obtém uma instancia do Redis chamando o método `Redis::connection`:
 
 	$redis = Redis::connection();
 
-This will give you an instance of the default Redis server. You may pass the server name to the `connection` method to get a specific server as defined in your Redis configuration:
+Isto lhe dará uma instância do servidor Redis padrão. Você pode passar o nome do servidor para o método `connection` para obter um servidor específico, tal como definido em sua configuração Redis:
 
 	$redis = Redis::connection('other');
 
-Once you have an instance of the Redis client, we may issue any of the [Redis commands](http://redis.io/commands) to the instance. Laravel uses magic methods to pass the commands to the Redis server:
+Uma vez que você tiver uma instância do cliente Redis, é possivel emitir qualquer um dos [comandos Redis](http://redis.io/commands) desta instância. Laravel usa métodos mágicos para passar comandos ao servidor Redis:
 
 	$redis->set('name', 'Taylor');
 
@@ -41,11 +41,11 @@ Once you have an instance of the Redis client, we may issue any of the [Redis co
 
 	$values = $redis->lrange('names', 5, 10);
 
-Notice the arguments to the command are simply passed into the magic method. Of course, you are not required to use the magic methods, you may also pass commands to the server using the `command` method:
+Observe os argumentos para o comando são simplesmente passado para o método mágico. Claro, você não é obrigado a usar os métodos mágicos, você também pode passar comandos para o servidor usando o método `command`:
 
 	$values = $redis->command('lrange', array(5, 10));
 
-When you are simply executing commands against the default connection, just use static magic methods on the `Redis` class:
+Quando você está estiver executando comandos contra a conexão padrão, basta usar métodos mágicos estáticos da classe `Redis`:
 
 	Redis::set('name', 'Taylor');
 
@@ -53,4 +53,4 @@ When you are simply executing commands against the default connection, just use 
 
 	$values = Redis::lrange('names', 5, 10);
 
-> **Note:** Redis [cache](/docs/cache) and [session](/docs/session) drivers are included with Laravel.
+> **Nota:** [Cache](/docs/cache) e [sessões](/docs/session) com drivers Redis está incluso no Laravel.

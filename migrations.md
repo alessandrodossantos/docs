@@ -4,7 +4,7 @@
 - [Criando Migrações](#creating-migrations)
 - [Executando Migrações](#running-migrations)
 - [Revertendo Migrações](#rolling-back-migrations)
-- [Seeding(Alimentando) Banco de Dados](#database-seeding)
+- [Seeding(Semeando) Banco de Dados](#database-seeding)
 
 <a name="introduction"></a>
 ## Introdução
@@ -14,62 +14,62 @@ Migrações é tipo de controle de versão para o seu banco de dados. Eles permi
 <a name="creating-migrations"></a>
 ## Criando Migrações
 
-To create a migration, you may use the `migrate:make` command on the Artisan CLI:
+Para cria migrações, use o comando `migrate:make` do Artisan CLI:
 
-**Creating A Migration**
+**Criando Uma Migração**
 
 	php artisan migrate:make create_users_table
 
-The migration will be placed in your `app/database/migrations` folder, and will contain a timestamp which allows the framework to determine the order of the migrations.
+A migração sera alocada no diretorio `app/database/migrations`, e irá conter um timestamp que permite  ao framework determinar a ordem das migrações.
 
-You may also specify a `--path` option when creating the migration. The path should be relative to the root directory of your installation:
+É possivel especificar uma opção `--path` quando criar uma migração. A opção path(diretório) deverá ser relativo ao diretório raiz de sua instalação:
 
 	php artisan migrate:make foo --path=app/migrations
 
-The `--table` and `--create` options may also be used to indicate the name of the table, and whether the migration will be creating a new table:
+As opções `--table` e `--create` são usadas para indicar o nome da tabela e se a migração será a criação de uma nova tabela:
 
 	php artisan migrate:make create_users_table --table=users --create
 
 <a name="running-migrations"></a>
 ## Executando Migrações
 
-**Running All Outstanding Migrations**
+**Executando Todas As Migrações**
 
 	php artisan migrate
 
-**Running All Outstanding Migrations For A Path**
+**Executando Todas As Migrações De Um Path(diretório)**
 
 	php artisan migrate --path=app/foo/migrations
 
-**Running All Outstanding Migrations For A Package**
+**Executando Todas As Migrações De Um Pacote**
 
 	php artisan migrate --package=vendor/package
 
-> **Note:** If you receive a "class not found" error when running migrations, try running the `composer update` command.
+> **Nota:** Se você receber um erro "class not found" quando executar migrações, tente excutar o comando `composer update`.
 
 <a name="rolling-back-migrations"></a>
 ## Revertendo Migrações
 
-**Rollback The Last Migration Operation**
+**Revertendo A Última Operação Migração**
 
 	php artisan migrate:rollback
 
-**Rollback all migrations**
+**Revertendo Todas As Migrações**
 
 	php artisan migrate:reset
 
-**Rollback all migrations and run them all again**
+**Revertendo Todas As Migrações E Executando Tudo Novamente**
 
 	php artisan migrate:refresh
 
 	php artisan migrate:refresh --seed
 
 <a name="database-seeding"></a>
-## Database Seeding
+## Seeding(Semeando) Banco de Dados
 
-Laravel also includes a simple way to seed your database with test data using seed files. All seed files are stored in `app/database/seeds`. Seed files should be named according to the table they seed, and simply return an array of records.
+Laravel inclui uma maneira simples de semear seu banco de dados com dados de teste, utilizando arquivos. Todos os arquivos de seed(sementes) estão armazenados em `app/database/seeds`. Arquivos de seed(semente) deverá ter o mesmo nome da tabela que irão semear, e simplesmente retornar um array de registros.
 
-**Example Database Seed File**
+**Exemplo De Arquivo Seed**
 
 	<?php
 
@@ -91,10 +91,10 @@ Laravel also includes a simple way to seed your database with test data using se
 
 	);
 
-To seed your database, you may use the `db:seed` command on the Artisan CLI:
+Para semear seu banco de dados, basta usar o comando `db:seed` do Artisan CLI:
 
 	php artisan db:seed
 
-You may also seed your database using the `migrate:refresh` command, which will also rollback and re-run all of your migrations:
+Também é possivel semear usando o comando `migrate:refresh`, que também reverterá e re-executará todas as suas migrações:
 
 	php artisan migrate:refresh --seed
