@@ -85,7 +85,7 @@ Está pode ser retornada para o navegador assim:
 		return View::make('greeting', array('name' => 'Taylor'));
 	});
 
-O segundo argumento passado para o `View::make` é uma matriz com dados que estarão disponíveis na sua view.
+O segundo argumento passado para o `View::make` é um array com dados que estarão disponíveis na sua view.
 
 **Passando Dados Para As Views**
 

@@ -28,7 +28,7 @@
     - [Uso Básico](/docs/database)
     - [Construtor de Query](/docs/queries)
     - [Eloquent ORM](/docs/eloquent)
-    - [Construtor de Schema](/docs/schema)
+    - [Construtor de Esquemas](/docs/schema)
     - [Migrações & Seeding](/docs/migrations)
     - [Redis](/docs/redis)
 - Artisan CLI

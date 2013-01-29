@@ -1,30 +1,30 @@
-# Localization
+# Localização
 
-- [Introduction](#introduction)
-- [Language Files](#language-files)
-- [Basic Usage](#basic-usage)
-- [Pluralization](#pluralization)
+- [Introdução](#introduction)
+- [Arquivos de Linguagem](#language-files)
+- [Uso Básico](#basic-usage)
+- [Pluralização](#pluralization)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-The Laravel `Lang` class provides a convenient way to retrieving strings in various languages, allowing you to easily support multiple languages within your application.
+A classe `Lang` do Laravel fornece uma maneira conveniente para recuperação de strings em várias linguagens, permitindo que você facilmente dê suporte a muitas linguagens na sua aplicação.
 
 <a name="language-files"></a>
-## Language Files
+## Arquivos de Linguagem
 
-Language strings are stored in files within the `app/lang` directory. Within this directory this should be a directory for each language supported by the application.
+Strings de linguagens estão armazenados no diretório `app/lang`. Neste diretório você deverá ter um outros diretório para cada linguagens suportada na sua aplicação.
 
 	/app
 		/lang
 			/en
 				messages.php
-			/es
+			/pt
 				messages.php
 
-Language files simply return an array of keyed strings. For example:
+Arquivos de linguagens são simples arrays de strings com chaves. Por exemplo:
 
-**Example Language File**
+**Exemplo De Arquivo De Linguagem**
 
 	<?php
 
@@ -32,34 +32,34 @@ Language files simply return an array of keyed strings. For example:
 		'welcome' => 'Welcome to our application'
 	);
 
-The default language for your application is stored in the `app/config/app.php` configuration file. You may change the active language at any time using the `App::locale` method:
+A linguagem padrão está no arquivo de configuração `app/config/app.php`. Você pode mudar a linguagem ativa a qualquer momento usando o método `App::locale`:
 
-**Changing The Default Language At Runtime**
+**Mudando A Linguagem Padrão em Tempo de Execução**
 
-	App::setLocale('es');
+	App::setLocale('pt');
 
 <a name="basic-usage"></a>
-## Basic Usage
+## Uso Básico
 
-**Retrieving Lines From A Language File**
+**Recuperando Linhas De Arquivo De Linguagem**
 
 	echo Lang::get('messages.welcome');
 
-The first segment of the string passed to the `get` method is the name of the language file, and the second is the name of the line that should be retrieved.
+O primeiro segmento da string passada no método `get` é nome do arquivo de linguagem, o segundo é o nome da linha que você deseja recuperar.
 
-> **Note*: If a language line does not exist, the key will be returned by the `get` method.
+> **Nota*: Se uma linha da linguagem não existir, a chave será retorna pelo método `get`.
 
-**Making Replacements In Lines**
+**Fazendo Substituições Das Linhas**
 
-You may also define place-holders in your language lines:
+Você também pode definir place-holders em suas linhas de linguagem:
 
 	'welcome' => 'Welcome, :name',
 
-Then, pass a second argument of replacements to the `Lang::get` method:
+Quando, passado um segundo argumento para o método `Lang::get` ele fará a substituição:
 
 	echo Lang::get('messages.welcome', array('name' => 'Dayle'));
 
-**Determine If A Language File Contains A Line**
+**Verificando Se Um Arquivo De Linguagem Contem Uma Linha**
 
 	if (Lang::has('messages.welcome'))
 	{
@@ -67,16 +67,16 @@ Then, pass a second argument of replacements to the `Lang::get` method:
 	}
 
 <a name="pluralization"></a>
-## Pluralization
+## Pluralização
 
-Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. You may easily manage this in your language files. By using a "pipe" character, you may separate the singular and plural forms of a string:
+Pluralização é um problema complicado, diferentes linguagens possuem suas variadas regras complexas de pluralização. Você pode gerenciar facilmente em seus arquivos de linguagems. Usando o caractere "pipe", é possivel separar o singular do plural que forma a string:
 
 	'apples' => 'There is one apple|There are many apples',
 
-You may then use the `Lang::choice` method to retrieve the line:
+Então basta usar o método `Lang::choice` para recuperar a linha:
 
 	echo Lang::choice('messages.apples', 10);
 
-Since the Laravel translator is powered by the Symfony Translation component, you may also create more explicit pluralization rules easily:
+O tradutor do Laravel é alimentado pelo poderoso componente Symfony Translation, também é possivel criar regras de pluralização mais explicitas facilmente:
 
 	'apples' => '{0} There are none|[1,19] There are some|[20,Inf] There are many',

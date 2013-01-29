@@ -1,18 +1,18 @@
-# Migrations & Seeding
+# Migrações & Seeding
 
-- [Introduction](#introduction)
-- [Creating Migrations](#creating-migrations)
-- [Running Migrations](#running-migrations)
-- [Rolling Back Migrations](#rolling-back-migrations)
-- [Database Seeding](#database-seeding)
+- [Introdução](#introduction)
+- [Criando Migrações](#creating-migrations)
+- [Executando Migrações](#running-migrations)
+- [Revertendo Migrações](#rolling-back-migrations)
+- [Seeding(Alimentando) Banco de Dados](#database-seeding)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-Migrations are a type of version control for your database. They allow a team to modify the database schema and stay up to date on the current schema state. Migrations are typically paired with the [Schema Builder](/docs/schema) to easily manage your application's scheme.
+Migrações é tipo de controle de versão para o seu banco de dados. Eles permitem um time modificar o esquema de um banco de dados e manter-se atualizados do esquema atual. Migrações é tipicamente emparelhado com o [Construtor de Esquemas](/docs/schema) para facilmente gerenciar seus esquemas da aplicação.
 
 <a name="creating-migrations"></a>
-## Creating Migrations
+## Criando Migrações
 
 To create a migration, you may use the `migrate:make` command on the Artisan CLI:
 
@@ -31,7 +31,7 @@ The `--table` and `--create` options may also be used to indicate the name of th
 	php artisan migrate:make create_users_table --table=users --create
 
 <a name="running-migrations"></a>
-## Running Migrations
+## Executando Migrações
 
 **Running All Outstanding Migrations**
 
@@ -48,7 +48,7 @@ The `--table` and `--create` options may also be used to indicate the name of th
 > **Note:** If you receive a "class not found" error when running migrations, try running the `composer update` command.
 
 <a name="rolling-back-migrations"></a>
-## Rolling Back Migrations
+## Revertendo Migrações
 
 **Rollback The Last Migration Operation**
 

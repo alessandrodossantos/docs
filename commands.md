@@ -33,15 +33,15 @@ O método `fire` será chamado quando seu comando for executado. Você pode qual
 
 ### Argumentos & Opções
 
-Os métodos `getArguments` e `getOptions` são onde você pode definir quais argumentos e opções que seu comando ira receber. Ambos métodos retornam uma matriz de comandos, que são descritos por uma lista de opções.
+Os métodos `getArguments` e `getOptions` são onde você pode definir quais argumentos e opções que seu comando ira receber. Ambos métodos retornam um array de comandos, que são descritos por uma lista de opções.
 
-Quando definimos `arguments(argumentos)`, os valores de definição da matriz representam o seguinte:
+Quando definimos `arguments(argumentos)`, os valores de definição do array representam o seguinte:
 
 	array($name, $mode, $description, $defaultValue)
 
 O argumento `mode` pode ser qualquer um a seguir: `InputArgument::REQUIRED` ou `InputArgument::OPTIONAL`.
 
-Ao definir `options(opções)`, os valores de definição da matriz representa o seguinte:
+Ao definir `options(opções)`, os valores de definição do array representa o seguinte:
 
 	array($name, $shortcut, $mode, $description, $defaultValue)
 

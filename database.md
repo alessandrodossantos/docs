@@ -20,7 +20,7 @@ Uma que sua conexão com o banco de ados está configurada, você pode executar 
 
 	$results = DB::select('select * from users where id = ?', array(1));
 
-O método `select` irá sempre retornar uma `array(matriz)` de resultados.
+O método `select` irá sempre retornar uma `array` de resultados.
 
 **Executando Uma Instrução Insert**
 
