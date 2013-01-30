@@ -42,7 +42,7 @@ Quando anexar arquivos a uma mensagem, dá para informar o MIME type e / ou nome
 
 	$m->attach($pathToFile, array('as' => $display, 'mime' => $mime));
 
-> **Nota:** A instancia de mensagem passada para a Closure `Mail::send` extende a classe de mensagem SwiftMailer, dando a possibilidade de você chamar qualquer outro método dessa classe para montar sua mensagem de email.
+> **Nota:** A instancia de mensagem passada para a Closure `Mail::send` estende a classe de mensagem SwiftMailer, dando a possibilidade de você chamar qualquer outro método dessa classe para montar sua mensagem de email.
 
 <a name="embedding-inline-attachments"></a>
 ## Incorporando Anexos Inline

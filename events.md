@@ -7,7 +7,7 @@
 <a name="basic-usage"></a>
 ## Uso Básico
 
-A Classe `Event` do Laravel fornece uma simples implementação de observador, permitindo você subscribe(assinar) e listen(ouvir) eventos na sua aplicação. A instalação de eventos do Laravel extende a classe `Symfony\Component\EventDispatcher\EventDispatcher`.
+A Classe `Event` do Laravel fornece uma simples implementação de observador, permitindo você subscribe(assinar) e listen(ouvir) eventos na sua aplicação. A instalação de eventos do Laravel estende a classe `Symfony\Component\EventDispatcher\EventDispatcher`.
 
 **Assinando Um Evento**
 
@@ -74,7 +74,7 @@ Se você não quiser o método `handle` como padrão, especifique o método que 
 <a name="event-subscribers"></a>
 ## Subscribers(Assinantes) de Eventos
 
-Subscribers(Assinantes) de eventos são classes que podem subscribe(assinar) mútiplos eventos de dentro da própria classe. Subscribers(assinantes) devem extender a classe `EventSubscriber` e definir um método `subscribes`.
+Subscribers(Assinantes) de eventos são classes que podem subscribe(assinar) mútiplos eventos de dentro da própria classe. Subscribers(assinantes) devem estender a classe `EventSubscriber` e definir um método `subscribes`.
 
 **Definindo Um Subscriber(assinante) de Evento**
 

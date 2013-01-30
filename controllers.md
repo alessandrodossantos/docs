@@ -28,7 +28,7 @@ Aqui está um exemplo básico de Classe Controladora:
 
 	}
 
-Todos os controladores devem extender a classe `BaseController`. A `BaseController` também se encontra no diretório `app/controllers`, e pode ser usado como local para colocar a lógica compartilhada. A `BaseController` extende a classe `Controller` do framework. Agora, podemos rotear essa ação controladora assim como:
+Todos os controladores devem estender a classe `BaseController`. A `BaseController` também se encontra no diretório `app/controllers`, e pode ser usado como local para colocar a lógica compartilhada. A `BaseController` estende a classe `Controller` do framework. Agora, podemos rotear essa ação controladora assim como:
 
 	Route::get('user/{id}', 'UserController@showProfile');
 

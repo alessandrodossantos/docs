@@ -102,7 +102,7 @@ Uma vez que você frequentemente irá querer entradas flash associadas com o red
 		//
 	}
 
-O objeto retorno será um método `file` que é um instância da classe `Symfony\Component\HttpFoundation\File\UploadedFile`, que extende a classe PHP `SplFileInfo` e fornece uma variedade de métodos para interagir com o arquivo.
+O objeto retorno será um método `file` que é um instância da classe `Symfony\Component\HttpFoundation\File\UploadedFile`, que estende a classe PHP `SplFileInfo` e fornece uma variedade de métodos para interagir com o arquivo.
 
 **Movendo Um Arquivo Enviado**
 
@@ -125,7 +125,7 @@ O objeto retorno será um método `file` que é um instância da classe `Symfony
 <a name="request-information"></a>
 ## Informações da Requisição
 
-A classe `Request` fornece muitos métodos para examinar a requisição HTTP para sua aplicação and extende a classe `Symfony\Component\HttpFoundation\Request`. Aqui está alguns destaques.
+A classe `Request` fornece muitos métodos para examinar a requisição HTTP para sua aplicação and estende a classe `Symfony\Component\HttpFoundation\Request`. Aqui está alguns destaques.
 
 **Recuperando A URI Da Requisição**
 

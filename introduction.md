@@ -15,4 +15,4 @@ Laravel visa tornar o processo de desenvolvimento agradável para o programador,
 
 Uma das melhores maneiras de aprender Laravel é ler toda sua documentação. Este guia detalha todos os aspectos do framework e como aplicá-los para a sua aplicação.
 
-Além deste guia, você pode querer verificar alguns dos livros sobre Laravel que estão disponíveis na [página de livros] (http://laravel.com/books). Esses livros servem como um bom recurso suplementar para o aprendizado do framework.
+Além deste guia, você pode querer verificar alguns dos livros sobre Laravel que estão disponíveis na [página de livros](http://laravel.com/books). Esses livros servem como um bom recurso suplementar para o aprendizado do framework.
