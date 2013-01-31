@@ -7,7 +7,7 @@
 <a name="configuration"></a>
 ## Configuração
 
-Laravel fornece uma limpa e simples API da popular biblioteca [SwiftMailer](http://swiftmailer.org). O arquivo de configuração de email é `app/config/mail.php`, e contém opçõe que lhe permite mudar o seu servidor de SMTP, porta, e credenciais, bem como definir um global endereço `from` para todas as mensagens enviadas pela biblioteca. Sinta-se livre para usar qualquer servidor de SMTP.
+Laravel fornece uma limpa e simples API da popular biblioteca [SwiftMailer](http://swiftmailer.org). O arquivo de configuração de email é `app/config/mail.php`, e contém opções que lhe permite mudar o seu servidor de SMTP, porta, e credenciais, bem como definir um global endereço `from` para todas as mensagens enviadas pela biblioteca. Sinta-se livre para usar qualquer servidor de SMTP.
 
 <a name="basic-usage"></a>
 ## Uso Básico
@@ -19,7 +19,7 @@ O método `Mail::send` é usado para enviar uma mensagem de email:
 		$m->to('foo@example.com', 'John Smith')->subject('Welcome!');
 	});
 
-O primeiro argumento passado para `send` é o nome que da view que será usada no corpo da mensagem. O segundo são parametros passados para a view, e o terceiro é uma Closure que permite você especificar outras várias opções para sua mensagem de email.
+O primeiro argumento passado para `send` é o nome que da view que será usada no corpo da mensagem. O segundo são parâmetros passados para a view, e o terceiro é uma Closure que permite você especificar outras várias opções para sua mensagem de email.
 
 > **Nota:** A variável `$message` é sempre passada para o email view, e permite a incorporação de anexos inline. Então, é melhor evitar passar uma variável `message` para o seu view.
 
@@ -47,7 +47,7 @@ Quando anexar arquivos a uma mensagem, dá para informar o MIME type e / ou nome
 <a name="embedding-inline-attachments"></a>
 ## Incorporando Anexos Inline
 
-Incorporar imagens inline dentro do seu email é tipicamente incômodo; sendo assim, Laravel fornece uma convenirente maneira para anexar imagens no seu email e recuperar o apropriado CID.
+Incorporar imagens inline dentro do seu email é tipicamente incômodo; sendo assim, Laravel fornece uma conveniente maneira para anexar imagens no seu email e recuperar o apropriado CID.
 
 **Incorporando Uma Image Em Um E-Mail View**
 

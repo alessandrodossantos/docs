@@ -8,7 +8,7 @@
 <a name="introduction"></a>
 ## Introdução
 
-Além dos comandos que o Artisan disponhe, é possível criar os seus próprios comandos de trabalho para sua aplicação. Você pode armazenar seus comandos personalizados no diretório`app/commands`; contudo, você é livre para escolher onde armazenar, desde que seus comandos possam ser carregados automaticamente com base nas configurações do seu `composer.json`.
+Além dos comandos que o Artisan disponibiliza, é possível criar os seus próprios comandos de trabalho para sua aplicação. Você pode armazenar seus comandos personalizados no diretório`app/commands`; contudo, você é livre para escolher onde armazenar, desde que seus comandos possam ser carregados automaticamente com base nas configurações do seu `composer.json`.
 
 <a name="building-a-command"></a>
 ## Criando Um Comando
@@ -51,7 +51,7 @@ O modo `VALUE_IS_ARRAY` indica que você pode usar o switch(--) muitas vezes qua
 
 	php artisan foo --option=bar --option=baz
 
-A opção `VALUE_NONE` indica que a opção pode usar simplemente o "switch":
+A opção `VALUE_NONE` indica que a opção pode usar simplesmente o "switch":
 
 	php artisan foo --option
 
@@ -75,15 +75,15 @@ Enquanto o seu comando é executado, você obviamente vai precisar acessar os va
 
 	$options = $this->option();
 
-### Escrendo Saídas
+### Escrevendo Saídas
 
-Para enviar uma saída para o console, você pode usar os métodos `info`, `comment`, `question` e `error`. Cada um desses metódos fará o uso apropriado das cores ANSI em suas cores propostas.
+Para enviar uma saída para o console, você pode usar os métodos `info`, `comment`, `question` e `error`. Cada um desses métodos fará o uso apropriado das cores ANSI em suas cores propostas.
 
 **Enviando Informação Para Console**
 
 	$this->info('Display this on the screen');
 
-**Eviando Uma Mensagem De Erro Para O Console**
+**Enviando Uma Mensagem De Erro Para O Console**
 
 	$this->error('Something went wrong!');
 

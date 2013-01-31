@@ -36,7 +36,7 @@ Você pode executar todos os testes do seu aplicativo executando o comando `phpu
 <a name="test-environment"></a>
 ## Ambiente de Teste
 
-Ao executar testes de unidade, Laravel automaticamente vai definir o ambiente de configuração para `test`. Além disso, Laravel inclui arquivos de configuração para `session` e `cache` no ambiente de teste. Ambos os drivers estão definidos como `array` no ambiente de teste, ou seja, nenhum dado de sessão ou cache seram mantidos durante o teste. Você é livre para criar configurações de outros ambientes de testes.
+Ao executar testes de unidade, Laravel automaticamente vai definir o ambiente de configuração para `test`. Além disso, Laravel inclui arquivos de configuração para `session` e `cache` no ambiente de teste. Ambos os drivers estão definidos como `array` no ambiente de teste, ou seja, nenhum dado de sessão ou cache serão mantidos durante o teste. Você é livre para criar configurações de outros ambientes de testes.
 
 <a name="calling-routes-from-tests"></a>
 ## Chamando Rotas nos Testes

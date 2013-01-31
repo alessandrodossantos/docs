@@ -24,7 +24,7 @@ A Classe `Event` do Laravel fornece uma simples implementação de observador, p
 
 Note que o método `Event::fire` retorna um objeto `Event`, permitindo você verificar a carga do evento depois dos listeners(ouvintes) terem sido chamados.
 
-Você podem também especificar a prioridade quando subscribing(assinar) eventos. Listeners(ouvintes) que tem alta prioridade seram executados primeiro, enquanto listeneres(ouvintes) que possuem a mesma prioridade seram executados pela ordem de subscription(assinatura).
+Você podem também especificar a prioridade quando subscribing(assinar) eventos. Listeners(ouvintes) que tem alta prioridade serão executados primeiro, enquanto listeneres(ouvintes) que possuem a mesma prioridade serão executados pela ordem de subscription(assinatura).
 
 **Assinando Eventos Com Prioridade**
 

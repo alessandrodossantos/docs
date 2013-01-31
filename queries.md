@@ -13,7 +13,7 @@
 <a name="introduction"></a>
 ## Introdução
 
-O construtor de consultas de banco de dados fornece um The database query builder provides a conviniente, inteface fluente para criar e executar consultas no banco de dados. Ele pode ser usado para executar a maioria das operações de banco de dados em seu aplicativo, e funciona em todos os sistemas de banco de dados suportados.
+O construtor de consultas de banco de dados fornece uma conveniente interface fluente para criar e executar consultas no banco de dados. Ele pode ser usado para executar a maioria das operações de banco de dados em seu aplicativo, e funciona em todos os sistemas de banco de dados suportados.
 
 > **Nota:** O construtor de consultas Laravel usa ligação de parâmetros do PDO para proteger seu aplicativo contra ataques de injeção de SQL. Não há necessidade de limpar as strings passadas.
 
@@ -194,7 +194,7 @@ O construtor de consultas também fornece uma variedade de métodos de agregador
 
 Se a tabela tem um id auto-incrementável, use `insertGetId` para inserir e já recuperar o id:
 
-**Inserindo Registro Na Tablea Com ID Auto-Incrementável**
+**Inserindo Registro Na Tabela Com ID Auto-Incrementável**
 
 	$id = DB::table('users')->insertGetId(
 		array('email' => 'john@example.com', 'votes' => 0),
@@ -202,7 +202,7 @@ Se a tabela tem um id auto-incrementável, use `insertGetId` para inserir e já 
 
 > **Nota:** Ao usar PostgreSQL o método insertGetId espera que a coluna de auto-incremento se chame "id".
 
-**Inserindo Multiplos Registros Numa Tabela**
+**Inserindo Múltiplos Registros Numa Tabela**
 
 	DB::table('users')->insert(
 		array('email' => 'taylor@example.com', 'votes' => 0),

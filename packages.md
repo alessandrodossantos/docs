@@ -44,7 +44,7 @@ Uma vez que o comando `workbench` for executado, o pacote vai estar disponível 
 
 Agora, você deverá registrar o `ServiceProvider` que foi criado para o seu pacote. Para registrar o provedor adicionando no array `providers` no arquivo `app/config/app.php`. Isso irá instruir o Laravel carregar seu pacote quando seu aplicativo for iniciado. Provedores de Serviço usa uma nomenclatura `[Pacote]ServiceProvider` por convenção. Então, usando o exemplo acima, você adicionaria `Taylor\Zapper\ZapperServiceProvider` para o array `providers`.
 
-Uma vez que o provedor tenha sido registrado, você está pronto para começar a desenvolver o seu pacote! No entanto, antes de mergulhar, você pode querer dar uma olhada nas seções abaixo para se familiarizadar melhor com a estrutura de pacotes e fluxo de desenvolvimento.
+Uma vez que o provedor tenha sido registrado, você está pronto para começar a desenvolver o seu pacote! No entanto, antes de mergulhar, você pode querer dar uma olhada nas seções abaixo para se familiarizar melhor com a estrutura de pacotes e fluxo de desenvolvimento.
 
 <a name="package-structure"></a>
 ## Estrutura do Pacote
@@ -82,7 +82,7 @@ Este método permite ao Laravel saber como carregar corretamente os views, a con
 <a name="package-conventions"></a>
 ## Convenções de Pacotes
 
-Ao utilizar recursos de um pacote, como configuração de items ou views, a sintaxe com dois pontos duplo será geralmente utilizada:
+Ao utilizar recursos de um pacote, como configuração de itens ou views, a sintaxe com dois pontos duplo será geralmente utilizada:
 
 **Carregando Uma View De Um Pacote**
 

@@ -7,14 +7,14 @@
 <a name="configuration"></a>
 ## Configuração
 
-Laravel faz conexão com banco de dados e execução de consultas ser extramamente simples. O arquivo de configuração do banco dados é `app/config/database.php`. Neste arquivo você pode definir tudo de sua conexão, bem como especificar que conexão será usada por padrão. Exemplos para todos os sistemas de base de dados suportadas são fornecidos neste arquivo.
+Laravel faz conexão com banco de dados e execução de consultas ser extremamente simples. O arquivo de configuração do banco dados é `app/config/database.php`. Neste arquivo você pode definir tudo de sua conexão, bem como especificar que conexão será usada por padrão. Exemplos para todos os sistemas de base de dados suportadas são fornecidos neste arquivo.
 
 Atualmente Laravel suporta quatro sistemas de banco de dados: MySQL, Postgres, SQLite, e SQL Server.
 
 <a name="running-queries"></a>
 ## Executando Consultas
 
-Uma que sua conexão com o banco de ados está configurada, você pode executar consultas usando a classe `DB`.
+Uma que sua conexão com o banco de dados está configurada, você pode executar consultas usando a classe `DB`.
 
 **Executando Um Consulta Select**
 
@@ -39,6 +39,6 @@ O método `select` irá sempre retornar uma `array` de resultados.
 <a name="accessing-connections"></a>
 ## Acessando Conexões
 
-Quando multiplas conexões são usadas, é possível acessar elas via método `DB::connection`:
+Quando múltiplas conexões são usadas, é possível acessar elas via método `DB::connection`:
 
 	$users = DB::connection('foo')->select(...);

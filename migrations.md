@@ -20,7 +20,7 @@ Para cria migrações, use o comando `migrate:make` do Artisan CLI:
 
 	php artisan migrate:make create_users_table
 
-A migração sera alocada no diretorio `app/database/migrations`, e irá conter um timestamp que permite  ao framework determinar a ordem das migrações.
+A migração sera alocada no diretório `app/database/migrations`, e irá conter um timestamp que permite  ao framework determinar a ordem das migrações.
 
 É possivel especificar uma opção `--path` quando criar uma migração. A opção path(diretório) deverá ser relativo ao diretório raiz de sua instalação:
 
@@ -45,7 +45,7 @@ As opções `--table` e `--create` são usadas para indicar o nome da tabela e s
 
 	php artisan migrate --package=vendor/package
 
-> **Nota:** Se você receber um erro "class not found" quando executar migrações, tente excutar o comando `composer update`.
+> **Nota:** Se você receber um erro "class not found" quando executar migrações, tente executar o comando `composer update`.
 
 <a name="rolling-back-migrations"></a>
 ## Revertendo Migrações

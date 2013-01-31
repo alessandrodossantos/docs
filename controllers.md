@@ -135,7 +135,7 @@ Esta única declaração de rota cria múltiplas rotas para lidar com uma varied
 
 **Ações Trados Por Controlador de Recursos**
 
-Verb      | Path                  | Action
+Verbo     | Caminho               | Ação
 ----------|-----------------------|--------------
 GET       | /resource             | index
 GET       | /resource/create      | create

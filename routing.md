@@ -132,7 +132,7 @@ Você pode também especificar que um filtro se aplique a todo um conjunto de ro
 
 	Route::when('admin/*', 'admin');
 
-No exemplo acima, o filtro `admin` será aplicado a todas as rotas iniciadas com `admin/`. O asterisco é usado como um curinga, e irá casar qualquer combinação de caractéres.
+No exemplo acima, o filtro `admin` será aplicado a todas as rotas iniciadas com `admin/`. O asterisco é usado como um curinga, e irá casar qualquer combinação de caracteres.
 
 **Classes de Filtro**
 
@@ -192,7 +192,7 @@ Algumas vezes você pode precisar aplicar filtros para um grupo de rotas. Em vez
 
 Rotas em Laravel são capazes de lidar com sub-domínios, e passar seu curinga como parâmetro para o o domínio:
 
-**Registrando Routeamento de Sub-Domínio**
+**Registrando Roteamento de Sub-Domínio**
 
 	Route::group(array('domain' => '{account}.myapp.com'), function()
 	{
@@ -220,4 +220,4 @@ Para mais informações sobre manipulações de exceções 404 e o uso de respos
 
 Controladores de Recursos torna fácil construir controles RESTful atraves dos recursos. 
 
-Veja a documentação sobre [Controllers](/docs/controllers#resource-controllers) para obter mais informações.
+Veja a documentação sobre [Controladores](/docs/controllers#resource-controllers) para obter mais informações.

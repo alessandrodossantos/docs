@@ -69,7 +69,7 @@ Quando, passado um segundo argumento para o método `Lang::get` ele fará a subs
 <a name="pluralization"></a>
 ## Pluralização
 
-Pluralização é um problema complicado, diferentes linguagens possuem suas variadas regras complexas de pluralização. Você pode gerenciar facilmente em seus arquivos de linguagems. Usando o caractere "pipe", é possivel separar o singular do plural que forma a string:
+Pluralização é um problema complicado, diferentes linguagens possuem suas variadas regras complexas de pluralização. Você pode gerenciar facilmente em seus arquivos de linguagens. Usando o caractere "pipe", é possível separar o singular do plural que forma a string:
 
 	'apples' => 'There is one apple|There are many apples',
 
@@ -77,6 +77,6 @@ Então basta usar o método `Lang::choice` para recuperar a linha:
 
 	echo Lang::choice('messages.apples', 10);
 
-O tradutor do Laravel é alimentado pelo poderoso componente Symfony Translation, também é possivel criar regras de pluralização mais explicitas facilmente:
+O tradutor do Laravel é alimentado pelo poderoso componente Symfony Translation, também é possível criar regras de pluralização mais explicitas facilmente:
 
 	'apples' => '{0} There are none|[1,19] There are some|[20,Inf] There are many',

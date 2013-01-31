@@ -7,7 +7,7 @@
 <a name="introduction"></a>
 ## Introdução
 
-[Redis](http://redis.io) é um avançado software livre de amazenamento chave-valor. Ele é muitas vezes referido como um servidor de estrutura de dados uma vez que pode conter chaves do tipo [strings](http://redis.io/topics/data-types#strings), [hashes](http://redis.io/topics/data-types#hashes), [lists](http://redis.io/topics/data-types#lists), [sets](http://redis.io/topics/data-types#sets), e [sorted sets](http://redis.io/topics/data-types#sorted-sets).
+[Redis](http://redis.io) é um avançado software livre de armazenamento chave-valor. Ele é muitas vezes referido como um servidor de estrutura de dados uma vez que pode conter chaves do tipo [strings](http://redis.io/topics/data-types#strings), [hashes](http://redis.io/topics/data-types#hashes), [lists](http://redis.io/topics/data-types#lists), [sets](http://redis.io/topics/data-types#sets), e [sorted sets](http://redis.io/topics/data-types#sorted-sets).
 
 <a name="configuration"></a>
 ## Configuração
@@ -33,7 +33,7 @@ Isto lhe dará uma instância do servidor Redis padrão. Você pode passar o nom
 
 	$redis = Redis::connection('other');
 
-Uma vez que você tiver uma instância do cliente Redis, é possivel emitir qualquer um dos [comandos Redis](http://redis.io/commands) desta instância. Laravel usa métodos mágicos para passar comandos ao servidor Redis:
+Uma vez que você tiver uma instância do cliente Redis, é possível emitir qualquer um dos [comandos Redis](http://redis.io/commands) desta instância. Laravel usa métodos mágicos para passar comandos ao servidor Redis:
 
 	$redis->set('name', 'Taylor');
 

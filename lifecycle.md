@@ -16,7 +16,7 @@ Seus arquivos de inicialização de aplicativos sao armazenados em `app/start`. 
 
 O arquivo de inicialização `global.php` contém alguns itens básicos por padrão, como o registro do [Logger](/docs/errors) e a inclusão dos seu arquivo `app/filters.php`. Mesmo assim, você pode adicionar qualquer coisa nesse arquivo se quiser. Ele se incluirá automaticamente em _cada_ requisição da sua aplicação, independentemente do ambiente. O arquivo `local.php`, por outro lado, somente é chamado quando a aplicação é executada no ambiente `local`. Para mais informações sobre ambientes, visite a documentação de [configuração](/docs/configuration).
 
-Naturalmente, se você tem outros ambientes alem de `local`, você deve criar arquivos de inicialização para esses outros ambientes. Eles irão automaticamente serem incluidos quando sua aplicação estiver rodando naquele ambiente.
+Naturalmente, se você tem outros ambientes alem de `local`, você deve criar arquivos de inicialização para esses outros ambientes. Eles irão automaticamente serem incluídos quando sua aplicação estiver rodando naquele ambiente.
 
 <a name="application-events"></a>
 ## Eventos de Aplicativo

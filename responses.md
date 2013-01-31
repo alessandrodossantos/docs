@@ -35,7 +35,7 @@ Uma instância de `Response` herda da classe `Symfony\Component\HttpFoundation\R
 <a name="redirects"></a>
 ## Redirecionamentos
 
-**Retornando Um Redicionamento**
+**Retornando Um Redirecionamento**
 
 	return Redirect::to('user/login');
 
@@ -126,7 +126,7 @@ Compositor de Views são callbacks ou métodos de classe que são chamados quand
 
 Agora cada vez que a view `profile` é criada, o dado `count` será vinculado ao view.
 
-Se você prefefir compositor baseado em classe, que fornecerá os benefícios de ser resolvido através da aplicação [conteúdo IoC](/docs/ioc), poderá fazê-lo:
+Se você preferir compositor baseado em classe, que fornecerá os benefícios de ser resolvido através da aplicação [conteúdo IoC](/docs/ioc), poderá fazê-lo:
 
 	View::composer('profile', 'ProfileComposer');
 

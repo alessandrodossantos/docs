@@ -27,7 +27,7 @@ O framework Laravel tem poucos requisitos:
 <a name="configuration"></a>
 ## Configuração
 
-Laravel não necessita de quase nenhuma configuração. Você é livre para iniciar o desenvolvimento! Porém, você pode querer revisar o arquivo `app/config/app.php` e sua documentação. Neste arquivo você encontrará varias opções, como `timezone` e `locale` que talvez você deseje mudar de acordo a sua applicação.
+Laravel não necessita de quase nenhuma configuração. Você é livre para iniciar o desenvolvimento! Porém, você pode querer revisar o arquivo `app/config/app.php` e sua documentação. Neste arquivo você encontrará varias opções, como `timezone` e `locale` que talvez você deseje mudar de acordo a sua aplicação.
 
 > **Nota:** Você deve se certificar de definir a opção `key` no arquivo `app/config/app.php`. Este valor deve conter 32 caracteres, de uma sequência aleatória. Esta chave será usada na encriptação de valores, valores que não serão encriptados enquanto está chave não for definida. Você pode rapidamente definir esse valor usando o seguinte comando do artisan `php artisan key:generate`.
 

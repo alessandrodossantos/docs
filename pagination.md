@@ -21,11 +21,11 @@ Existem várias maneiras para paginar itens. A forma mais simples é usando o m�
 
 Você pode também paginar o modelo [Eloquent](/docs/eloquent):
 
-**Paginando um Molelo Eloquent**
+**Paginando um Modelo Eloquent**
 
 	$users = User::where('votes', '>', 100)->paginate(15);
 
-O argumento passado para o método é o número de items que você deseja mostrar por páginas. Uma vez que tenha recebido os resultados, você pode mostrar eles em sua view, e criar links de paginação usando o método `links`:
+O argumento passado para o método é o número de itens que você deseja mostrar por páginas. Uma vez que tenha recebido os resultados, você pode mostrar eles em sua view, e criar links de paginação usando o método `links`:
 
 	<div class="container">
 		<?php foreach ($users as $user): ?>

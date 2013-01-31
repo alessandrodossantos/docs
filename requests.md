@@ -9,7 +9,7 @@
 <a name="basic-input"></a>
 ## Entradas Básicas
 
-Você pode acessar todas as entradas do usuário com algums métodos simples. Você não precisa se preocupar com os verbos da requisição HTTP, assim como entrada, eles são acessados todos da mesma forma.
+Você pode acessar todas as entradas do usuário com alguns métodos simples. Você não precisa se preocupar com os verbos da requisição HTTP, assim como entrada, eles são acessados todos da mesma forma.
 
 **Recuperando Um Valor de Entrada**
 
@@ -125,7 +125,7 @@ O objeto retorno será um método `file` que é um instância da classe `Symfony
 <a name="request-information"></a>
 ## Informações da Requisição
 
-A classe `Request` fornece muitos métodos para examinar a requisição HTTP para sua aplicação and estende a classe `Symfony\Component\HttpFoundation\Request`. Aqui está alguns destaques.
+A classe `Request` fornece muitos métodos para examinar a requisição HTTP para sua aplicação e estende a classe `Symfony\Component\HttpFoundation\Request`. Aqui está alguns destaques.
 
 **Recuperando A URI Da Requisição**
 
@@ -142,7 +142,7 @@ A classe `Request` fornece muitos métodos para examinar a requisição HTTP par
 
 	$url = Request::url();
 
-**Recuperando Um Cabeçalho da Requisicao**
+**Recuperando Um Cabeçalho da Requisição**
 
 	$value = Request::header('Content-Type');
 

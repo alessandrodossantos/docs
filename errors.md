@@ -8,7 +8,7 @@
 
 ## Erros Detalhados
 
-Por padrão, erros detalhados estam habilitados em sua aplicação. Isso significa que quando ocorrer um erro, você ira ver uma página de erro com uma detalhada pilha de rastreamento e messagem de erro. Você pode desabilitar os erros detalhados, definindo a opção `debug` como `false` no arquivo`app/config/app.php` da sua aplicação. **É altamente recomendado que você desabilite erros detalhados em seu ambiente de produção.**
+Por padrão, erros detalhados estão habilitados em sua aplicação. Isso significa que quando ocorrer um erro, você ira ver uma página de erro com uma detalhada pilha de rastreamento e mensagem de erro. Você pode desabilitar os erros detalhados, definindo a opção `debug` como `false` no arquivo`app/config/app.php` da sua aplicação. **É altamente recomendado que você desabilite erros detalhados em seu ambiente de produção.**
 
 ## Manipulando Erros
 
@@ -38,7 +38,7 @@ Se um manipulador de exceção retorna uma reposta, esta resposta irá ser envia
 <a name="http-exceptions"></a>
 ## Exceções HTTP
 
-Exceções em relação a HTTP, referem-se a erros que podem ocorrer durante uma requisição do cliente. Isso significa que uma página de erro não encontrada (404), um erro de autorização (401) ou mesmo um erro 500 seram gerados. Para retornar essa resposta, use o seguinte:
+Exceções em relação a HTTP, referem-se a erros que podem ocorrer durante uma requisição do cliente. Isso significa que uma página de erro não encontrada (404), um erro de autorização (401) ou mesmo um erro 500 serão gerados. Para retornar essa resposta, use o seguinte:
 
 	App::abort(404, 'Page not found');
 
@@ -73,6 +73,6 @@ Instalações do Laravel logging fornece uma simples camada em cima do poderoso 
 
 O logger fornece os sete níveis de logging descritos em [RFC 5424](http://tools.ietf.org/html/rfc5424): **debug**, **info**, **notice**, **warning**, **error**, **critical**, e **alert**.
 
-Monolog possui uma variedade de manipuladores adicionais que você pode usar para logging. Se necessário, você pode acessar a instância subjacente do Monolog inicialmente usuado pelo Laravel:
+Monolog possui uma variedade de manipuladores adicionais que você pode usar para logging. Se necessário, você pode acessar a instância subjacente do Monolog inicialmente usado pelo Laravel:
 
 	$monolog = Log::getMonolog();

@@ -79,7 +79,7 @@ Depois de chamar o método `messages` de uma instância `Validator`, você receb
 
     echo $messages->first('email', '<p>:message</p>');
 
-> **Nota:** Por padrão, as mensagens são formatdas usando sintaxe compatível com o Bootstrap.
+> **Nota:** Por padrão, as mensagens são formatadas usando sintaxe compatível com o Bootstrap.
 
 **Recuperando Todas As Mensagens De Erro Com Um Formato**
 
@@ -169,7 +169,7 @@ O campo em fase de validação deve ser um valor anterior a uma data informada. 
 <a name="rule-alpha"></a>
 #### alpha (alfabeto)
 
-O campo em fase de validação deve ser totalmente com caractéres do alfabeto.
+O campo em fase de validação deve ser totalmente com caracteres do alfabeto.
 
 <a name="rule-alpha-dash"></a>
 #### alpha_dash (alfabeto e traços)

@@ -6,7 +6,7 @@
 <a name="laravel-philosophy"></a>
 ## Filosofia do Laravel
 
-Laravel é um framework de aplicações web com expressiva, sintaxe elegante. Acreditamos que o desenvolvimento dever ser uma divertida, experiência crivativa para ser verdadeiramente gratificante. Laravel tenta tirar a dor de desenvolvimento através da implementação de tarefas comuns usadas na maioria dos projetos web, como autenticação, roteamento, sessões e cache.
+Laravel é um framework de aplicações web com expressiva, sintaxe elegante. Acreditamos que o desenvolvimento dever ser uma divertida, experiência criativa para ser verdadeiramente gratificante. Laravel tenta tirar a dor de desenvolvimento através da implementação de tarefas comuns usadas na maioria dos projetos web, como autenticação, roteamento, sessões e cache.
 
 Laravel visa tornar o processo de desenvolvimento agradável para o programador, sem sacrificar a funcionalidade do aplicativo. Desenvolvedores felizes fazem melhores códigos.
 
