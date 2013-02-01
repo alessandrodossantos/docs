@@ -259,65 +259,65 @@ O arquivo em fase de validação deve ter um MIME type correspondente com uma li
 O campo em fase de validação deve ter um _value_ mínimo. Strings, números, e arquivos são avaliados da mesma forma que a regra `size`.
 
 <a name="rule-numeric"></a>
-#### numeric
+#### numeric (numérico)
 
 O campo em fase de validação deve have a numeric value.
 
 <a name="rule-regex"></a>
-#### regex:_pattern_
+#### regex:_pattern_ (expressão regular)
 
-O campo em fase de validação deve match the given regular expression.
+O campo em fase de validação deve casar com a expressão regular informada.
 
-**Note:** When using the `regex` pattern, it may be necessary to specify rules in an array instead of using pipe delimiters, especially if the regular expression contains a pipe character.
+**Note:** Ao usar o padrão `regex`, se faz necessário especificar as regas num array ao invés do delimitador pipe, especialmente se a expressão regular contém o caractere pipe.
 
 <a name="rule-required"></a>
-#### required
+#### required (obrigatório)
 
-O campo em fase de validação deve be present in the input data.
+O campo em fase de validação deve estar presente nos dados de entrada.
 
 <a name="rule-required-with"></a>
-#### required_with:_foo_,_bar_,...
+#### required_with:_foo_,_bar_,... (obrigatório com)
 
-O campo em fase de validação deve be present _only if_ the other specified fields are present.
+O campo em fase de validação deve estar presente _only if_(somente se) o outro campo especificado estiver presente.
 
 <a name="rule-same"></a>
-#### same:_field_
+#### same:_field_ (igual)
 
-The given _field_ must match the field under validation.
+O _field_(campo) deve corresponder ao campo em fase de validação.
 
 <a name="rule-size"></a>
-#### size:_value_
+#### size:_value_ (tamanho)
 
-O campo em fase de validação deve have a size matching the given _value_. For string data, _value_ corresponds to the number of characters. For numeric data, _value_ corresponds to a given integer value. For files, _size_ corresponds to the file size in kilobytes.
+O campo em fase de validação deve ter um tamanho igual ao _value_(valor informado). Para dados de em string, _value_ corresponde ao número de caracteres. Dados numérico, _value_ corresponde ao inteiro informado. Arquivos, _size_ corresponde ao tamanho do arquivo em kilobytes.
 
 <a name="rule-unique"></a>
-#### unique:_table_,_column_,_except_,_idColumn_
+#### unique:_table_,_column_,_except_,_idColumn_ (único)
 
-O campo em fase de validação deve be unique on a given database table. If the `column` option is not specified, the field name will be used.
+O campo em fase de validação deve ser único na tabela do banco de dados. Se a opção `column` não for informada, o nome do campo será usada.
 
-**Basic Usage Of Unique Rule**
+**Uso Básico Da Regra Único**
 
     'email' => 'unique:users'
 
-**Specifying A Custom Column Name**
+**Especificando Um Nome De Coluna Personalizado**
 
     'email' => 'unique:users,email_address'
 
-**Forcing A Unique Rule To Ignore A Given ID**
+**Forçando A Regra Único A Ignorar Um ID Informado**
 
     'email' => 'unique:users,email_address,10'
 
 <a name="rule-url"></a>
 #### url
 
-O campo em fase de validação deve be formatted as an URL.
+O campo em fase de validação deve ser formatado como uma URL.
 
 <a name="custom-error-messages"></a>
-## Custom Error Messages
+## Mensagens de Erro Personalizadas
 
-If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
+Se necessário, você pode usar mensagens de erro personalizadas para validação em vez dos padrões. Existem várias formas de especificar mensagens personalizadas.
 
-**Passing Custom Messages Into Validator**
+**Passando Mensagens Personalizadas Para O Validator**
 
     $messages = array(
         'required' => 'The :attribute field is required.',
@@ -325,9 +325,9 @@ If needed, you may use custom error messages for validation instead of the defau
 
     $validator = Validator::make($input, $rules, $messages);
 
-*Note:* The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
+*Nota:* O place-holder `:attribute` será substituído pelo nome real do campo em fase de validação. Você também pode utilizar outros place-holders em mensagens de validação.
 
-**Other Validation Place-Holders**
+**Outros Place-Holders De Validação**
 
     $messages = array(
         'same'    => 'The :attribute and :other must match.',
@@ -336,43 +336,43 @@ If needed, you may use custom error messages for validation instead of the defau
         'in'      => 'The :attribute must be one of the following types: :values',
     );
 
-Sometimes you may wish to specify a custom error messages only for a specific field:
+Talvez você queira especificar um mensagens de erro personalizada para um determinado campo:
 
-**Specifying A Custom Message For A Given Attribute**
+**Especificando Uma Mensagem Personalizadas Para Um Determinado Atributo**
 
     $messages = array(
         'email.required' => 'We need to know your e-mail address!',
     );
 
-In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to `custom` array in the `app/lang/xx/validation.php` language file.
+Em alguns casos, você pode desejar especificar suas mensagens personalizadas em um arquivo de linguagem ao invés de passar diretamente para o `Validator`. Para isso, adicione suas mensagens para um array `custom` no array do seu arquivo de linguagem `app/lang/xx/validation.php`.
 
-**Specifying Custom Messages In Language Files**
+**Especificando Mensagens Personalizadas Em Arquivos de Linguagem**
 
     'custom' => array(
         'email' => array(
-            'required' => 'We need to know your e-mail address!',
+            'required' => 'Queremos saber o seu endereço de e-mail!',
         ),
     ),
 
 <a name="custom-validation-rules"></a>
 ## Custom Validation Rules
 
-Laravel provides a variety of helpful validation rules; however, you may wish to specify some of your own. One method of registering custom validation rules is using the `Validator::extend` method:
+Laravel fornece uma variedade de regras de validação úteis, no entanto, você pode especificar alguns dos seus próprios. Um método de registro de regras de validação personalizadas usa o método `Validator::extend`:
 
-**Registering A Custom Validation Rule**
+**Registrando Uma Regra de Validação Personalizada**
 
     Validator::extend('foo', function($attribute, $value, $parameters)
     {
         return $value == 'foo';
     });
 
-The custom validator Closure receives three arguments: the name of the `$attribute` being validated, the `$value` of the attribute, and an array of `$parameters` passed to the rule.
+A Closure da validação personalizada recebe três argumentos: o nome do atributo `$attribute` a ser validado, o `$value`(valor) do atributo, e um array de `$parameters`(parâmetros) passados para a regra.
 
-Note that you will also need to define an error message for your custom rules. You can do so either using an inline custom message array or by adding an entry in the validation language file.
+Note que você também precisa definir uma mensagem de erro para as suas regras. Você pode fazer isso usando um array de mensagem em linha personalizado ou adicionando uma entrada no arquivo de linguagem de validação.
 
-Instead of using Closure callbacks to extend the Validator, you may also extend the Validator class itself. To do so, write a Validator class that extends `Illuminate\Validation\Validator`. You may add validation methods to the class by prefixing them with `validate`:
+Em vez de usar uma Closure para estender o Validator, você pode estender a classe Validator. Para isso, escreva uma classe Validator que estende `Illuminate\Validation\Validator`. Você pode adicionar métodos de validação prefixando com `validate`:
 
-**Extending The Validator Class**
+**Estendo A Classe Validator**
 
     <?php
 
@@ -385,16 +385,16 @@ Instead of using Closure callbacks to extend the Validator, you may also extend 
 
     }
 
-Next, you need to register your custom Validator extension:
+Depois, registre sua estendida classe Validator personalizada:
 
-**Registering A Custom Validator Resolver**
+**Registrando Um Resolvedor De Validação Personalizada**
 
     Validator::resolver(function()
     {
         return new CustomValidator;
     });
 
-When creating a custom validation rules, you may sometimes need to define custom place-holder replacements for error messages. You may do so by creating a custom Validator as described above, and adding a `replaceXXX` function to the validator.
+Ao criar regras de validação personalizada, algumas vezes é necessário definir trocadores de place-holders para as mensagens de erro. Você pode fazer isso criando um validador personalizado, conforme descrito acima, e acrescentando uma função `replaceXXX` para a validação.
 
     protected function replaceFoo($message, $attribute, $rule, $parameters)
     {

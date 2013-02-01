@@ -1,72 +1,72 @@
-# Session
+# Sessão
 
-- [Configuration](#configuration)
-- [Session Usage](#session-usage)
-- [Flash Data](#flash-data)
-- [Database Sessions](#database-sessions)
+- [Configuração](#configuration)
+- [Uso de Sessão](#session-usage)
+- [Dados Flash](#flash-data)
+- [Sessões no Banco de Dados](#database-sessions)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-Since HTTP driven applications are stateless, sessions provide a way to store information about the user across requests. Laravel ships with a variety of session back-ends available for use through a clean, unified API. Support for popular back-ends such as [Memcached](http://memcached.org), [Redis](http://redis.io), and databases is included out of the box.
+Uma vez que o HTTP é um protocolo "sem lado", sessões fornecem uma maneira de armazenar informações sobre o usuário nas requisições. Laravel embarca com uma variedade de back-ends de sessão, disponíveis para o uso através de uma limpa API unificada. Suporta populares back-ends como [Memcached](http://memcached.org), [Redis](http://redis.io), e banco de dados.
 
-The session configuration is stored in `app/config/session.php`. Be sure to review the well documented options available to you in this file. By default, Laravel is configured to use the `cookie` session driver, which will work well for the majority of applications.
+A configuração da sessão está armazenada em `app/config/session.php`. Certifique-se de revisar toda as opções documentadas neste arquivo. Por padrão, Laravel usa `cookie` para driver de sessão, que irá funcionar bem para a maioria das aplicações.
 
 <a name="session-usage"></a>
-## Session Usage
+## Uso de Sessão
 
-**Storing An Item In The Session**
+**Guardando Um Item Na Sessão**
 
 	Session::put('key', 'value');
 
-**Retrieving An Item From The Session**
+**Recuperando Um Item Da Sessão**
 
 	$value = Session::get('key');
 
-**Retrieving An Item Or Returning A Default Value**
+**Recuperando Um Item Ou Retornando Um Valor Padrão**
 
 	$value = Session::get('key', 'default');
 
 	$value = Session::get('key', function() { return 'default'; });
 
-**Determining If An Item Exists In The Session**
+**Determinando Se Um Item Existe Na Sessão**
 
 	if (Session::has('users'))
 	{
 		//
 	}
 
-**Removing An Item From The Session**
+**Removendo Um Item Da Sessão**
 
 	Session::forget('key');
 
-**Removing All Items From The Session**
+**Removendo Todos Os Itens Da Sessão**
 
 	Session::flush();
 
-**Regenerating The Session ID**
+**Retomando A Sessão**
 
 	Session::regenerate();
 
 <a name="flash-data"></a>
-## Flash Data
+## Dados Flash
 
-Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method:
+Às vezes, você pode querer armazenar itens na sessão somente para a próxima solicitação. Use o método `Session::flash`:
 
 	Session::flash('key', 'value');
 
-**Reflashing The Current Flash Data For Another Request**
+**Reflashing O Dado Flash Atual Para Uma Outra Requisição**
 
 	Session::reflash();
 
-**Reflashing Only A Subset Of Flash Data**
+**Reflashing Somente Um Subconjunto De Dados Flash**
 
 	Session::keep(array('username', 'email'));
 
 <a name="database-sessions"></a>
-## Database Sessions
+## Sessões no Banco de Dados
 
-When using the `database` session driver, you will need to setup a table to contain the session items. Below is an example `Schema` declaration for the table:
+Para usar o `banco de dados` como driver de sessão, você precisa configurar uma tabela para os itens de sessão. Abaixo está um exemplo de declaração de `Schema` para a tabela:
 
 	Schema::create('sessions', function($t)
 	{

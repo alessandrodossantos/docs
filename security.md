@@ -1,116 +1,116 @@
 # Security
 
-- [Configuration](#configuration)
-- [Storing Passwords](#storing-passwords)
-- [Authenticating Users](#authenticating-users)
-- [Protecting Routes](#protecting-routes)
-- [Encryption](#encryption)
+- [Configuração](#configuration)
+- [Armazenando Senhas](#storing-passwords)
+- [Autenticando Usuários](#authenticating-users)
+- [Protegendo Rotas](#protecting-routes)
+- [Encriptação](#encryption)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-Laravel aims to make implementing authentication very simple. In fact, almost everything is configured for you out of the box. The authentication configuration file is located at `app/config/auth.php`, which contains several well documented options for tweaking the behavior of the authentication facilities.
+Laravel pretende fazer a implementação de autenticação muito simples. Na verdade, quase tudo é configurado para você. O arquivo de configuração de autenticação esta em `app/config/auth.php`, que contém várias opções bem documentadas para ajustar com o comportamento da autenticação.
 
-By default, Laravel includes a `User` model in your `app/models` directory which may be used with the default Eloquent authentication driver. Please remember when building the Schema for this Model to ensure that the password field is a minimum of 60 characters.
+Por padrão, Laravel inclui um modelo `User` em seu diretório `app/models` que podem ser utilizadas com o controlador Eloquent de autenticação padrão. Por favor, lembre-se ao construir o esquema para este modelo assegure-se que o campo de senha é de pelo menos 60 caracteres.
 
-If your application is not using Eloquent, you may use the `database` authentication driver which uses the Laravel query builder.
+Se o seu aplicativo não está usando Eloquent, você pode usar o driver de autenticação de `banco de dados` que usa o construtor de consultas do Laravel.
 
 <a name="storing-passwords"></a>
-## Storing Passwords
+## Armazenando Senhas
 
-The Laravel `Hash` class provides secure Bcrypt hashing:
+A classe `Hash` do Laravel fornece segurança Bcrypt:
 
-**Hashing A Password Using Bcrypt**
+**Hashing Uma Senha Usando Bcrypt**
 
 	$password = Hash::make('secret');
 
-**Verifying A Password Against A Hash**
+**Verificação De Uma Senha Contra Uma Hash**
 
 	if (Hash::check('secret', $hashedPassword))
 	{
-		// The passwords match...
+		// As senhas conferem...
 	}
 
 <a name="authenticating-users"></a>
-## Authenticating Users
+## Autenticando Usuários
 
-To log a user into your application, you may use the `Auth::attempt` method.
+Para logar um usuário na sua aplicação, use o método `Auth::attempt`.
 
 	if (Auth::attempt(array('email' => $email, 'password' => $password)))
 	{
-		// The user's credentials are valid...
+		// As credenciais do usuários são válidas...
 	}
 
-Take note that `email` is not a required option, it is merely used for example. You should use whatever column name corresponds to a "username" in your database.
+Tome nota de que `email` não é uma opção necessária, é apenas utilizada no exemplo. Você pode usar qualquer nome de coluna corresponde a um "nome de usuário" em seu banco de dados.
 
-If you would like to provide "remember me" functionality in your application, you may pass `true` as the second argument to the `attempt` method, which will keep the user authenticated indefinitely (or until they manually logout):
+Se você quiser fornecer um "mantenha me conectado" em seu aplicativo, você pode passar `true` como o segundo argumento para o método `attemp`, que irá manter o usuário autenticado indefinidamente (ou até que saia manualmente):
 
-**Authenticating A User And "Remembering" Them**
+**Autenticando Um Usuários E "Lembrando-se" Dele**
 
 	if (Auth::attempt(array('email' => $email, 'password' => $password), true))
 	{
-		// The user is being remembered...
+		// O usuário não será esquecido...
 	}
 
-**Note:** If the `attempt` method returns `true`, the user is considered logged into the application.
+**Nota:** Se o método `attempt` retornar `true`, o usuário será considerado como logado na sua aplicação.
 
-**Authenticating A User with extra conditions**
+**Autenticando Um Usuário Com Condições Extras**
 
-You may add in extra conditions to ensure that the user is (for example) 'active', or 'not suspended':
+Você pode adicionar condições adicionais para se certificar que o utilizador é (por exemplo) 'active(ativo)', ou 'not suspended(não suspenso)':
 
-    if (Auth::attempt(array('email' => $email, 'password' => $password, 'active' => 1, 'suspended' => 0)))
+    if (Auth::attempt(array('email' => $email, 'password' => $password, 'ativo' => 1, 'suspenso' => 0)))
     {
-        // The user is active, not suspended, and exists.
+        // O usuário está ativo, não suspenso, e existe.
     }
 
-Once a user is authenticated, you may access the User model / record:
+Uma vez que um usuário é autenticado, você pode acessar o registro/modelo desse usuário:
 
-**Accessing The Logged In User**
+**Acessando O Usuário Logado**
 
 	$email = Auth::user()->email;
 
-**Logging A User Out Of The Application**
+**Deslogando Um Usuário**
 
 	Auth::logout();
 
 <a name="protecting-routes"></a>
-## Protecting Routes
+## Protegendo Rotas
 
-Route filters may be used to allow only authenticated users to access a given route. Laravel provides the `auth` filter by default, and it is defined in `app/filters.php`.
+Filtros de rota pode ser usado para permitir que somente usuários autenticados acessem determinada rota. Laravel fornece o filtro `auth` por padrão, e isso está definido em `app/filters.php`.
 
-**Protecting A Route**
+**Protegendo uma rota**
 
 	Route::get('profile', array('before' => 'auth', function()
 	{
-		// Only authenticated users may enter...
+		// Somente usuários autenticados podem acessar...
 	}));
 
 ### CSRF Protection
 
-Laravel provides an easy method of protecting your application from cross-site request forgeries.
+Laravel fornece um método fácil de proteger seu aplicativo de falsificações de pedido cross-site.
 
-**Insert the CSRF token into your form ** using `csrf_token()` or `Session::getToken()`
+**Insere a CSRF token em seu formulário ** usando `csrf_token()` ou `Session::getToken()`
 
     <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
 
-**Validate the submitted CSRF token**
+**Valida O Envio Da CSRF token**
 
     Route::post('register', array('before' => 'csrf', function()
     {
-        return 'You gave a valid CSRF token!';
+        return 'Você possui uma válida CSRF token!';
     }));
 
 <a name="encryption"></a>
-## Encryption
+## Encriptação
 
-Laravel provides facilities for strong AES-256 encryption via the mcrypt PHP extension:
+Laravel possui recursos para forte criptografia AES-256 através da extensão PHP mcrypt:
 
-**Encrypting A Value**
+**Encriptando um Valor**
 
 	$encrypted = Crypt::encrypt('secret');
 
-> **Note:** Be sure to set a 32 character, random string in the `key` option of the `app/config/app.php` file. Otherwise, encrypted values will not be secure.
+> **Nota:** Certifique-se de definir uma sequência aleatório de 32 caracteres, na opção `key` no seu arquivo `app/config/app.php`. Caso contrário, os valores criptografados não será segura.
 
-**Decrypting A Value**
+**Decodificando Um Valor**
 
 	$decrypted = Crypt::decrypt($encryptedValue);

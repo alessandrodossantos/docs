@@ -1,15 +1,15 @@
 # Templates
 
-- [Controller Layouts](#controller-layouts)
+- [Layouts do Controlador](#controller-layouts)
 - [Blade Templating](#blade-templating-engine)
-- [Other Blade Control Structures](#other-blade-control-structures)
+- [Outras Estruturas de Controle do Blade](#other-blade-control-structures)
 
 <a name="controller-layouts"></a>
-## Controller Layouts
+## Layouts do Controlador
 
-One method of using templates in Laravel is via controller layouts. By specifying the `layout` property on the controller, the view specified will be created for you and will be the assumed response that should be returned from actions.
+Uma maneira de utilizar templates em Laravel é através do layouts do controlador. Especificando a propriedade `layout` no controlador, a view específica será criada para você e irá se tornar a resposta de suas ações.
 
-**Defining A Layout On A Controller**
+**Definindo Um Layout Em Um Controlador**
 
 	class UserController extends BaseController {
 
@@ -31,16 +31,16 @@ One method of using templates in Laravel is via controller layouts. By specifyin
 <a name="blade-template-engine"></a>
 ## Blade Templating
 
-Blade is a simple, yet powerful templating engine provided with Laravel. Unlike controller layouts, Blade is driven by _template inheritance_ and _sections_. All Blade templates should use the `.blade.php` extension.
+Blade é uma simples, e ainda poderoso motor de templating fornecido com o Laravel. Ao contrário de layouts do controlador, Blade é guiado por _herança de template_ e _seções_. Todos os templates Blade deve usar a extensão `.blade.php`.
 
-**Defining A Blade Layout**
+**Definindo Um Layout Blade**
 
-	<!-- Stored in app/views/layouts/master.blade.php -->
+	<!-- Armazenado em app/views/layouts/master.blade.php -->
 
 	<html>
 		<body>
 			@section('sidebar')
-				This is the master sidebar.
+				Esta é a barra lateral principal.
 			@stop
 
 			<div class="container">
@@ -49,32 +49,32 @@ Blade is a simple, yet powerful templating engine provided with Laravel. Unlike 
 		</body>
 	</html>
 
-**Using A Blade Layout**
+**Usando Um Layout Blade**
 
 	@extends('layouts.master')
 
 	@section('sidebar')
 		@parent
 
-		<p>This is appended to the master sidebar.</p>
+		<p>Isto é anexado a barra lateral principal.</p>
 	@stop
 
 	@section('content')
-		<p>This is my body content.</p>
+		<p>Este é o conteúdo do corpo.</p>
 	@stop
 
-Note that views which `extend` a Blade layout simply override sections from the layout. Content of the layout can be included in a child view using the `@parent` directive in a section, allowing you to append to the contents of a layout section such as a sidebar or footer.
+Note que a view que `extend` um layout Blade, simplesmente substitui seções do layout. O conteúdo do layout pode ser incluído em uma view filha usando a directiva `@parent` em uma seção, o que lhe permite anexar o conteúdo de uma seção de layout, como uma barra lateral ou rodapé.
 
 <a name="other-blade-control-structures"></a>
-## Other Blade Control Structures
+## Outras Estruturas de Controle do Blade
 
-**Echoing Data**
+**Ecoado Dados**
 
 	Hello, {{ $name }}.
 
 	The current UNIX timestamp is {{ time() }}.
 
-**If Statements**
+**Instruções IF**
 
 	@if (count($records) > 0)
 		I have records!
@@ -86,7 +86,7 @@ Note that views which `extend` a Blade layout simply override sections from the 
 		You are not signed in.
 	@endunless
 
-**Loops**
+**Loops (Laços)**
 
 	@for ($i = 0; $i < 10; $i++)
 		The current value is {{ $i }}
@@ -100,10 +100,10 @@ Note that views which `extend` a Blade layout simply override sections from the 
 		<p>I'm looping forever.</p>
 	@endwhile
 
-**Including Sub-Views**
+**Incluíndo Sub-Views**
 
 	@include('view.name')
 
-**Comments**
+**Comentários**
 
-	{{-- This comment will not be in the rendered HTML --}}
+	{{-- Este comentário não será exibido no HTML --}}
