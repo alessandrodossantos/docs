@@ -1,4 +1,4 @@
-# Mail
+# Email
 
 - [Configuração](#configuration)
 - [Uso Básico](#basic-usage)
