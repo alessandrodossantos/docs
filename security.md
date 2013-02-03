@@ -1,4 +1,4 @@
-# Security
+# Segurança
 
 - [Configuração](#configuration)
 - [Armazenando Senhas](#storing-passwords)
