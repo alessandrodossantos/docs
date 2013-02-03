@@ -94,7 +94,7 @@ Uma vez que ligamos o `UserRepositoryInterface` a um tipo concreto, o `DbUserRep
 
 Laravel fornece muitas oportunidade para usar o IoC container e adicionar flexibilidade e testabilidade para a sua aplicação. Um exemplo é ao resolver controladores. Todos os controladores são resolvidos através do IoC container, significando que você pode type-hint(induzir o tipo) das dependências no seu construtor do controlador, e eles serão automaticamente injetados.
 
-**Type-Hinting Controller Dependencies**
+**Type-Hinting(Indução de Tipo) de Dependências no Controlador**
 
 	class OrderController extends BaseController {
 
@@ -112,11 +112,11 @@ Laravel fornece muitas oportunidade para usar o IoC container e adicionar flexib
 
 	}
 
-In this example, the `OrderRepository` class will automatically be injected into the controller. This means that when [unit testing](/docs/testing) a "mock" `OrderRepository` may be bound into the container and injected into the controller, allowing for painless stubbing of database layer interaction.
+Neste exemplo, a classe `OrderRepository` irá automaticamente ser injetada no controlador, permitindo facil stub(esboço) da interação com a camada de banco de dados.
 
-[Filters](/docs/routing#route-filters), [composers](/docs/responses#view-composers), and [event handlers](/docs/events#using-classes-as-listeners) may also be resolved out of the IoC container. When registering them, simply give the name of the class that should be used:
+[Filtros](/docs/routing#route-filters), [compositores](/docs/responses#view-composers), e [manipuladores de evento](/docs/events#using-classes-as-listeners) pode também ser resolvido fora do IoC container. Ao registrá-los, simplesmente informe o nome da classe que deve ser usado:
 
-**Other Examples Of IoC Usage**
+**Outro Exemplo de Uso do IoC**
 
 	Route::filter('foo', 'FooFilter');
 
@@ -127,11 +127,11 @@ In this example, the `OrderRepository` class will automatically be injected into
 <a name="service-providers"></a>
 ## Provedores de Serviços
 
-Service providers are a great way to group related IoC registrations in a single location. In fact, most of the core Laravel components include service providers. All of the registered service providers for your application are listed in the `providers` array of the `app/config/app.php` configuration file.
+Provedores de serviço são uma ótima maneira de agrupar registros de IoC relacionados, em um lugar só. Na verdade, a maioria do núcleo dos componentes do Laravel inclui provedores de serviço. Todos os registros de provedores de serviço da sua aplicação são listados no array `providers` no arquivo de configuração `app/config/app.php`.
 
-To create a service provider, simply extend the `Illuminate\Support\ServiceProvider` class and define a `register` method:
+Para criar um provedor de serviço, simplesmente estenda a classe `Illuminate\Support\ServiceProvider` e defina um método `register`:
 
-**Defining A Service Provider**
+**Criando um Provedor de Serviço**
 
 	use Illuminate\Support\ServiceProvider;
 
@@ -147,4 +147,4 @@ To create a service provider, simply extend the `Illuminate\Support\ServiceProvi
 
 	}
 
-Note that in the `register` method, the application IoC container is available to you via the `$this->app` property. Once you have created a provider and are ready to register it with your application, simply add it to the `providers` array in your `app` configuration file.
+Observe que no método `register`, o IoC container da aplicação está disponível via propriedade `$this->app`. Uma vez que você cria uma provedor e ele já está pronto para ser registrado na sua aplicação, basta adicioná-lo no array `providers` no seu arquivo de configuração `app`.
