@@ -6,6 +6,7 @@
 - [Rotas Nomeadas](#named-routes)
 - [Grupos de Rota](#route-groups)
 - [Roteamento de Sub-Domínio](#sub-domain-routing)
+- [Prefíxo de Rotas](#route-prefix)
 - [Lançando Erros 404](#throwing-404-errors)
 - [Controladores de Recurso](#resource-controllers)
 
@@ -198,6 +199,23 @@ Rotas em Laravel são capazes de lidar com sub-domínios, e passar seu curinga c
 	{
 
 		Route::get('user/{id}', function($account, $id)
+		{
+			//
+		});
+
+	});
+
+<a name="route-prefix"></a>
+## Prefixos de Rota
+
+Prefixar opção de rota oferece a vantagem de segmentar a URL para uma rota ou lista de rotas agrupadas. 
+
+**Prefixando Rotas Agrupadas**
+
+	Route::group(array('prefix' => 'admin'), function()
+	{
+
+		Route::get('user', function()
 		{
 			//
 		});

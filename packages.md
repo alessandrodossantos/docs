@@ -32,11 +32,11 @@ A maneira mais fácil de criar um pacote para uso com Laravel é o comando `work
 
 	php artisan workbench
 
-Este comando irá pedir várias informações, tais como o vendor e nome do pacote, bem como o seu nome e endereço de email. Essas informações são usadas para criar o namespace e arquivo `composer.json` de seu pacote.
+Este comando irá pedir várias informações, tais como o vendor e nome do pacote, bem como o seu nome e endereço de e-mail. Essas informações são usadas para criar o namespace e arquivo `composer.json` de seu pacote.
 
 O nome de vendor é uma forma de diferenciar o seu pacote de outros pacotes com o mesmo nome, de pacotes de autores diferentes. Por exemplo, se eu (Taylor Otwell) criar um novo pacote chamado "Zapper", o nome do fornecedor poderá ser `Taylor`, enquanto o nome do pacote seria `Zapper`.
 
-Uma vez que o comando `workbench` for executado, o pacote vai estar disponível dentro do diretório `workbench` da sua instalação Laravel. Primeiro, você deve executar o comando `composer install` **a partir do diretório raiz de seus pacotes workbench**, no qual instalará dependências e criará os arquivos autoload do Composer do seu pacote. Você pode instruir o comando `workbench` a fazer isso automaticamente ao criar um pacote usando a directiva `--composer`:
+Uma vez que o comando `workbench` for executado, o pacote vai estar disponível dentro do diretório `workbench` da sua instalação Laravel. Primeiro, você deve executar o comando `composer install` **a partir do diretório raiz de seus pacotes workbench**, no qual instalará dependências e criará os arquivos autoload do Composer do seu pacote. Você pode instruir o comando `workbench` a fazer isso automaticamente ao criar um pacote usando a diretiva `--composer`:
 
 **Criando Um Pacote WorkBench E Executando o Composer**
 
@@ -97,18 +97,18 @@ Ao utilizar recursos de um pacote, como configuração de itens ou views, a sint
 <a name="development-workflow"></a>
 ## Fluxo de Desenvolvimento
 
-When developing a package, it is useful to be able to develop within the context of an application, allowing you to easily view and experiment with your templates, etc. So, to get started, install a fresh copy of the Laravel framework, then use the `workbench` command to create your package structure.
+Ao desenvolver um pacote, é recomendado desenvolvé-lo no contexto de uma aplicação, permitindo a você facilmente ver e experimentar seus templates, etc. Então, ao iniciar, instale uma cópia do framework Laravel, e então use o comando `workbench` para criar a estrutura do seu pacote.
 
-After the `workbench` command has created your package. You may `git init` from the `workbench/[vendor]/[package]` directory and `git push` your package straight from the workbench! This will allow you to conveniently develop the package in an application context without being bogged down by constant `composer update` commands.
+Depois do comando `workbench` criar o seu pacote, dê o comando `git init` de dentro do diretório `workbench/[vendor]/[pacote]` e um `git push` para enviar o seu pacote diretamente do workbench! Isso permitirá que você desenvolva convenientemente o seu pacote em um contexto de aplicação sem ficar emperrado por comandos `composer update` constantes.
 
-Since your packages are in the `workbench` directory, you may be wondering how Composer knows to autoload your package's files. When the `workbench` directory exists, Laravel will intelligently scan it for packages, loading their Composer autoload files when the application starts!
+Desde que seus pacotes estejam no diretório `workbench`, você pode ficar se perguntando como o Composer faz autoload dos arquivos dos seus pacotes. Se o diretório `workbench` existir, Laravel irá inteligentemente buscar os seus pacotes, carregando seus arquivos autoload do Composer, do seu pacote, quando a aplicação iniciar!
 
 <a name="package-routing"></a>
 ## Roteamento do Pacote
 
-In prior versions of Laravel, a `handles` clause was used to specify which URIs a package could respond to. However, in Laravel 4, a package may respond to any URI. To load a routes file for your package, simply `include` it from within your service provider's `register` method.
+Em versões anteriores do Laravel, uma cláusula `handles(manipuladora)` era usada para especificar quais URIs o pacote poderia responder. No entanto, em Laravel 4, um pacote pode responder a qualquer URI. Para carregar um arquivo de rotas para o seu pacote, basta `include(inclui-lo)` dentro de seu provedor de serviços no método `register`.
 
-**Including A Routes File From A Service Provider**
+**Incluindo Um Arquivo De Rota De Um Provedor De Serviço**
 
 	public function register()
 	{
@@ -120,71 +120,71 @@ In prior versions of Laravel, a `handles` clause was used to specify which URIs 
 <a name="package-configuration"></a>
 ## Configuração do Pacote
 
-Some packages may require configuration files. These files should be defined in the same way as typical application configuration files. And, when using the default `$this->package` method of registering resources in your service provider, may be accessed using the usual "double-colon" syntax:
+Alguns pacotes requer arquivos de configuração. Esses arquivos devem ser definidos da mesma maneira que os arquivos de configuração de uma aplicação típica. E, ao usar o método padrão `$this->package` registrado nos recursos em seu provedor de serviço, pode ser acessado usando sintaxe "double-colon(dúplo dois pontos)":
 
-**Accessing Configuração do Pacote Files**
+**Acessando Arquivos De Configuração do Pacote**
 
 	Config::get('package::file.option');
 
-However, if your package contains a single configuration file, you may simply name the file `config.php`. When this is done, you may access the options directly, without specifying the file name:
+Mas, se sua aplicação contém um simples arquivo de configuração, você pode nomeá-lo de `config.php`.Feito isso, você acessa as opções diretamente, sem especificar o nome do aquivo:
 
-**Accessing Single File Configuração do Pacote**
+**Acessando Um Simples Arquivo De Configuração do Pacote**
 
 	Config::get('package::option');
 
 ### Cascading Configuration Files
 
-When other developers install your package, they may wish to override some of the configuration options. However, if they change the values in your package source code, they will be overwritten the next time Composer updates the package. Instead, the `config:publish` artisan command should be used:
+Quando outros desenvolvedores instalarem o pacote, eles podem querer substituir algumas das opções de configuração. No entanto, se alterar os valores no código fonte do pacote, eles serão substituídos nas próximas atualizações do pacote pelo Composer. Em vez disso, o comando `config:publish` deve ser usado:
 
-**Executing The Config Publish Command**
+**Executando Comando De Publicação De Configuração**
 
 	php artisan config:publish vendor/package
 
-When this command is executed, the configuration files for your application will be copied to `app/config/packages/vendor/package` where they can be safely modified by the developer!
+Quando este comando é executado, os arquivos de configuração do seu pacote serão copiados para `app/config/packages/vendor/package` onde eles podem ser facilmente modificados pelo desenvolvedor!
 
-> **Note:** The developer may also create environment specific configuration files for your package by placing them in `app/config/packages/vendor/package/environment`.
+> **Nota:** O desenvolvedor pode criar arquivos de configurações para ambientes específicos de seu pacote colocando os em `app/config/packages/vendor/package/environment`.
 
 <a name="package-migrations"></a>
 ## Migrações do Pacote
 
-You may easily create and run migrations for any of your packages. To create a migration for a package in the workbench, use the `--bench` option:
+Você pode facilmente criar e executar migrações para qualquer um de seus pacotes. Para criar uma migração para um pacote no workbench, use a opção `--bench`:
 
-**Creating Migrations For Workbench Packages**
+**Criando Migrações Para Um Pacote Workbench**
 
 	php artisan migrate:make create_users_table --bench="vendor/package"
 
-**Running Migrations For Workbench Packages**
+**Executando Migrações Para Um Pacote Workbench**
 
 	php artisan migrate --bench="vendor/package"
 
-To run migrations for a finished package that was installed via Composer into the `vendor` directory, you may use the `--package` directive:
+Para executar migrações de um pacote pronto que foi instalado via Composer no seu diretório `vendor`, use a diretiva `--package`:
 
-**Running Migrations For An Installed Package**
+**Executando Migrações Para Um Pacote Instalado**
 
 	php artisan migrate --package="vendor/package"
 
 <a name="package-assets"></a>
 ## Assets do Pacote
 
-Some packages may have assets such as JavaScript, CSS, and images. However, we are unable to link to assets in the `vendor` or `workbench` directories, so we need a way to move these assets into the `public` directory of our application. The `asset:publish` command will take care of this for you:
+Algumas pacotes necessitam de recursos como JavaScript, CSS, e imagens. Mas, nos não podemos linkar os recursos que estão nos diretórios `vendor` ou `workbench`, então precisamos de um jeito de mover esses recursos para o diretório `public` da nossa aplicação. O comando `asset:publish` irá cuidar disso para você:
 
-**Moving Assets do Pacote To Public**
+**Movendo Assets(Recusos) do Pacote Para O Public**
 
 	php artisan asset:publish vendor/package
 
-If the package is still in the `workbench`, use the `--bench` directive:
+Se o pacote está no `workbench`, use a diretiva `--bench`:
 
 	php artisan asset:publish --bench="vendor/package"
 
-This command will move the assets into the `public/packages` directory according to the vendor and package name. So, a package named `userscape/kudos` would have its assets moved to `public/packages/userscape/kudos`. Using this asset publishing convention allows you to safely code asset path in your package's views.
+Esse pacote moverá os recursos de dentro do diretório `public/packages` de acordo com o nome de vendor e nome do pacote. Sendo assim, um pacote de nome `userscape/kudos` deverá ter seus recursos movidos para `public/packages/userscape/kudos`. Usando essa convenção, a publicação de recursos permite seguramente ativar recursos nas suas views do pacote.
 
 <a name="publishing-packages"></a>
 ## Publicando Pacotes
 
-When your package is ready to publish, you should submit the package to the [Packagist](http://packagist.org) repository. If the package is specific to Laravel, consider adding a `laravel` tag to your package's `composer.json` file.
+Quando o pacote está pronto para publicar, você deve enviá-lo para o repositório [Packagist](http://packagist.org). Se o pacote é específico para Laravel, considere acressentar uma tag `laravel` no seu arquivo `composer.json`.
 
-Also, it is courteous and helpful to tag your releases so that developers can depend on stable versions when requesting your package in their `composer.json` files. If a stable version is not ready, consider using the `branch-alias` Composer directive.
+Além disso, é cortês e útil marcar os seus lançamentos para que os desenvolvedores possam depender de versões estáveis ​​ao solicitar o seu pacote nos arquivos `composer.json`. Se uma versão estável não está pronta, considere usar a diretiva `branch-alias` do Composer.
 
-Once your package has been published, feel free to continue developing it within the application context created by `workbench`. This is a great way to continue to conveniently develop the package even after it has been published.
+Uma vez que o pacote foi publicado, sinta-se livre para continuar a desenvolvê-lo dentro do contexto de aplicação criado pelo `workbench`. Esta é uma excelente forma de continuar a desenvolver convenientemente o pacote, mesmo depois de ter sido publicado.
 
-Some organizations choose to host their own private repository of packages for their own developers. If you are interested in doing this, review the documentation for the [Satis](http://github.com/composer/satis) project provided by the Composer team.
+Algumas organizações optam por hospedar seu próprio repositório privado de pacotes, para os seus desenvolvedores. Se está interessado em fazer isso, consulte a documentação do projeto [Satis](http://github.com/composer/satis) fornecido pela equipe do Composer.
