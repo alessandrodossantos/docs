@@ -19,7 +19,7 @@ Por padrão, o arquivo `app/start/global.php` contem um manipulador de erro para
 		Log::error($exception);
 	});
 
-Este é o manipulador de erro mais básico. Sendo assim, você pode especificar mais manipuladores se necessário. Manipuladores são chamados com base em seus type-hint de manipulação de Exceções. Por exemplo, você pode criar um manipulador que somente manipula instância de `RuntimeException`:
+Este é o manipulador de erro mais básico. Sendo assim, você pode especificar mais manipuladores se necessário. Manipuladores são chamados com base em seus type-hint(indução de tipo) de manipulação de Exceções. Por exemplo, você pode criar um manipulador que somente manipula instância de `RuntimeException`:
 
 	App::error(function(RuntimeException $exception)
 	{

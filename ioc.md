@@ -9,40 +9,40 @@
 <a name="introduction"></a>
 ## Introdução
 
-O IoC(Inversão de Controle) container do Laravel é uma poderosa ferramenta para gerenciar dependências de classes. Injeção de dependências é um método de remoção de alta dependências de classes. Instead, the dependencies are injected at run-time, allowing for greater flexibility as dependency implementations may be swapped easily.
+O IoC(Inversão de Controle) container do Laravel é uma poderosa ferramenta para gerenciar dependências de classes. Injeção de dependências é um método de remoção de alta dependências de classes. Em disso, as dependências são injetadas em tempo de execução permitindo uma maior flexibilidade, assim implementações de dependências podem ser trocadas facilmente.
 
-Understanding the Laravel IoC container is essential to building a powerful, large application, as well as for contributing to the Laravel core itself.
+Entender o Laravel IoC container é essencial para contruir poderosas e grandes aplicações, bem como contribuir para o núcleo em si do Laravel.
 
 <a name="basic-usage"></a>
 ## Uso Básico
 
-There are two ways the IoC container can resolve dependencies: via Closure callbacks or automatic resolution. First, we'll explore Closure callbacks. First, a "type" may be bound into the container:
+São duas as maneiras de resolver dependências com o IoC container: via Closure callbacks ou resolução automática. Primeiro, iremos explorar Closure callbacks. Um "tipo" pode ser ligado dentro do container:
 
-**Binding A Type Into The Container**
+**Ligando Um Tipo No Container**
 
 	App::bind('foo', function()
 	{
 		return new FooBar;
 	});
 
-**Resolving A Type From The Container**
+**Resolvendo Um Tipo Do Container**
 
 	$value = App::make('foo');
 
-When the `App::make` method is called, the Closure callback is executed and the result is returned.
+Quando o método `App::make`, a Closure callback é executada e o resultado é retornado.
 
-Sometimes, you may wish to bind something into the container that should only be resolved once, and the same instance should be returned on subsequent calls into the container:
+Algumas vezes, talvez você queira ligar algo no container que só deve ser resolvida uma vez, e na mesma instância, ele deve ser devolvido em chamadas subseqüentes para o container:
 
-**Binding A "Shared" Type Into The Container**
+**Ligando Um Tipo "Compartilhado" No Container**
 
 	App::singleton('foo', function()
 	{
 		return new FooBar;
 	});
 
-You may also bind an existing object instance into the container using the `instance` method:
+Você também pode ligar uma instancia de um objeto existente no container usando o método `instance`:
 
-**Binding An Existing Instance Into The Container**
+**Ligando Uma Instância Existente No Container**
 
 	$foo = new Foo;
 
@@ -51,9 +51,9 @@ You may also bind an existing object instance into the container using the `inst
 <a name="automatic-resolution"></a>
 ## Resolução Automática
 
-The IoC container is powerful enough to resolve classes without any configuration at all in many scenarios. For example:
+O IoC container é poderoso o suficiente para resolver classes sem nenhuma configuração em muitos cenários. Por exemplo:
 
-**Resolving A Class**
+**Resolvendo Uma Classe**
 
 	class FooBar {
 
@@ -66,17 +66,17 @@ The IoC container is powerful enough to resolve classes without any configuratio
 
 	$fooBar = App::make('FooBar');
 
-Note that even though we did not register the FooBar class in the container, the container will still be able to resolve the class, even injecting the `Baz` dependency automatically!
+Note-se que mesmo que não registrando a classe FooBar no container, ele ainda será capaz de resolver a classe, mesmo injetando a dependência `Baz` automaticamente!
 
-When a type is not bound in the container, it will use PHP's Reflection facilities to inspect the class and read the constructor's type-hints. Using this information, the container can automatically build an instance of the class.
+Quando um tipo não está vinculada no container, ele irá utilizar as meios de Reflexão do PHP para inspecionar a classe e ler o construtor do type-hints(indutor de tipo). Usando essas informações, o container pode automaticamente construir uma instância da classe.
 
-However, in some cases, a class may depend on an interface implementation, not a "concrete type". When this is the case, the `App::bind` method must be used to inform the container which interface implementation to inject:
+No entanto, alguns casos, uma classe pode depender de uma implementação de interface, e não um "tipo concreto". Quando for assim, o método `App::bind` deve ser utilizado para informar o cointainer que implementação de interface injetar:
 
-**Binding An Interface To An Implementation**
+**Ligando Uma Interace Para Uma Implementação**
 
 	App::bind('UserRepositoryInterface', 'DbUserRepository');
 
-Now consider the following controller:
+Agora considere o seguinte controlador:
 
 	class UserController extends BaseController {
 
@@ -87,12 +87,12 @@ Now consider the following controller:
 
 	}
 
-Since we have bound the `UserRepositoryInterface` to a concrete type, the `DbUserRepository` will automatically be injected into this controller when it is created.
+Uma vez que ligamos o `UserRepositoryInterface` a um tipo concreto, o `DbUserRepository` será automaticamente injetado este controlador quando ele é criado.
 
 <a name="practical-usage"></a>
 ## Uso Prático
 
-Laravel provides several opportunities to use the IoC container to increase the flexibility and testability of your application. One primary example is when resolving controllers. All controllers are resolved through the IoC container, meaning you can type-hint dependencies in a controller constructor, and they will automatically be injected.
+Laravel fornece muitas oportunidade para usar o IoC container e adicionar flexibilidade e testabilidade para a sua aplicação. Um exemplo é ao resolver controladores. Todos os controladores são resolvidos através do IoC container, significando que você pode type-hint(induzir o tipo) das dependências no seu construtor do controlador, e eles serão automaticamente injetados.
 
 **Type-Hinting Controller Dependencies**
 
