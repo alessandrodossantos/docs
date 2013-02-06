@@ -5,9 +5,9 @@
 - [Insert, Update, Delete](#insert-update-delete)
 - [Timestamps](#timestamps)
 - [Relacionamentos](#relationships)
-- [Carregamento Ansioso](#eager-loading)
+- [Carregamento Prévio](#eager-loading)
 - [Inserindo em Modelos Relacionados](#inserting-related-models)
-- [Trabalhando com Tabelas Dinâmicas](#working-with-pivot-tables)
+- [Trabalhando com Tabelas Intermediárias](#working-with-pivot-tables)
 - [Coleções](#collections)
 - [Acessadores & Modificadores](#accessors-and-mutators)
 - [Atribuição em Massa](#mass-assignment)
@@ -109,7 +109,7 @@ Para apagar um modelo, simplesmente chame o método `delete` method em uma inst�
 
 	$user->delete();
 
-Sim, você pode apagar encadando de uma consulta do modelo:
+Sim, você pode apagar encadeando uma consulta no modelo:
 
 	$affectedRows = User::where('votes', '>', 100)->delete();
 
@@ -212,7 +212,7 @@ Agora podemos acessar os comentários da publicação através da propriedade di
 
 	$comments = Post::find(1)->comments;
 
-If you need to add further constraints to which posts are retrieved, you may call the `comments` method and continue chaining conditions:
+Se você precisar adicionar mais restrições para as quais os posts são recuperados, poderá invocar o método comments e continuar com as condições de encadeamento:
 
 	$comments = Post::find(1)->comments()->where('title', '=', 'foo')->first();
 
@@ -234,7 +234,7 @@ Para definir o inverso dessa relação no modelo `Comment`, nos usámos o métod
 	}
 
 <a name="many-to-many"></a>
-### Many To Many
+### Muitos Para Muitos
 
 Relações muitos-para-muitos é o tipo de relacionamento mais complicado. Um exemplo de um relacionamento é um usuário com muitos papéis(roles), onde os papéis também compartilhados por outros usuários. Exemplo, muitos usuários tem o papel de "Admin". Três tabelas são necessárias para este relacionamento: `users`, `roles`, e `role_user`. A tabela `role_user` é derivada da ordem alfabética dos nomes dos modelos relacionados, e devem ter as colunas `user_id` e `role_id`.
 
@@ -253,7 +253,7 @@ Agora podemos recuperar os papéis(roles) através do modelo `User`:
 
 	$roles = User::find(1)->roles;
 
-Se você gostaria de usar um nome de tabela não convencional para a sua tabela dinâmica, você pode passar como um segundo argumento para o método `belongsToMany`:
+Se você quiser usar um nome de tabela não convencional para a sua tabela intermediária, você pode passar como um segundo argumento para o método `belongsToMany`:
 
 	return $this->belongsToMany('Role', 'user_roles');
 
@@ -264,7 +264,7 @@ Você pode sobrescrever a convenção de chaves associadas:
 <a name="polymorphic-relations"></a>
 ### Relacionamentos Polimórficos
 
-Relacionamentos Polimorficos permitem um modelo pertecer a mais de um modelo numa simples associação. Exemplo, você pode ter um modelo photo(foto) que pertence a um modelo staff(equipe) ou a um modelo order(pedido). Definiriamos essa relação assim:
+Relacionamentos Polimórficos permitem um modelo pertencer a mais de um modelo numa simples associação. Exemplo, você pode ter um modelo photo(foto) que pertence a um modelo staff(equipe) ou a um modelo order(pedido). Definiríamos essa relação assim:
 
 	class Photo extends Eloquent {
 
@@ -288,7 +288,7 @@ Relacionamentos Polimorficos permitem um modelo pertecer a mais de um modelo num
 
 		public function photos()
 		{
-			return $this->hasMany('Photo', 'imageable');
+			return $this->morphMany('Photo', 'imageable');
 		}
 
 	}
@@ -335,9 +335,9 @@ Para ajudar a entender como isso funciona, vamos explorar a estrutura do banco d
 Os campos chave para observar aqui são `imageable_id` e `imageable_type` na tabela `photos`. O imageable_id conterá o valor do ID, que neste exemplo, será o staff ou order, enquanto que imageable_type irá conter o nome da classe dona do modelo. Isso é o que permite o ORM determinar que tipo possui o modelo para retornar quando acessar a relação `imageable`.
 
 <a name="eager-loading"></a>
-## Carregamento Ansioso
+## Carregamento Prévio
 
-Eager loading exists to alleviate the N + 1 query problem. For example, consider a `Book` model that is related to `Author`. The relationship is defined like so:
+Carregamento prévio existe para aliviar problema com consulta N + 1. Exemplo, considere um modelo `Book` que está relacionado a `Author`. A relação é definida assim:
 
 	class Book extends Eloquent {
 
@@ -348,54 +348,54 @@ Eager loading exists to alleviate the N + 1 query problem. For example, consider
 
 	}
 
-Now, consider the following code:
+Agora considere o seguinte código:
 
 	foreach (Book::all() as $book)
 	{
 		echo $book->author->name;
 	}
 
-This loop will execute 1 query to retrieve all of the books on the table, then another query for each book to retrieve the author. So, if we have 25 books, this loop would run 26 queries.
+Esse loop executará 1 consulta para recuperar todos os livros, em seguida, uma outra consulta onde cada livro recupera o autor. Então, se temos 25 livros, este loop executará 26 consultas.
 
-Thankfully, we can use eager loading to drastically reduce the number of queries. The relationships that should be eager loaded may be specified via the `with` method:
+Felizmente, podemos usar o carregamento prévio para reduzir drasticamente o número de consultas. As relações que devem ser carregadas previamente pode ser especificado através do método `with`:
 
 	foreach (Book::with('author')->get() as $book)
 	{
 		echo $book->author->name;
 	}
 
-In the loop above, only two queries will be executed:
+No loop acima, apenas duas consultas serão executadas:
 
 	select * from books
 
 	select * from authors where id in (1, 2, 3, 4, 5, ...)
 
-Wise use of eager loading can drastically increase the performance of your application.
+Uso inteligente de carregamento prévio pode aumentar drasticamente o desempenho de sua aplicação.
 
-Of course, you may eager load multiple relationships at one time:
+Claro, você pode carregar previamente múltiplas relações de uma só vez:
 
 	$books = Book::with('author', 'publisher')->get();
 
-You may even eager load nested relationships:
+Você pode até mesmo carregar relações aninhadas:
 
 	$books = Book::with('author.contacts')->get();
 
-In the example above, the `author` relationship will be eager loaded, and the author's `contacts` relation will also be loaded.
+No exemplo acima, a relação `author` será previamente carregada, e a relação `contacts` também será carregada.
 
-### Eager Load Constraints
+### Condições de Carregamento Prévio
 
-Sometimes you may wish to eager load a relationship, but also specify a condition for the eager load. Here's an example:
+Talvez, você deseje carregar previamente uma relação, mas também especificar uma condição. Aqui está um exemplo:
 
 	$users = User::with(array('posts' => function($query)
 	{
 		$query->where('title', 'like', '%first%');
 	}))->get();
 
-In this example, we're eager loading the user's posts, but only if the post's title column contains the word "first".
+Nesse exemplo, posts dos usuários serão previamente carregados, mas somente se o posts possuírem a palavra "first" na coluna title.
 
-### Lazy Eager Loading
+### Carregamento Prévio Preguiçoso
 
-It is also possible to eagerly load related models directly from an already existing model collection. This may be useful when dynamically deciding whether to load related models or not, or in combination with caching.
+Também é possível carregar modelos previamente relacionados diretamente de uma coleção de modelo já existente. Isto pode ser útil quando decidir dinamicamente carregar modelos relacionados ou não, ou em combinação com caching.
 
 	$books = Book::all();
 
@@ -404,9 +404,9 @@ It is also possible to eagerly load related models directly from an already exis
 <a name="inserting-related-models"></a>
 ## Inserindo em Modelos Relacionados
 
-You will often need to insert new related models. For example, you may wish to insert a new comment for a post. Instead of manually setting the `post_id` foreign key on the model, you may insert the new comment from its parent `Post` model directly:
+Frequentemente você precisá inserir novos modelos relacionados. Por exemplo, você pode querer inserir um novo comentário para um post. Em vez de configurar manualmente a chave estrangeira `post_id` no modelo, você pode inserir o novo comentário diretamente no seu modelo pai `Post`:
 
-**Attaching A Related Model**
+**Anexando Um Modelo Relacionado**
 
 	$comment = new Comment(array('message' => 'A new comment.'));
 
@@ -414,42 +414,42 @@ You will often need to insert new related models. For example, you may wish to i
 
 	$comment = $post->comments()->save($comment);
 
-In this example, the `post_id` field will automatically be set on the inserted comment.
+Nesse exemplo, o campo `post_id` será automaticante definido no comentário inserido.
 
-### Inserting Related Models (Many To Many)
+### Inserindo em Modelos Relacionados (Muitos Para Muitos)
 
-You may also insert related models when working with many-to-many relations. Let's continue using our `User` and `Role` models as examples. We can easily attach new roles to a user using the `attach` method:
+Você também pode inserir modelos relacionados quando trabalhar com relações muitos-para-muitos relações. Vamos continuar usando nossos modelos `User` e `Role` como exemplos. Podemos facilmente anexar novos papéis(roles) para um usuário usando o método `attach`:
 
-**Attaching Many To Many Models**
+**Anexando Modelos Muitos Para Muitos**
 
 	$user = User::find(1);
 
 	$user->roles()->attach(1);
 
-You may also pass an array of attributes that should be stored on the pivot table for the relation:
+Você pode passar um conjunto de atributos que serão armazenados na tabela intermediária da relação:
 
 	$user->roles()->attach(1, array('expires' => $expires));
 
-You may also use the `sync` method to attach related models. The `sync` method accepts an array of IDs to place on the pivot table. After this operation is complete, only the IDs in the array will be on the intermediate table for the model:
+Você também pode usar o método `sync` para anexar modelos relacionados. O método `sync` aceita um array de IDs para colocar na tabela intermediária. Após a operação ser concluída, apenas os IDs do array estará na tabela intermédia do modelo:
 
-**Using Sync To Attach Many To Many Models**
+**Usando Sync Para Anexar Modelos Muitos Para Muitos**
 
 	$user->roles()->sync(array(1, 2, 3));
 
-Sometimes you may wish to create a new related model and attach it in a single command. For this operation, you may use the `save` method:
+Outras vezes você pode querer criar um novo modelo relacional e anexar em um simples comando. Para isso, use o método `save`:
 
 	$role = new Role(array('name' => 'Editor'));
 
 	User::find(1)->roles()->save($role);
 
-In this example, the new `Role` model will be saved and attached to the user model. You may also pass an array of attributes to place on the joining table for this operation:
+No exemplo, o novo modelo `Role` será salvo e anexado para o modelo usuário. Você pode também passar um conjunto de atributos para colocar junto da tabela para esta operação:
 
 	User::find(1)->roles()->save($role, array('expires' => $expires));
 
 <a name="working-with-pivot-tables"></a>
 ## Trabalhando com Tabelas Dinâmicas
 
-As you have already learned, working with many-to-many relations requires the presence of an intermediate table. Eloquent provides some very helpful ways of interacting with this table. For example, let's assume our `User` object has many `Role` objects that it is related to. After accessing this relationship, we may access the `pivot` table on the models:
+Como você já aprendeu, trabalhar com relações muitos-para-muitos requer uma tabela intermediária. Eloquent fornece algumas maneiras muito úteis de interagir com essa tabela. Exemplo, vamos assumir que nosso objeto `User` tem muitos objetos `Role` que se relacionam. Depois de acessar essa relação, podemos acessar a tabela intermediária dos modelos:
 
 	$user = User::find(1);
 
@@ -458,34 +458,34 @@ As you have already learned, working with many-to-many relations requires the pr
 		echo $role->pivot->created_at;
 	}
 
-Notice that each `Role` model we retrieve is automatically assigned a `pivot` attribute. This attribute contains a model representing the intermediate table, and may be used as any other Eloquent model.
+Observe que cada modelo `Role` que recuperamos é automaticamente recebe um atributo `pivot`. Esse atributo contem o modelo que representa a tabela intermediária, e pode ser utilizado como qualquer outro modelo Eloquent.
 
-By default, only the keys will be present on the `pivot` object. If your pivot table contains extra attributes, you must specify them when defining the relationship:
+Por padrão, apenas as chaves estarão presentes no objeto o `pivot`. Se a sua tabela dinâmica contém atributos extras, você deve especificá-los ao definir a relação:
 
 	return $this->belongsToMany('Role')->withPivot('foo', 'bar');
 
-Now the `foo` and `bar` attributes will be accessible on our `pivot` object for the `Role` model.
+Agora os atributos `foo` and `bar` serão acessíveis no nosso objeto `pivot` do modelo `Role`.
 
-If your want your pivot table to have automatically maintained `created_at` and `updated_at` timestamps, use the `withTimestamps` method on the relationship definition:
+Se você deseja que suas tabelas dinâmicas mantenham `created_at` e `updated_at` timestamps, use o método `withTimestamps` na definição da relação:
 
 	return $this->belongsToMany('Role')->withTimestamps();
 
-To delete all records on the pivot table for a model, you may use the `delete` method:
+Para excluir todos os registros da tabela intermediária de um modelo, você pode usar o método `delete`:
 
-**Deleting Records On A Pivot Table**
+**Apagando Registros De Uma Tabela Intermediária**
 
 	User::find(1)->roles()->delete();
 
-Note that this operation does not delete records from the `roles` table, but only from the pivot table.
+Note que essa operação não deleta registros da tabela `roles`, mas somente da tabela intermediária.
 
 <a name="collections"></a>
 ## Coleções
 
-All multi-result sets returned by Eloquent either via the `get` method or a relationship return an Eloquent `Collection` object. This objects implements the `IteratorAggregate` PHP interface so it can be iterated over like an array. However, this object also has a variety of other helpful methods for working with result sets.
+Todos os conjuntos de vários resultados retornado pelo Eloquent através do método `get` ou por uma relação, retorna um objeto `Collection` do Eloquent. Este objeto implementa a interface `IteratorAggregate` do PHP para que possa ser iterado como um array. No entanto, este objeto tem também uma variedade de outros métodos úteis para trabalhar com os conjuntos de resultados.
 
-For example, we may determine if a result set contains a given primary key using the `contains` method:
+Por exemplo, podemos determinar se um resultado contém uma chave primária informada, usando o método `contains`:
 
-**Checking If A Collection Contains A Key**
+**Verificando Se Uma Coleção Contém Uma Chave**
 
 	$roles = User::find(1)->roles;
 
@@ -494,19 +494,19 @@ For example, we may determine if a result set contains a given primary key using
 		//
 	}
 
-Collections may also be converted to an array or JSON:
+Coleções podem ser convertidas em array ou JSON:
 
 	$roles = User::find(1)->roles->toArray();
 
 	$roles = User::find(1)->roles->toJson();
 
-If a collection is cast to a string, it will be returned as JSON:
+Se uma coleção for convertida para string, será retornado um JSON:
 
 	$roles = (string) User::find(1)->roles;
 
-Sometimes, you may wish to return a custom Collection object with your own added methods. You may specify this on your Eloquent model by overriding the `newCollection` method:
+Pode ser que você queria retornar um objeto coleção personalizada, com métodos próprios adicionados. Você pode especificar isso no seu modelo Eloquent sobrescrevendo o método `newCollection`:
 
-**Returning A Custom Collection Type**
+**Retornando Uma Coleção Personalizada**
 
 	class User extends Eloquent {
 
@@ -520,9 +520,9 @@ Sometimes, you may wish to return a custom Collection object with your own added
 <a name="accessors-and-mutators"></a>
 ## Acessadores & Modificadores
 
-Eloquent provides a convenient way to transform your model attributes when getting or setting them. Simplify define a `getFoo` method on your model to declare an accessor. Keep in mind that the methods should follow camel-casing, even though your database columns are snake-case:
+Eloquent fornece uma maneira conveniente para transformar atributos do seu modelo quando acessá-los ou atribuí-los. Basta definir um método `getFoo` para declarar um acessador. Mantenha em mente que os métodos devem ser camel-casing, mesmo que suas colunas de banco de dados sejam snake-case:
 
-**Defining An Accessor**
+**Definindo Um Acessador**
 
 	class User extends Eloquent {
 
@@ -533,11 +533,11 @@ Eloquent provides a convenient way to transform your model attributes when getti
 
 	}
 
-In the example above, the `first_name` column has an accessor. Note that the value of the attribute is passed to the accessor.
+No exemplo acima, a coluna `first_name` tem um acessador. Note que o valor do atributo é passado para o acesssador.
 
-Mutators are declared in a similar fashion:
+Modificadores são declarados de maneira semelhante:
 
-**Defining A Mutator**
+**Definindo Um Modificador**
 
 	class User extends Eloquent {
 
@@ -551,13 +551,13 @@ Mutators are declared in a similar fashion:
 <a name="mass-assignment"></a>
 ## Atribuição em Massa
 
-When creating a new model, you pass an array of attributes to the model constructor. These attributes are then assigned to the model via mass-assignment. This is convenient; however, can be a **serious** security concern when blindly passing user input into a model. If user input is blindly passed into a model, the user is free to modify **any** and **all** of the model's attributes.
+Ao criar um novo modelo, você passa um array de valores para o construtor do modelo. Estes valores são então atribuídos ao modelo através da atribuição em massa. Isto é conveniente, no entanto, pode ter um problema **sério** de segurança, quando cegamente passa os valores de entrada do usuário para o modelo. Se a entrada do usuário é cegamente passada para um modelo, o usuário é livre para modificar **qualquer** e **todos** os atributos do modelo.
 
-A more secure approach to assigning attributes is either to manually assign them, or to set the `fillable` or `guarded` properties on your model.
+Uma abordagem mais segura para a atribuição de valores, é eles atribuir manualmente, ou para definir as propriedades `fillable(preenchível)` ou `guarded(protegido)` no seu modelo.
 
-The `fillable` property specifies which attributes should be mass-assignable. This can be set at the class or instance level.
+A propriedade `fillable` especifica quais atributos podem ser atribuídos em massa. Isso pode ser definido no nível da classe ou da instância.
 
-**Defining Fillable Attributes On A Model**
+**Definindo Atributos Preenchíveis Em Um Modelo**
 
 	class User extends Eloquent {
 
@@ -565,11 +565,11 @@ The `fillable` property specifies which attributes should be mass-assignable. Th
 
 	}
 
-In this example, only the three listed attributes will be mass-assignable.
+Neste exemplo, apenas os três atributos listados serão atribuídos em massa.
 
-The inverse of `fillable` is `guarded`, and serves as a "black-list" instead of a "white-list":
+`guarded` é o inverso de `fillable`, e serve como uma "lista negra":
 
-**Defining Guarded Attributes On A Model**
+**Definindo Atributos Protegidos Em Um Modelo**
 
 	class User extends Eloquent {
 
@@ -577,45 +577,46 @@ The inverse of `fillable` is `guarded`, and serves as a "black-list" instead of 
 
 	}
 
-In the example above, the `id` and `password` attributes may **not** be mass assigned. All other attributes will be mass assignable. You may also block **all** attributes from mass assignment using the guard method:
+No exemplo acima, os atributos `id` e `password` **não** podem ser atribuídos em massa. Todos os outros atributos podem. Você pode também bloquear **todos** atributos de atribuição em massa usando o método de guarda:
 
-**Blocking All Attributes From Mass Assignment**
+**Bloqueando Todos Os Atributos Contra Uma Atribuição Em Massa**
 
 	protected $guarded = array('*');
 
 <a name="converting-to-arrays-or-json"></a>
 ## Covertendo para Arrays / JSON
 
-When building JSON APIs, you may often need to convert your models and relationships to arrays or JSON. So, Eloquent includes methods for doing so. To convert a model and its loaded relationship to an array, you may use the `toArray` method:
+Ao construir APIs JSON, você pode precisar converter seus modelos e relações para arrays ou JSON. Então, Eloquent inclui métodos para isso. Para converter um modelo e sua relação já carregada para uma array, você pode usar o método `toArray`:
 
-**Converting A Model To An Array**
+**Convertendo Um Modelo Para Um Array**
 
 	$user = User::with('roles')->first();
 
 	return $user->toArray();
 
-Note that entire collections of models may also be converted to arrays:
+Veja que coleções inteiras de modelos podem também ser convertidos para arrays:
 
 	return User::all()->toArray();
 
-To convert a model to JSON, you may use the `toJson` method:
+Para converter um modelo para JSON, use o método `toJson`:
 
-**Converting A Model To JSON**
+**Convertendo Um Modelo Para JSON**
 
 	return User::find(1)->toJson();
 
-Note that when a model or collection is cast to a string, it will be converted to JSON, meaning you can return Eloquent objects directly from your application's routes!
 
-**Returning A Model From A Route**
+Lembre-se que quando um modelo ou coleção é convertido para uma string, ele será convertido para JSON, ou seja, você pode retornar objetos Eloquent diretamente das rotas da sua aplicação!
+
+**Retornando Um Modelo Por Uma Rota**
 
 	Route::get('users', function()
 	{
 		return User::all();
 	});
 
-Sometimes you may wish to limit the attributes that are included in your model's array or JSON form, such as passwords. To do so, add a `hidden` property definition to your model:
+Às vezes, você pode querer limitar os atributos que retornados no array do seu modelo ou no JSON, como senhas. Para fazer isso, adicione a propriedade `hidden` para o seu modelo:
 
-**Hiding Attributes From Array Or JSON Conversion**
+**Ocultando Atributos Da Conversão Array Ou JSON**
 
 	class User extends Eloquent {
 
