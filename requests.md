@@ -15,11 +15,11 @@ Você pode acessar todas as entradas do usuário com alguns métodos simples. Vo
 
 	$name = Input::get('name');
 
-**Recuperando Um Valor Padrão Se O Valor de Entrada Está Ausente**
+**Recuperando Um Valor Padrão Se O Valor de Entrada Estiver Ausente**
 
 	$name = Input::get('name', 'Sally');
 
-**Determinando SE Um Valor de Entrada Está Presente**
+**Determinando Se Um Valor de Entrada Está Presente**
 
 	if (Input::has('name'))
 	{
@@ -45,7 +45,7 @@ Algumas bibliotecas JavaScript como Backbone pode enviar entradas para a aplica�
 <a name="cookies"></a>
 ## Cookies
 
-Todos os cookies criados pelo framework Laravel são encriptados e assinado com um código de autenticação, significando que será considerado inválido se forem alterados pelo cliente.
+Todos os cookies criados pelo framework Laravel são encriptados e assinados com um código de autenticação, significando que será considerado inválido se forem alterados pelo cliente.
 
 **Recuperando Um Valor De Cookie**
 
@@ -64,7 +64,7 @@ Todos os cookies criados pelo framework Laravel são encriptados e assinado com 
 <a name="old-input"></a>
 ## Entradas Antigas
 
-Você pode precisar manter entradas de uma requisição até a próxima requisição. Por exemplo, você pode precisar re-popular um formulário depois de checar por erros de validação.
+Você pode precisar manter entradas de uma requisição, para acessá-la na próxima requisição. Por exemplo, você pode precisar re-popular um formulário depois de checar por erros de validação.
 
 **Flashing Entradas Na Sessão**
 
@@ -95,7 +95,7 @@ Uma vez que você frequentemente irá querer entradas flash associadas com o red
 
 	$file = Input::file('photo');
 
-**Determinando Se O Arquivo Foi Enviado**
+**Determinando Se Um Arquivo Foi Enviado**
 
 	if (Input::hasFile('photo'))
 	{

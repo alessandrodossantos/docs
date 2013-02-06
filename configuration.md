@@ -23,9 +23,9 @@ Observe que a sintaxe com "ponto" deve ser usado para acessar valores nos vário
 <a name="environment-configuration"></a>
 ## Configuração de Ambiente
 
-Muitas vezes, é útil ter valores diferentes de configuração com base no ambiente onde aplicativo é executado. Por exemplo, você pode querer usar um controlador de cache diferente em sua máquina de desenvolvimento local do que no servidor de produção. É fácil de realizar isso usando configuração baseado em ambiente.
+Muitas vezes, é útil ter valores diferentes de configuração com base no ambiente onde aplicativo é executado. Por exemplo, você pode querer usar um controlador de cache diferente em sua máquina de desenvolvimento local do que no servidor de produção. É fácil realizar isso usando configuração baseado em ambiente.
 
-Simplesmente crie um diretório dentro de `config` que case com seu nome de ambiente, como `local`. Depois, crie arquivos de configuração que sobrescreva e especifique as opções para este ambiente. Por exemplo, para sobrescrever o driver de cache o ambiente local, você deve criar um arquivo `cache.php` em `app/config/local` com o seguinte conteúdo:
+Simplesmente crie um diretório dentro de `config` que case com seu nome de ambiente, como `local`. Depois, crie arquivos de configuração que sobrescreva e especifique as opções para este ambiente. Por exemplo, para sobrescrever o driver de cache no ambiente local, você deve criar um arquivo `cache.php` em `app/config/local` com o seguinte conteúdo:
 
 	<?php
 
@@ -37,6 +37,6 @@ Simplesmente crie um diretório dentro de `config` que case com seu nome de ambi
 
 > **Nota:** Não use 'testing' como um nome de ambiente. Isso é reservado para as unidades de teste.
 
-Observe que você não precisa especificar _todas_ opções que está no arquivo de configuração base, mas somente a opção que desejar sobrescrever. O arquivo de configuração de ambiente irá "cascatear" os arquivos de base.
+Observe que você não precisa especificar _todas_ opções que estão no arquivo de configuração base, mas somente a opção que desejar sobrescrever. O arquivo de configuração de ambiente irá "cascatear" os arquivos de base.
 
-Depois, precisamos informar o framework como determinar qual ambiente está sendo executado. O ambiente padrão é sempre `production`. No entanto, você pode configurar outros ambientes dentro do arquivo `start.php` no diretório raiz da sua instalação. Nesse arquivo você procurará uma chamada `$app->detectEnvironment`. A matrir passada para esse método é usado para determinar o ambiente atual. Você pode adicionar outros nomes de ambientes e máquinas para o array, como necessitar.
+Depois, precisamos informar o framework como determinar qual ambiente está sendo executado. O ambiente padrão é sempre `production`. No entanto, você pode configurar outros ambientes dentro do arquivo `start.php` no diretório raiz da sua instalação. Nesse arquivo você encontrará a chamada `$app->detectEnvironment`. O array passado para esse método é usado para determinar o ambiente atual. Você pode adicionar outros nomes de ambientes e máquinas para o array, como necessitar.

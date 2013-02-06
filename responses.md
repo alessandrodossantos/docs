@@ -66,9 +66,9 @@ Uma instância de `Response` herda da classe `Symfony\Component\HttpFoundation\R
 <a name="views"></a>
 ## Views
 
-Views tipicamente contem o HTML da sua aplicação e fornece uma conveniente maneira de separar o controle e a logica de dominio da sua lógica de apresentação. Views são armazenados no diretório `app/views`.
+Views tipicamente contem o HTML da sua aplicação e fornece uma maneira conveniente de separar o controle e a lógica de controle da sua lógica de apresentação. Views são armazenados no diretório `app/views`.
 
-Uma simples view pode ser algo assim:
+Uma simples view pode ser algo como isso:
 
 	<!-- View armazenada em app/views/greeting.php -->
 
@@ -78,7 +78,7 @@ Uma simples view pode ser algo assim:
 		</body>
 	</html>
 
-Está pode ser retornada para o navegador assim:
+Esta view pode ser retornada para o navegador assim:
 
 	Route::get('/', function()
 	{
@@ -103,7 +103,7 @@ Algumas vezes você pode querer passar uma view para dentro de outra view. Por e
 
 	$view = View::make('greeting')->nest('child', 'child.view', $data);
 
-A sub-view pode então ser exibida na view pai view:
+A sub-view pode então ser exibida na view pai:
 
 	<html>
 		<body>
@@ -130,7 +130,7 @@ Se você preferir compositor baseado em classe, que fornecerá os benefícios de
 
 	View::composer('profile', 'ProfileComposer');
 
-Uma classe compositor de view deve ser definida assim como:
+Uma classe compositor de view deve ser definida assim:
 
 	class ProfileComposer {
 

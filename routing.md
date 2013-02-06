@@ -29,7 +29,7 @@ A maioria das rotas do seu aplicativo será definida no arquivo `app/routes.php`
 		return 'Hello World';
 	});
 
-**Registrando uma Rota Respondendo Qualquer HTTP Verbo**
+**Registrando uma Rota Respondendo Qualquer Verbo HTTP**
 
 	Route::any('foo', function()
 	{
@@ -103,7 +103,7 @@ Se uma resposta é retornada de um filtro, a mesma será considerada a resposta 
 		return 'You are over 200 years old!';
 	}));
 
-**Anexando Multiplos Filtros a uma Rota**
+**Anexando Múltiplos Filtros a uma Rota**
 
 	Route::get('user', array('before' => 'auth|old', function()
 	{
@@ -137,7 +137,7 @@ No exemplo acima, o filtro `admin` será aplicado a todas as rotas iniciadas com
 
 **Classes de Filtro**
 
-Para filtros avançados, você talvez queira usar uma classe em vez de uma Closure. Uma vez que classes de filtro são resolvidas fora da aplicação do [IoC container](/docs/ioc), você será capaz de utilizar a injeção de dependência nesses filtros para maior testabilidade.
+Para filtros avançados, você talvez queira usar uma classe em vez de uma Closure. Uma vez que classes de filtro são resolvidas através da aplicação [IoC container](/docs/ioc), você será capaz de utilizar a injeção de dependência nesses filtros para maior testabilidade.
 
 **Definindo Classes de Filtro**
 
@@ -179,12 +179,12 @@ Algumas vezes você pode precisar aplicar filtros para um grupo de rotas. Em vez
 	{
 		Route::get('/', function()
 		{
-			// Has Auth Filter
+			// Tem Filtro de Autenticação
 		});
 
 		Route::get('user/profile', function()
 		{
-			// Has Auth Filter
+			// Tem Filtro de Autenticação
 		});
 	});
 
@@ -208,7 +208,7 @@ Rotas em Laravel são capazes de lidar com sub-domínios, e passar seu curinga c
 <a name="route-prefix"></a>
 ## Prefixos de Rota
 
-Prefixar opção de rota oferece a vantagem de segmentar a URL para uma rota ou lista de rotas agrupadas. 
+Configurar a opção prefix para um grupo de rotas, oferece a vantagem de segmentar a URL para uma rota ou uma lista de rotas <agrupadas class=""></agrupadas>
 
 **Prefixando Rotas Agrupadas**
 
@@ -225,17 +225,17 @@ Prefixar opção de rota oferece a vantagem de segmentar a URL para uma rota ou 
 <a name="throwing-404-errors"></a>
 ## Lançando Erros 404
 
-Existem duas maneiras de manualmente lançar um erro 404 de uma rota. A primeira, deve usar o métodos `App::abort`:
+Existem duas maneiras de manualmente lançar um erro 404 em uma rota. A primeira, deve usar o métodos `App::abort`:
 
 	App::abort(404);
 
 A segunda, você pode lançar uma instância de `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`.
 
-Para mais informações sobre manipulações de exceções 404 e o uso de respostas customizadas para esses erros, você pode encontrar na seção de [erros](/docs/errors#handling-404-errors) da documentação.
+Para mais informações sobre manipulações de exceções 404 e o uso de respostas personalizadas para esses erros, você pode encontrar na seção de [erros](/docs/errors#handling-404-errors) da documentação.
 
 <a name="resource-controllers"></a>
 ## Controladores de Recursos
 
-Controladores de Recursos torna fácil construir controles RESTful atraves dos recursos. 
+Controladores de Recursos torna fácil construir controles RESTful através dos recursos. 
 
 Veja a documentação sobre [Controladores](/docs/controllers#resource-controllers) para obter mais informações.
