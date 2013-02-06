@@ -517,6 +517,15 @@ Pode ser que você queria retornar um objeto coleção personalizada, com métod
 
 	}
 
+**Aplicando Um Callback Nos Objetos Em Uma Coleção**
+
+	$roles = User::find(1)->roles;
+	
+	$roles->each(function($role)
+	{
+		//	
+	});
+
 <a name="accessors-and-mutators"></a>
 ## Acessadores & Modificadores
 
