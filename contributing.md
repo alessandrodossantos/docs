@@ -7,14 +7,14 @@
 <a name="introduction"></a>
 ## Introdução
 
-Laravel é livre, software de código aberto, sendo assim qualquer um pode contribuir para o seu desenvolvimento e progresso. O código fonte do Laravel está atualmente hospedado em [Github](http://github.com), que proporciona uma maneira fácil para forkar o projeto e mesclar suas contribuições.
+Laravel é um software livre, de código aberto, sendo assim qualquer um pode contribuir para o seu desenvolvimento e progresso. O código fonte do Laravel está atualmente hospedado em [Github](http://github.com), que proporciona uma maneira fácil para forkar o projeto e mesclar suas contribuições.
 
 <a name="pull-requests"></a>
 ## Pull Requests
 
-O processo de pull request é diferente para novos recursos e para bugs. Antes de enviar um pull request para uma novo recurso, você deverá primeiro criar um issue com `[Proposal]` no título. A proposta deverá descrever o novo recurso, bem como ideias para a implementação. A proposta será então revisto e, aprovado ou negado. Uma vez que a proposta seja aprovada, um pull request pode ser criado para a implementação do novo recurso. Pull requests que não seguem essa diretriz, será fechado imediatamente.
+O processo de pull request é diferente para novos recursos e para bugs. Antes de enviar um pull request de uma novo recurso, você deverá primeiro criar um issue com `[Proposal]` no título. A proposta deverá descrever o novo recurso, bem como ideias para a implementação. A proposta será então revisada e, aprovada ou negada. Uma vez que a proposta seja aprovada, um pull request pode ser criado para a implementação do novo recurso. Pull requests que não seguem essa diretriz, será fechado imediatamente.
 
-Pull requests para bugs pode ser enviado sem a criação de qualquer proposta. Se você acredita que conhece uma solução para o bug apresentado no Github, por favor, deixe um comentário detalhando sua proposta de correção.
+Pull requests para bugs pode ser enviado sem a criação de qualquer proposta. Se você acha que conhece uma solução para o bug apresentado no Github, por favor, deixe um comentário detalhando sua proposta de correção.
 
 ### Solicitações de Recursos
 
