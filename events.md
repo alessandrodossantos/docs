@@ -7,22 +7,20 @@
 <a name="basic-usage"></a>
 ## Uso Básico
 
-A Classe `Event` do Laravel fornece uma simples implementação de observador, permitindo você subscribe(assinar) e listen(ouvir) eventos na sua aplicação. A instalação de eventos do Laravel estende a classe `Symfony\Component\EventDispatcher\EventDispatcher`.
+A Classe `Event` do Laravel fornece uma simples implementação de observador, permitindo você subscribe(assinar) e listen(ouvir) eventos na sua aplicação.
 
 **Assinando Um Evento**
 
-	Event::listen('user.login', function($event)
+	Event::listen('user.login', function($user)
 	{
-		$event->user->last_login = new DateTime;
+		$user->last_login = new DateTime;
 
-		$event->user->save();
+		$user->save();
 	});
 
 **Disparando Um Evento**
 
-	$event = Event::fire('user.login', array('user' => $user));
-
-Note que o método `Event::fire` retorna um objeto `Event`, permitindo você verificar a carga do evento depois dos listeners(ouvintes) terem sido chamados.
+	$event = Event::fire('user.login', array($user));
 
 Você podem também especificar a prioridade quando subscribing(assinar) eventos. Listeners(ouvintes) que tem alta prioridade serão executados primeiro, enquanto listeneres(ouvintes) que possuem a mesma prioridade serão executados pela ordem de subscription(assinatura).
 
@@ -40,7 +38,7 @@ Algumas vezes, você pode desejar interromper a propagação de um evento ou out
 	{
 		// Handle the event...
 
-		$event->stop();
+		return false;
 	});
 
 <a name="using-classes-as-listeners"></a>
@@ -58,7 +56,7 @@ Por padrão, o método `handle` na classe `LoginHandler` será chamada:
 
 	class LoginHandler {
 
-		public function handle($event)
+		public function handle($data)
 		{
 			//
 		}
@@ -74,11 +72,11 @@ Se você não quiser o método `handle` como padrão, especifique o método que 
 <a name="event-subscribers"></a>
 ## Subscribers(Assinantes) de Eventos
 
-Subscribers(Assinantes) de eventos são classes que podem subscribe(assinar) mútiplos eventos de dentro da própria classe. Subscribers(assinantes) devem estender a classe `EventSubscriber` e definir um método `subscribes`.
+Subscribers(Assinantes) de eventos são classes que podem subscribe(assinar) mútiplos eventos de dentro da própria classe. Subscribers devem possuir um método `subscribe`, quer irá ser passado a uma instância despachadora do evento:
 
 **Definindo Um Subscriber(assinante) de Evento**
 
-	class UserEventHandler extends EventSubscriber {
+	class UserEventHandler {
 
 		/**
 		 * Handle user login events.
@@ -98,19 +96,13 @@ Subscribers(Assinantes) de eventos são classes que podem subscribe(assinar) mú
 
 		/**
 		 * Register the listeners for the subscriber.
-		 *
+		 * @param  Illuminate\Events\Dispatcher  $events
 		 * @return array
 		 */
-		public static function subscribes()
+		public static function subscribes($events)
 		{
-			return array(
-				'user.login' => array(
-					array('onUserLogin', 10),
-				),
-				'user.logout' => array(
-					array('onUserLogout', 10),
-				),
-			);
+			$events->listen('user.login', 'UserEventHandler@onUserLogin');
+ 	 		$events->listen('user.logout', 'UserEventHandler@onUserLogout');
 		}
 
 	}
@@ -121,9 +113,3 @@ Uma vez que a subscriber(assinatura) foi definida, ela pode ser registrada com a
 
 	$subscriber = new UserEventHandler();
 	Event::subscribe($subscriber);
-
-**Removendo Um Subscriber(assinante) de Evento**
-
-	Event::unsubscribe($subscriber);
-	
-A instância que que foi passada para o método `subscribe()` também pode ser passada para o método `unsubscribe()` removê-la.

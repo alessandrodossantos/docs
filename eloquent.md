@@ -529,13 +529,13 @@ Pode ser que você queria retornar um objeto coleção personalizada, com métod
 <a name="accessors-and-mutators"></a>
 ## Acessadores & Modificadores
 
-Eloquent fornece uma maneira conveniente para transformar atributos do seu modelo quando acessá-los ou atribuí-los. Basta definir um método `getFoo` para declarar um acessador. Mantenha em mente que os métodos devem ser camel-casing, mesmo que suas colunas de banco de dados sejam snake-case:
+Eloquent fornece uma maneira conveniente para transformar atributos do seu modelo quando acessá-los ou atribuí-los. Basta definir um método `getFooAttribute` para declarar um acessador. Mantenha em mente que os métodos devem ser camel-casing, mesmo que suas colunas de banco de dados sejam snake-case:
 
 **Definindo Um Acessador**
 
 	class User extends Eloquent {
 
-		public function giveFirstName($value)
+		public function getFirstName($value)
 		{
 			return ucfirst($value);
 		}
@@ -550,7 +550,7 @@ Modificadores são declarados de maneira semelhante:
 
 	class User extends Eloquent {
 
-		public function takeFirstName($value)
+		public function setFirstName($value)
 		{
 			$this->attributes['first_name'] = strtolower($value);
 		}

@@ -67,29 +67,31 @@ As opções `--table` e `--create` são usadas para indicar o nome da tabela e s
 <a name="database-seeding"></a>
 ## Seeding(Semeando) Banco de Dados
 
-Laravel inclui uma maneira simples de semear seu banco de dados com dados de teste, utilizando arquivos. Todos os arquivos de seed(sementes) estão armazenados em `app/database/seeds`. Arquivos de seed(semente) deverá ter o mesmo nome da tabela que irão semear, e simplesmente retornar um array de registros.
+Laravel inclui uma maneira simples de semear seu banco de dados com dados de teste, utilizando classes. Todos as classes de seed(sementes) estão armazenados em `app/database/seeds`. Classes de seed podem ter qualquer nome que você quiser, mas provavelmente você seguirá alguma convenção sensata, algo como `UserTableSeeder`, etc. Por padrão, uma classe `DatabaseSeeder` é definida por você. Desta classe, você pode usar o método `call` para executar outra classe seed, permitindo a você controlar a ordem de seeding.
 
-**Exemplo De Arquivo Seed**
+ A classes de seed(semente) deverá ter o mesmo nome da tabela que irão semear, e simplesmente retornar um array de registros.
 
-	<?php
+**Exemplo De Classe Seed**
 
-	return array(
+	class DatabaseSeeder extends Seeder {
 
-		array(
-			'email' => 'john@example.com',
-			'votes' => 10,
-			'created_at' => new DateTime,
-			'updated_at' => new DateTime,
-		),
+		public function run()
+		{
+			$this->call('UserTableSeeder');
+		}
 
-		array(
-			'email' => 'smith@example.com',
-			'votes' => 20,
-			'created_at' => new DateTime,
-			'updated_at' => new DateTime,
-		),
+	}
 
-	);
+	class UserTableSeeder extends Seeder {
+
+		public function run()
+		{
+			DB::table('users')->delete();
+
+			User::create(array('email' => 'foo@bar.com'));
+		}
+
+	}
 
 Para semear seu banco de dados, basta usar o comando `db:seed` do Artisan CLI:
 
